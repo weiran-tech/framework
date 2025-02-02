@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace DummyNamespace;
+
+use Weiran\Framework\Application\TestCase;
+
+class DummyClass extends TestCase
+{
+    //
+}

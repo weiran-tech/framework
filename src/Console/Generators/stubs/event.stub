@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace DummyNamespace;
+
+use Weiran\Framework\Application\Event;
+
+class DummyClass extends Event
+{
+    public $var;
+
+    public function __construct($var)
+    {
+        $this->var = $var;
+    }
+}

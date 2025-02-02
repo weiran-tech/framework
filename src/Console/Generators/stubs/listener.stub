@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace DummyNamespace;
+
+use DummyFullEvent;
+use Weiran\Framework\Application\Event;
+
+class DummyClass
+{
+    /**
+     * Handle the event.
+     *
+     * @param Event|DummyEvent $event
+     * @return void
+     */
+    public function handle(DummyEvent $event)
+    {
+
+    }
+}

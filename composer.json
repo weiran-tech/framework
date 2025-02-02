@@ -1,0 +1,46 @@
+{
+    "name": "poppy/framework",
+    "description": "A framework for laravel module development.",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Mark Zhao",
+            "email": "zhaody901@126.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-bcmath": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-xml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Poppy\\Framework\\": "src/"
+        },
+        "files": [
+            "src/Support/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Poppy\\Framework\\Tests\\": "tests/"
+        }
+    },
+    "bin": [
+        "bin/poppy"
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Poppy\\Framework\\FrameworkServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}
