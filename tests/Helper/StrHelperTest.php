@@ -168,7 +168,7 @@ class StrHelperTest extends TestCase
 
     public function testNormalizeClassName(): void
     {
-        $this->assertEquals('\Poppy\Framework\Helper\FileHelper', StrHelper::normalizeClassName(FileHelper::class));
+        $this->assertEquals('\Weiran\Framework\Helper\FileHelper', StrHelper::normalizeClassName(FileHelper::class));
     }
 
     public function testGetClassId(): void
@@ -178,7 +178,7 @@ class StrHelperTest extends TestCase
 
     public function testGetClassNamespace(): void
     {
-        $this->assertEquals('\Poppy\Framework\Helper', StrHelper::getClassNamespace(FileHelper::class));
+        $this->assertEquals('\Weiran\Framework\Helper', StrHelper::getClassNamespace(FileHelper::class));
     }
 
     public function testClearLink(): void
