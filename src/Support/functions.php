@@ -201,8 +201,8 @@ if (!function_exists('poppy_class')) {
         $type       = Str::before($slug, '.');
         $moduleName = Str::after($slug, '.');
         $namespace  = Str::studly($moduleName);
-        if ($type === 'poppy') {
-            return $class ? "Poppy\\{$namespace}\\{$class}" : "Poppy\\{$namespace}";
+        if ($type === 'weiran') {
+            return $class ? "Weiran\\{$namespace}\\{$class}" : "Poppy\\{$namespace}";
         }
 
         return $class ? "{$namespace}\\{$class}" : $namespace;
@@ -375,7 +375,7 @@ if (!function_exists('x_header')) {
      * 获取 Header 中的 x-{ph} 信息, 不支持获取 x-app 里存储的 json 信息
      * 完整列表参考以下地址
      * @url https://wulicode.com/develop/standard/client/
-     * @param string $type    ver,id,os
+     * @param string $type ver,id,os
      * @param string $default 增加默认参数
      * @return string
      * @since 3.2

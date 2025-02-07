@@ -1,5 +1,5 @@
 {
-    "name": "poppy/framework",
+    "name": "weiran/framework",
     "description": "A framework for laravel module development.",
     "license": "Apache-2.0",
     "authors": [
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Poppy\\Framework\\": "src/"
+            "Weiran\\Framework\\": "src/"
         },
         "files": [
             "src/Support/functions.php"
@@ -25,16 +25,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Poppy\\Framework\\Tests\\": "tests/"
+            "Weiran\\Framework\\Tests\\": "tests/"
         }
     },
     "bin": [
-        "bin/poppy"
+        "bin/weiran"
     ],
     "extra": {
         "laravel": {
             "providers": [
-                "\\Poppy\\Framework\\FrameworkServiceProvider"
+                "Weiran\\Framework\\FrameworkServiceProvider"
             ]
         }
     },

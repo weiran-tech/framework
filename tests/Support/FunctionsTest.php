@@ -29,8 +29,8 @@ class FunctionsTest extends TestCase
 
     public function testPoppyClass()
     {
-        $poppyCoreModel = poppy_class('poppy.core', 'Models');
-        $this->assertEquals('Poppy\\Core\\Models', $poppyCoreModel);
+        $poppyCoreModel = poppy_class('weiran.core', 'Models');
+        $this->assertEquals('Weiran\\Core\\Models', $poppyCoreModel);
 
         $moduleSiteModal = poppy_class('module.site', 'Models');
         $this->assertEquals('Site\\Models', $moduleSiteModal);
