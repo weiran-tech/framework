@@ -59,7 +59,7 @@ class FrameworkServiceProvider extends ServiceProvider
         $this->app->register(Console\ConsoleServiceProvider::class);
         $this->app->register(Console\GeneratorServiceProvider::class);
         $this->app->register(Http\BladeServiceProvider::class);
-        $this->app->register(Poppy\PoppyServiceProvider::class);
+        $this->app->register(Weiran\WeiranServiceProvider::class);
         $this->app->register(Parse\ParseServiceProvider::class);
         $this->app->register(Translation\TranslationServiceProvider::class);
     }
@@ -72,7 +72,7 @@ class FrameworkServiceProvider extends ServiceProvider
     {
         return [
             'path.framework',
-            'path.poppy',
+            'path.weiran',
             'path.module',
         ];
     }

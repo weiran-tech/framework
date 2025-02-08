@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Framework\Poppy\Abstracts;
+namespace Weiran\Framework\Weiran\Abstracts;
 
 use Exception;
 use Illuminate\Config\Repository as Config;
@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Weiran\Framework\Exceptions\ApplicationException;
-use Weiran\Framework\Poppy\Contracts\Repository as RepositoryContract;
+use Weiran\Framework\Weiran\Contracts\Repository as RepositoryContract;
 
 /**
  * Repository
@@ -99,11 +99,11 @@ abstract class Repository implements RepositoryContract
                 return 'module.' . basename($item);
             });
 
-            // poppy path
-            $collection = collect($this->files->directories(app('path.poppy')));
+            // weiran path
+            $collection = collect($this->files->directories(app('path.weiran')));
             $collection->each(function ($item) use ($baseNames) {
                 if ($this->files->exists($item . '/manifest.json')) {
-                    $baseNames->push('poppy.' . basename($item));
+                    $baseNames->push('weiran.' . basename($item));
                 }
             });
             return $baseNames;

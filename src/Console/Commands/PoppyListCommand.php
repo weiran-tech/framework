@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Weiran\Framework\Console\Commands;
 
 use Illuminate\Console\Command;
-use Weiran\Framework\Poppy\Poppy;
+use Weiran\Framework\Weiran\Weiran;
 
 /**
  * Poppy List
@@ -25,9 +25,9 @@ class PoppyListCommand extends Command
     protected $description = 'List all application modules';
 
     /**
-     * @var Poppy
+     * @var Weiran
      */
-    protected Poppy $poppy;
+    protected Weiran $poppy;
 
     /**
      * The table headers for the command.
@@ -37,9 +37,9 @@ class PoppyListCommand extends Command
 
     /**
      * Create a new command instance.
-     * @param Poppy $poppy
+     * @param Weiran $poppy
      */
-    public function __construct(Poppy $poppy)
+    public function __construct(Weiran $poppy)
     {
         parent::__construct();
 

@@ -20,7 +20,7 @@ if (strpos($baseDir, 'vendor/poppy') !== false) {
     $folders = [
         $baseDir.'/config',
         $baseDir.'/framework',
-        $baseDir.'/poppy',
+        $baseDir.'/weiran',
         $baseDir.'/modules',
     ];
 }

@@ -11,7 +11,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Weiran\Framework\Classes\Traits\MigrationTrait;
 use Weiran\Framework\Events\PoppyMigrateReset;
-use Weiran\Framework\Poppy\Poppy;
+use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -35,9 +35,9 @@ class PoppyMigrateResetCommand extends Command
     protected $description = 'Rollback all database migrations for a specific or all modules';
 
     /**
-     * @var Poppy
+     * @var Weiran
      */
-    protected Poppy $poppy;
+    protected Weiran $poppy;
 
     /**
      * @var Migrator
@@ -51,11 +51,11 @@ class PoppyMigrateResetCommand extends Command
 
     /**
      * Create a new command instance.
-     * @param Poppy      $poppy
+     * @param Weiran     $poppy
      * @param Filesystem $files
      * @param Migrator   $migrator
      */
-    public function __construct(Poppy $poppy, Filesystem $files, Migrator $migrator)
+    public function __construct(Weiran $poppy, Filesystem $files, Migrator $migrator)
     {
         parent::__construct();
 

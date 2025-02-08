@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Framework\Poppy;
+namespace Weiran\Framework\Weiran;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
-use Weiran\Framework\Poppy\Contracts\Repository;
+use Weiran\Framework\Weiran\Contracts\Repository;
 
 /**
  * @method bool optimize()
@@ -28,7 +28,7 @@ use Weiran\Framework\Poppy\Contracts\Repository;
  * @method enable(string $slug)
  * @method disable(string $slug)
  */
-class Poppy
+class Weiran
 {
 
     /**

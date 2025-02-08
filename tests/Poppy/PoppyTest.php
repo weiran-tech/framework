@@ -59,7 +59,7 @@ class PoppyTest extends TestCase
 
     public function testOptimize(): void
     {
-        $poppyJson = storage_path('app/poppy.json');
+        $poppyJson = storage_path('app/weiran.json');
         if (app('files')->exists($poppyJson)) {
             app('files')->delete($poppyJson);
         }

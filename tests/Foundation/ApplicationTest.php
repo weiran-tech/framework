@@ -17,6 +17,6 @@ class ApplicationTest extends TestCase
         $this->assertEquals(dirname(__FILE__, 3), app('path.framework'));
         $this->assertEquals(framework_path(), app('path.framework'));
         $this->assertEquals(base_path('modules'), app('path.module'));
-        $this->assertEquals(home_path(), app('path.poppy'));
+        $this->assertEquals(home_path(), app('path.weiran'));
     }
 }

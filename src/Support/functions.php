@@ -174,8 +174,8 @@ if (!function_exists('poppy_path')) {
      */
     function poppy_path(string $slug = null, string $file = null): string
     {
-        if (Str::contains($slug, 'poppy.')) {
-            $modulesPath = app('path.poppy');
+        if (Str::contains($slug, 'weiran.')) {
+            $modulesPath = app('path.weiran');
         }
         else {
             $modulesPath = app('path.module');
@@ -281,7 +281,7 @@ if (!function_exists('home_path')) {
      */
     function home_path(string $path = ''): string
     {
-        return app('path.poppy') . ($path ? DIRECTORY_SEPARATOR . $path : '');
+        return app('path.weiran') . ($path ? DIRECTORY_SEPARATOR . $path : '');
     }
 }
 

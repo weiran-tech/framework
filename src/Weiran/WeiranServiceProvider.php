@@ -2,15 +2,15 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Framework\Poppy;
+namespace Weiran\Framework\Weiran;
 
 use Illuminate\Support\ServiceProvider;
-use Weiran\Framework\Poppy\Contracts\Repository;
+use Weiran\Framework\Weiran\Contracts\Repository;
 
 /**
  * Module manager
  */
-class PoppyServiceProvider extends ServiceProvider
+class WeiranServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -29,7 +29,7 @@ class PoppyServiceProvider extends ServiceProvider
         $this->app->singleton('poppy', function ($app) {
             $repository = $app->make(Repository::class);
 
-            return new Poppy($app, $repository);
+            return new Weiran($app, $repository);
         });
     }
 

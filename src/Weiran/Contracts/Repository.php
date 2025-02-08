@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Framework\Poppy\Contracts;
+namespace Weiran\Framework\Weiran\Contracts;
 
 use Illuminate\Support\Collection;
 

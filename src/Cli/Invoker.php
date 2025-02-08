@@ -39,7 +39,7 @@ class Invoker
             }
         }
 
-        @unlink($this->path . '/storage/app/poppy.json');
+        @unlink($this->path . '/storage/app/weiran.json');
 
         echo 'Weiran Clear succeeded.';
         return true;

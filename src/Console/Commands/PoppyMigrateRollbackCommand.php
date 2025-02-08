@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Migrations\Migrator;
 use Weiran\Framework\Classes\Traits\MigrationTrait;
-use Weiran\Framework\Poppy\Poppy;
+use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -38,16 +38,16 @@ class PoppyMigrateRollbackCommand extends Command
     protected Migrator $migrator;
 
     /**
-     * @var Poppy
+     * @var Weiran
      */
-    protected Poppy $poppy;
+    protected Weiran $poppy;
 
     /**
      * Create a new command instance.
      * @param Migrator $migrator
-     * @param Poppy    $poppy
+     * @param Weiran   $poppy
      */
-    public function __construct(Migrator $migrator, Poppy $poppy)
+    public function __construct(Migrator $migrator, Weiran $poppy)
     {
         parent::__construct();
 

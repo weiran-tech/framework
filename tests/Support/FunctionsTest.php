@@ -19,8 +19,8 @@ class FunctionsTest extends TestCase
         $this->assertEquals(base_path('modules/system/src/sample.php'), $systemPath);
 
         // poppy - system
-        $poppySystemPath = poppy_path('poppy.system', 'src/sample.php');
-        $this->assertEquals(app('path.poppy') . '/system/src/sample.php', $poppySystemPath);
+        $poppySystemPath = poppy_path('weiran.system', 'src/sample.php');
+        $this->assertEquals(app('path.weiran') . '/system/src/sample.php', $poppySystemPath);
 
         // base Path = root/modules
         $poppyRoot = poppy_path();
@@ -38,7 +38,7 @@ class FunctionsTest extends TestCase
 
     public function testPoppyFriendly()
     {
-        $name = poppy_friendly('\Weiran\Framework\Poppy\Poppy');
+        $name = poppy_friendly('\Weiran\Framework\Weiran\Weiran');
         $this->assertEquals(trans('poppy::util.classes.poppy.poppy'), $name);
         $name = poppy_friendly('\Demo\Models\NotExistModel');
         $this->assertEquals('demo::util.classes.models.not_exist_model', $name);

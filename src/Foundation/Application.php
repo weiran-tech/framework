@@ -200,7 +200,7 @@ class Application extends ApplicationBase
         parent::bindPathsInContainer();
 
         $this->instance('path.framework', $this->frameworkPath());
-        $this->instance('path.poppy', dirname($this->frameworkPath()));
+        $this->instance('path.weiran', dirname($this->frameworkPath()));
         $this->instance('path.module', $this->modulePath());
     }
 }

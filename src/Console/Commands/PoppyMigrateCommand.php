@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Weiran\Framework\Classes\Traits\MigrationTrait;
 use Weiran\Framework\Events\PoppyMigrated;
-use Weiran\Framework\Poppy\Poppy;
+use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -35,9 +35,9 @@ class PoppyMigrateCommand extends Command
     protected $description = 'Run the database migrations for a specific or all modules';
 
     /**
-     * @var Poppy
+     * @var Weiran
      */
-    protected Poppy $poppy;
+    protected Weiran $poppy;
 
     /**
      * @var Migrator
@@ -47,9 +47,9 @@ class PoppyMigrateCommand extends Command
     /**
      * Create a new command instance.
      * @param Migrator $migrator
-     * @param Poppy    $poppy
+     * @param Weiran   $poppy
      */
-    public function __construct(Migrator $migrator, Poppy $poppy)
+    public function __construct(Migrator $migrator, Weiran $poppy)
     {
         parent::__construct();
 

@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Weiran\Framework\Events;
 
 use Weiran\Framework\Application\Event;
-use Weiran\Framework\Poppy\Poppy;
+use Weiran\Framework\Weiran\Weiran;
 
 /**
  * Migrate Refresh
@@ -14,7 +14,7 @@ class PoppyMigrateReset extends Event
 {
 
     /**
-     * @var Poppy 模块
+     * @var Weiran 模块
      */
     public $poppy;
 
@@ -24,10 +24,10 @@ class PoppyMigrateReset extends Event
     private $option;
 
     /**
-     * @param Poppy $poppy
-     * @param array $option
+     * @param Weiran $poppy
+     * @param array  $option
      */
-    public function __construct(Poppy $poppy, $option = [])
+    public function __construct(Weiran $poppy, $option = [])
     {
         $this->poppy  = $poppy;
         $this->option = $option;

@@ -13,7 +13,7 @@ use Weiran\Framework\Classes\Traits\MigrationTrait;
 use Weiran\Framework\Exceptions\ModuleNotFoundException;
 
 /**
- * PoppyServiceProvider
+ * WeiranServiceProvider
  */
 abstract class PoppyServiceProvider extends ServiceProviderBase
 {

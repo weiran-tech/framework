@@ -7,7 +7,7 @@ namespace Weiran\Framework\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Weiran\Framework\Poppy\Poppy;
+use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -29,14 +29,14 @@ class PoppySeedCommand extends Command
     protected $description = 'Seed the database with records for a specific or all modules';
 
     /**
-     * @var Poppy
+     * @var Weiran
      */
-    protected Poppy $poppy;
+    protected Weiran $poppy;
 
     /**
      * @inheritDoc
      */
-    public function __construct(Poppy $poppy)
+    public function __construct(Weiran $poppy)
     {
         parent::__construct();
 

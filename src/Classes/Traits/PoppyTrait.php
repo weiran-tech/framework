@@ -25,7 +25,7 @@ use Weiran\Framework\Foundation\Application;
 use Weiran\Framework\Parse\Ini;
 use Weiran\Framework\Parse\Xml;
 use Weiran\Framework\Parse\Yaml;
-use Weiran\Framework\Poppy\Poppy;
+use Weiran\Framework\Weiran\Weiran;
 use Weiran\Framework\Translation\Translator;
 use Psr\Log\LoggerInterface;
 
@@ -224,9 +224,9 @@ trait PoppyTrait
 
     /**
      * get poppy
-     * @return Poppy
+     * @return Weiran
      */
-    protected function pyPoppy(): Poppy
+    protected function pyPoppy(): Weiran
     {
         return py_container()->make('poppy');
     }

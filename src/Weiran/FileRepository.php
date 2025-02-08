@@ -2,14 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Framework\Poppy;
+namespace Weiran\Framework\Weiran;
 
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Weiran\Framework\Events\PoppyOptimized;
 use Weiran\Framework\Exceptions\ApplicationException;
-use Weiran\Framework\Poppy\Abstracts\Repository;
+use Weiran\Framework\Weiran\Abstracts\Repository;
 use Throwable;
 
 /**
@@ -301,7 +301,7 @@ class FileRepository extends Repository
      */
     private function getCachePath(): string
     {
-        return storage_path('app/poppy.json');
+        return storage_path('app/weiran.json');
     }
 }
 

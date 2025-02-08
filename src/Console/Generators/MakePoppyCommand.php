@@ -9,7 +9,7 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Weiran\Framework\Events\PoppyMake;
-use Weiran\Framework\Poppy\Poppy;
+use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 /**
@@ -34,9 +34,9 @@ class MakePoppyCommand extends Command
 
     /**
      * The poppy instance.
-     * @var Poppy
+     * @var Weiran
      */
-    protected Poppy $poppy;
+    protected Weiran $poppy;
 
     /**
      * The filesystem instance.
@@ -53,9 +53,9 @@ class MakePoppyCommand extends Command
     /**
      * Create a new command instance.
      * @param Filesystem $files
-     * @param Poppy      $poppy
+     * @param Weiran     $poppy
      */
-    public function __construct(Filesystem $files, Poppy $poppy)
+    public function __construct(Filesystem $files, Weiran $poppy)
     {
         parent::__construct();
 
