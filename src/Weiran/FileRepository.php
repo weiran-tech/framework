@@ -230,6 +230,7 @@ class FileRepository extends Repository
         });
 
         $depends = '';
+
         $modules->each(function (Collection $module) use (&$depends) {
             $module->put('id', crc32($module->get('slug')));
 

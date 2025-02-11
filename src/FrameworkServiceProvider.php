@@ -26,18 +26,18 @@ class FrameworkServiceProvider extends ServiceProvider
     {
         // 注册 api 文档配置
         $this->publishes([
-            framework_path('config/poppy.php') => config_path('poppy.php'),
-        ], 'poppy');
+            framework_path('config/weiran.php') => config_path('weiran.php'),
+        ], 'weiran');
 
         // framework register
         if (!self::$registered) {
-            app('poppy')->register();
+            app('weiran')->register();
             self::$registered = true;
         }
 
         // views an lang
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'poppy');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'poppy');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'weiran');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'weiran');
 
         $this->bootValidation();
 
@@ -53,7 +53,7 @@ class FrameworkServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(
             framework_path('config/framework.php'),
-            'poppy.framework'
+            'weiran.framework'
         );
 
         $this->app->register(Console\ConsoleServiceProvider::class);

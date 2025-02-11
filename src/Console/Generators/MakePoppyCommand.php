@@ -71,7 +71,7 @@ class MakePoppyCommand extends Command
     public function handle()
     {
         $slug = Str::slug($this->argument('slug'));
-        if (app('poppy')->exists($slug)) {
+        if (app('weiran')->exists($slug)) {
             $this->error('Slug `' . $slug . '` exists');
             return;
         }

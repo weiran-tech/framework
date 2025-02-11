@@ -53,13 +53,13 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
     {
         $slug = $this->argument('slug');
 
-        if (!$this->laravel['poppy']->exists($slug)) {
+        if (!$this->laravel['weiran']->exists($slug)) {
             throw new ModuleNotFoundException($slug);
         }
 
         // take everything after the module name in the given path (ignoring case)
-        if ($this->laravel['poppy']->isPoppy($slug)) {
-            $trimSlug = Str::after($slug, 'poppy.');
+        if ($this->laravel['weiran']->isPoppy($slug)) {
+            $trimSlug = Str::after($slug, 'weiran.');
             [, $mid] = explode('\\', $name);
             $midAfter  = str_replace('_', '-', Str::snake($mid));
             $lowerName = strtolower(str_replace($mid, $midAfter, $name));

@@ -13,20 +13,13 @@ use Weiran\Framework\Weiran\Contracts\Repository;
 class WeiranServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap the application services.
-     */
-    public function boot()
-    {
-    }
-
-    /**
      * Register the application services.
      */
-    public function register()
+    public function register():void
     {
         $this->app->bind(Repository::class, FileRepository::class);
 
-        $this->app->singleton('poppy', function ($app) {
+        $this->app->singleton('weiran', function ($app) {
             $repository = $app->make(Repository::class);
 
             return new Weiran($app, $repository);
@@ -37,8 +30,8 @@ class WeiranServiceProvider extends ServiceProvider
      * Get the services provided by the provider.
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
-        return ['poppy'];
+        return ['weiran'];
     }
 }

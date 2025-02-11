@@ -20,10 +20,10 @@ class PoppyTest extends TestCase
         $this->assertEquals('Site\ServiceProvider', $namespace);
         $namespace = poppy_class('module.site');
         $this->assertEquals('Site', $namespace);
-        $namespace = poppy_class('poppy.system', 'ServiceProvider');
-        $this->assertEquals('Poppy\System\ServiceProvider', $namespace);
-        $namespace = poppy_class('poppy.system');
-        $this->assertEquals('Poppy\System', $namespace);
+        $namespace = poppy_class('weiran.system', 'ServiceProvider');
+        $this->assertEquals('Weiran\System\ServiceProvider', $namespace);
+        $namespace = poppy_class('weiran.system');
+        $this->assertEquals('Weiran\System', $namespace);
     }
 
 
@@ -53,7 +53,7 @@ class PoppyTest extends TestCase
         $this->testOptimize();
 
         /** @var Collection $enabled */
-        $enabled = app('poppy')->all();
+        $enabled = app('weiran')->all();
         $this->assertNotEquals(0, $enabled->count());
     }
 
@@ -63,7 +63,7 @@ class PoppyTest extends TestCase
         if (app('files')->exists($poppyJson)) {
             app('files')->delete($poppyJson);
         }
-        app('poppy')->optimize();
+        app('weiran')->optimize();
         $this->assertFileExists($poppyJson);
     }
 
@@ -76,7 +76,7 @@ class PoppyTest extends TestCase
         collect($folders)->each(function ($folder) {
             $matched = preg_match('/modules\/(?<module>[a-z]*)\/src/', $folder, $matches);
             $name    = 'module.' . $matches['module'];
-            if ($matched && !app('poppy')->exists($name)) {
+            if ($matched && !app('weiran')->exists($name)) {
                 $this->fail("Module `{$matches['module']}` Not Exist , Please run `php artisan poppy:optimize` to fix.");
             }
             else {

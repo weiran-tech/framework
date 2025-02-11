@@ -57,7 +57,7 @@ class PoppyMigrateRefreshCommand extends Command
         }
 
         if (isset($slug)) {
-            $module = $this->laravel['poppy']->where('slug', $slug);
+            $module = $this->laravel['weiran']->where('slug', $slug);
 
             event(new PoppyMigrateRefreshed($module, $this->option()));
 

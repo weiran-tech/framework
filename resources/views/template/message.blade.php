@@ -1,4 +1,4 @@
-@extends('poppy::template.default')
+@extends('weiran::template.default')
 @section('head-css')
     <style>
         a {
@@ -89,21 +89,23 @@
                     <p>{!! $message !!}</p>
                     @if ($to)
                         <p>
-                            @if($time)您将在 <span id="clock">{{ (int) ($time / 1000) }}</span>秒内跳转至目标页面, 如果不想等待, @endif
+                            @if($time)
+                                您将在 <span id="clock">{{ (int) ($time / 1000) }}</span>秒内跳转至目标页面, 如果不想等待,
+                            @endif
                             <a href="{!! $to !!}">点此立即跳转</a>
                         </p>
                         @if($time)
                             <script>
-                                $(function () {
-                                    let t = {!! $time !!};//设定跳转的时间
-                                    setInterval(function () {
-                                        if (t === 0) {
-                                            window.location.href = "{!! $to !!}"; //设定跳转的链接地址
-                                        }
-                                        document.getElementById('clock').innerText = Math.ceil(t / 1000);// 显示倒计时
-                                        t -= 1000;
-                                    }, 1000); //启动1秒定时
-                                })
+                            $(function () {
+                                let t = {!! $time !!};//设定跳转的时间
+                                setInterval(function () {
+                                    if (t === 0) {
+                                        window.location.href = "{!! $to !!}"; //设定跳转的链接地址
+                                    }
+                                    document.getElementById('clock').innerText = Math.ceil(t / 1000);// 显示倒计时
+                                    t -= 1000;
+                                }, 1000); //启动1秒定时
+                            })
                             </script>
                         @endif
                     @endif

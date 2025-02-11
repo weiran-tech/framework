@@ -32,10 +32,10 @@ class PoppyEnableCommand extends Command
     {
         $slug = $this->argument('slug');
 
-        if ($this->laravel['poppy']->isDisabled($slug)) {
-            $this->laravel['poppy']->enable($slug);
+        if ($this->laravel['weiran']->isDisabled($slug)) {
+            $this->laravel['weiran']->enable($slug);
 
-            $module = $this->laravel['poppy']->where('slug', $slug);
+            $module = $this->laravel['weiran']->where('slug', $slug);
 
             event(new PoppyEnabled($module));
 

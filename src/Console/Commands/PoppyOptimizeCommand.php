@@ -15,7 +15,7 @@ class PoppyOptimizeCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $name = 'poppy:optimize';
+    protected $name = 'weiran:optimize';
 
     /**
      * The console command description.
@@ -26,12 +26,12 @@ class PoppyOptimizeCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle():void
+    public function handle(): void
     {
         $this->info('Generating optimized module cache');
 
-        $this->laravel['poppy']->optimize();
+        $this->laravel['weiran']->optimize();
 
-        event('poppy.optimized', [$this->laravel['poppy']->all()]);
+        event('weiran.optimized', [$this->laravel['weiran']->all()]);
     }
 }

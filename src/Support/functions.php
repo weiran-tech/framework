@@ -202,7 +202,7 @@ if (!function_exists('poppy_class')) {
         $moduleName = Str::after($slug, '.');
         $namespace  = Str::studly($moduleName);
         if ($type === 'weiran') {
-            return $class ? "Weiran\\{$namespace}\\{$class}" : "Poppy\\{$namespace}";
+            return $class ? "Weiran\\{$namespace}\\{$class}" : "Weiran\\{$namespace}";
         }
 
         return $class ? "{$namespace}\\{$class}" : $namespace;

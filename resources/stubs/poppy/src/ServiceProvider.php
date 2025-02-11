@@ -6,9 +6,9 @@ namespace DummyNamespace;
 
 use DummyNamespace\Http\RouteServiceProvider;
 use Weiran\Framework\Exceptions\ModuleNotFoundException;
-use Weiran\Framework\Support\PoppyServiceProvider;
+use Weiran\Framework\Support\WeiranServiceProvider;
 
-class ServiceProvider extends PoppyServiceProvider
+class ServiceProvider extends WeiranServiceProvider
 {
 
     /**

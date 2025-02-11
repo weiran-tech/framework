@@ -71,7 +71,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerListCommand()
     {
         $this->app->singleton('command.poppy.list', function ($app) {
-            return new PoppyListCommand($app['poppy']);
+            return new PoppyListCommand($app['weiran']);
         });
 
         $this->commands('command.poppy.list');
@@ -83,7 +83,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerMigrateCommand()
     {
         $this->app->singleton('command.poppy.migrate', function ($app) {
-            return new PoppyMigrateCommand($app['migrator'], $app['poppy']);
+            return new PoppyMigrateCommand($app['migrator'], $app['weiran']);
         });
 
         $this->commands('command.poppy.migrate');
@@ -107,7 +107,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerMigrateResetCommand()
     {
         $this->app->singleton('command.poppy.migrate.reset', function ($app) {
-            return new PoppyMigrateResetCommand($app['poppy'], $app['files'], $app['migrator']);
+            return new PoppyMigrateResetCommand($app['weiran'], $app['files'], $app['migrator']);
         });
 
         $this->commands('command.poppy.migrate.reset');
@@ -124,7 +124,7 @@ class ConsoleServiceProvider extends ServiceProvider
 
             $migrator = new Migrator($table, $repository, $app['db'], $app['files']);
 
-            return new PoppyMigrateRollbackCommand($migrator, $app['poppy']);
+            return new PoppyMigrateRollbackCommand($migrator, $app['weiran']);
         });
 
         $this->commands('command.poppy.migrate.rollback');
@@ -148,7 +148,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerSeedCommand()
     {
         $this->app->singleton('command.poppy.seed', function ($app) {
-            return new PoppySeedCommand($app['poppy']);
+            return new PoppySeedCommand($app['weiran']);
         });
 
         $this->commands('command.poppy.seed');

@@ -178,7 +178,7 @@ abstract class Request extends FormRequest
             $class = $model;
         }
         if (!$user->can($policy, $model)) {
-            $message = trans('poppy::resp.authorization_exception', [
+            $message = trans('weiran::resp.authorization_exception', [
                 'name' => policy_friendly($class, $policy),
             ]);
             throw new AuthorizationException($message);

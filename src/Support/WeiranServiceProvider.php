@@ -15,7 +15,7 @@ use Weiran\Framework\Exceptions\ModuleNotFoundException;
 /**
  * WeiranServiceProvider
  */
-abstract class PoppyServiceProvider extends ServiceProviderBase
+abstract class WeiranServiceProvider extends ServiceProviderBase
 {
 
     use MigrationTrait;
@@ -45,11 +45,11 @@ abstract class PoppyServiceProvider extends ServiceProviderBase
              */
             $modulePath = poppy_path($module);
 
-            if (Str::start($module, 'poppy')) {
-                // 模块命名 poppy.mgr-page
-                // namespace : py-mgr-page
+            if (Str::start($module, 'weiran')) {
+                // 模块命名 weiran.mgr-page
+                // namespace : weiran-mgr-page
                 // 命名空间进行简化处理
-                $namespace = str_replace('poppy.', 'py-', $module);
+                $namespace = str_replace('weiran.', 'weiran-', $module);
             }
             else {
                 // 模块命名 module.order
@@ -80,7 +80,7 @@ abstract class PoppyServiceProvider extends ServiceProviderBase
     {
         $slug = (isset($args[0]) and is_string($args[0])) ? $args[0] : null;
         if ($slug) {
-            $module = app('poppy')->where('slug', $slug);
+            $module = app('weiran')->where('slug', $slug);
             if (is_null($module)) {
                 throw new ModuleNotFoundException($slug);
             }

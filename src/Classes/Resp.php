@@ -51,7 +51,7 @@ class Resp
 
     /**
      * Resp constructor.
-     * @param int               $code    code
+     * @param int               $code code
      * @param string|MessageBag $message message
      */
     public function __construct(int $code, $message = '')
@@ -78,84 +78,36 @@ class Resp
         if (!$message) {
             switch ($code) {
                 case self::SUCCESS:
-                    $message = (string) trans('poppy::resp.success');
+                    $message = (string) trans('weiran::resp.success');
                     break;
                 case self::ERROR:
-                    $message = (string) trans('poppy::resp.error');
+                    $message = (string) trans('weiran::resp.error');
                     break;
                 case self::TOKEN_MISS:
-                    $message = (string) trans('poppy::resp.token_miss');
+                    $message = (string) trans('weiran::resp.token_miss');
                     break;
                 case self::TOKEN_TIMEOUT:
-                    $message = (string) trans('poppy::resp.token_timeout');
+                    $message = (string) trans('weiran::resp.token_timeout');
                     break;
                 case self::TOKEN_ERROR:
-                    $message = (string) trans('poppy::resp.token_error');
+                    $message = (string) trans('weiran::resp.token_error');
                     break;
                 case self::PARAM_ERROR:
-                    $message = (string) trans('poppy::resp.param_error');
+                    $message = (string) trans('weiran::resp.param_error');
                     break;
                 case self::SIGN_ERROR:
-                    $message = (string) trans('poppy::resp.sign_error');
+                    $message = (string) trans('weiran::resp.sign_error');
                     break;
                 case self::NO_AUTH:
-                    $message = (string) trans('poppy::resp.no_auth');
+                    $message = (string) trans('weiran::resp.no_auth');
                     break;
                 case self::INNER_ERROR:
                 default:
-                    $message = (string) trans('poppy::resp.inner_error');
+                    $message = (string) trans('weiran::resp.inner_error');
                     break;
             }
             $this->message = $message;
         }
-    }
-
-    /**
-     * 返回错误代码
-     * @return int
-     */
-    public function getCode(): int
-    {
-        return $this->code;
-    }
-
-    /**
-     * 返回错误信息
-     * @return null|string
-     */
-    public function getMessage(): string
-    {
-        $env     = !is_production() ? '[' . config('app.env') . ']' : '';
-        $message = (is_string($this->message) ? $this->message : implode(',', $this->message));
-        if (Str::contains($message, $env)) {
-            $message = str_replace($env, '.', $message);
-        }
-
-        return $env . $message;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        if (is_array($this->message)) {
-            return implode("\n", $this->message);
-        }
-
-        return $this->message;
-    }
-
-    /**
-     * to array
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return [
-            'status'  => $this->getCode(),
-            'message' => $this->getMessage(),
-        ];
     }
 
     /**
@@ -165,29 +117,29 @@ class Resp
     public static function desc(string $key = null)
     {
         $desc = [
-            self::SUCCESS       => (string) trans('poppy::resp.success'),
-            self::ERROR         => (string) trans('poppy::resp.error'),
-            self::TOKEN_MISS    => (string) trans('poppy::resp.token_miss'),
-            self::TOKEN_TIMEOUT => (string) trans('poppy::resp.token_timeout'),
-            self::TOKEN_ERROR   => (string) trans('poppy::resp.token_error'),
-            self::PARAM_ERROR   => (string) trans('poppy::resp.param_error'),
-            self::SIGN_ERROR    => (string) trans('poppy::resp.sign_error'),
-            self::NO_AUTH       => (string) trans('poppy::resp.no_auth'),
-            self::INNER_ERROR   => (string) trans('poppy::resp.inner_error'),
+            self::SUCCESS       => (string) trans('weiran::resp.success'),
+            self::ERROR         => (string) trans('weiran::resp.error'),
+            self::TOKEN_MISS    => (string) trans('weiran::resp.token_miss'),
+            self::TOKEN_TIMEOUT => (string) trans('weiran::resp.token_timeout'),
+            self::TOKEN_ERROR   => (string) trans('weiran::resp.token_error'),
+            self::PARAM_ERROR   => (string) trans('weiran::resp.param_error'),
+            self::SIGN_ERROR    => (string) trans('weiran::resp.sign_error'),
+            self::NO_AUTH       => (string) trans('weiran::resp.no_auth'),
+            self::INNER_ERROR   => (string) trans('weiran::resp.inner_error'),
         ];
         return kv($desc, $key);
     }
 
     /**
      * 错误输出
-     * @param int                     $type   错误码
-     * @param string|array|MessageBag $msg    类型
+     * @param int                     $type 错误码
+     * @param string|array|MessageBag $msg 类型
      * @param string|null|array       $append
      *                                        _json: 强制以 json 数据返回
      *                                        _location : 重定向
      *                                        _reload : 刷新页面, 需要提前设定 Session::previousUrl()
      *                                        _time   : 刷新或者重定向的时间(毫秒), 如果为null, 则显示页面信息, false 为立即刷新或者重定向, true 默认为 3S, 指定时间则为 xx ms
-     * @param array|null              $input  表单提交的数据, 是否连带返回
+     * @param array|null              $input 表单提交的数据, 是否连带返回
      * @return JsonResponse|RedirectResponse
      */
     public static function web(int $type, $msg, $append = null, array $input = null)
@@ -254,9 +206,9 @@ class Resp
 
     /**
      * 返回成功输入
-     * @param string|array|MessageBag $msg    提示消息
+     * @param string|array|MessageBag $msg 提示消息
      * @param string|null|array       $append 追加的信息
-     * @param array|null              $input  保留输入的数据
+     * @param array|null              $input 保留输入的数据
      * @return JsonResponse|RedirectResponse
      */
     public static function success($msg, $append = null, array $input = null)
@@ -266,9 +218,9 @@ class Resp
 
     /**
      * 返回错误数组
-     * @param string|array|MessageBag $msg    提示消息
+     * @param string|array|MessageBag $msg 提示消息
      * @param string|null|array       $append 追加的信息
-     * @param array|null              $input  保留输入的数据
+     * @param array|null              $input 保留输入的数据
      * @return JsonResponse|RedirectResponse
      */
     public static function error($msg, $append = null, array $input = null)
@@ -278,7 +230,7 @@ class Resp
 
     /**
      * 返回自定义信息
-     * @param int    $code    code
+     * @param int    $code code
      * @param string $message message
      * @return array
      */
@@ -289,16 +241,16 @@ class Resp
 
     /**
      * 显示界面
-     * @param int|bool|null $time     时间
+     * @param int|bool|null $time 时间
      * @param string|null   $location location
-     * @param array|null    $input    input
+     * @param array|null    $input input
      * @return RedirectResponse|\Illuminate\Http\Response
      */
     private static function webView($code, $message, $time = null, string $location = null, array $input = null)
     {
-        $messageTpl = config('poppy.framework.message_template');
+        $messageTpl = config('weiran.framework.message_template');
         // default message template
-        $view = 'poppy::template.message';
+        $view = 'weiran::template.message';
         if ($messageTpl) {
             foreach ($messageTpl as $context => $tplView) {
                 if (py_container()->isRunningIn($context)) {
@@ -346,7 +298,7 @@ class Resp
     /**
      * 不支持 location
      * splash 不支持 location | back (Mark Zhao)
-     * @param Resp         $resp   resp
+     * @param Resp         $resp resp
      * @param string|array $append append
      * @return JsonResponse
      */
@@ -382,5 +334,53 @@ class Resp
 
         $format = config('poppy.framework.json_format', 0);
         return Response::json($return, 200, [], $format);
+    }
+
+    /**
+     * 返回错误代码
+     * @return int
+     */
+    public function getCode(): int
+    {
+        return $this->code;
+    }
+
+    /**
+     * 返回错误信息
+     * @return null|string
+     */
+    public function getMessage(): string
+    {
+        $env     = !is_production() ? '[' . config('app.env') . ']' : '';
+        $message = (is_string($this->message) ? $this->message : implode(',', $this->message));
+        if (Str::contains($message, $env)) {
+            $message = str_replace($env, '.', $message);
+        }
+
+        return $env . $message;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if (is_array($this->message)) {
+            return implode("\n", $this->message);
+        }
+
+        return $this->message;
+    }
+
+    /**
+     * to array
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'status'  => $this->getCode(),
+            'message' => $this->getMessage(),
+        ];
     }
 }

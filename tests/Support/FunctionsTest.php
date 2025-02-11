@@ -39,7 +39,7 @@ class FunctionsTest extends TestCase
     public function testPoppyFriendly()
     {
         $name = poppy_friendly('\Weiran\Framework\Weiran\Weiran');
-        $this->assertEquals(trans('poppy::util.classes.poppy.poppy'), $name);
+        $this->assertEquals(trans('weiran::util.classes.poppy.poppy'), $name);
         $name = poppy_friendly('\Demo\Models\NotExistModel');
         $this->assertEquals('demo::util.classes.models.not_exist_model', $name);
     }

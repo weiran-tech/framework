@@ -28,11 +28,11 @@ class BladeServiceProvider extends ServiceProvider
     {
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
             // @poppy($slug)
-            $bladeCompiler->directive('poppy', function ($slug) {
-                return "<?php if(app('poppy')->exists({$slug}) && app('poppy')->isEnabled({$slug})): ?>";
+            $bladeCompiler->directive('weiran', function ($slug) {
+                return "<?php if(app('weiran')->exists({$slug}) && app('weiran')->isEnabled({$slug})): ?>";
             });
 
-            $bladeCompiler->directive('endpoppy', function () {
+            $bladeCompiler->directive('endweiran', function () {
                 return '<?php endif; ?>';
             });
         });
