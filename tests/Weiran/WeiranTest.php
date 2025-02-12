@@ -2,14 +2,14 @@
 
 declare(strict_types = 1);
 
-namespace Weiran\Framework\Tests\Poppy;
+namespace Weiran\Framework\Tests\Weiran;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Weiran\Framework\Application\TestCase;
 use Weiran\Framework\Helper\ArrayHelper;
 
-class PoppyTest extends TestCase
+class WeiranTest extends TestCase
 {
     /**
      * namespace test
@@ -77,7 +77,7 @@ class PoppyTest extends TestCase
             $matched = preg_match('/modules\/(?<module>[a-z]*)\/src/', $folder, $matches);
             $name    = 'module.' . $matches['module'];
             if ($matched && !app('weiran')->exists($name)) {
-                $this->fail("Module `{$matches['module']}` Not Exist , Please run `php artisan poppy:optimize` to fix.");
+                $this->fail("Module `{$matches['module']}` Not Exist , Please run `php artisan weiran:optimize` to fix.");
             }
             else {
                 $this->assertTrue(true, "Module `{$matches['module']}` loaded.");

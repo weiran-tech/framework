@@ -7,10 +7,10 @@ namespace Weiran\Framework\Weiran;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Throwable;
 use Weiran\Framework\Events\PoppyOptimized;
 use Weiran\Framework\Exceptions\ApplicationException;
 use Weiran\Framework\Weiran\Abstracts\Repository;
-use Throwable;
 
 /**
  * FileRepository
@@ -221,7 +221,7 @@ class FileRepository extends Repository
         $modules   = collect();
 
         $baseNames->each(function ($module) use ($modules, $cache) {
-            $basename = collect([]);
+            $basename = collect();
             $temp     = $basename->merge(collect($cache->get($module)));
             $manifest = $temp->merge(collect($this->getManifest($module)));
             // rewrite slug
@@ -232,7 +232,7 @@ class FileRepository extends Repository
         $depends = '';
 
         $modules->each(function (Collection $module) use (&$depends) {
-            $module->put('id', crc32($module->get('slug')));
+            $module->put('id', crc32((string) $module->get('slug')));
 
             if (!$module->has('enabled')) {
                 $module->put('enabled', true);

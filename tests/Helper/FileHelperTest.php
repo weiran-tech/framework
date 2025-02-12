@@ -30,22 +30,22 @@ class FileHelperTest extends TestCase
     public function testGetJson(): void
     {
         // todo li 可以生成一个 json 文件, 来验证是否正确
-        $file = poppy_path('poppy.framework', 'tests/files/demo.jpg');
+        $file = poppy_path('weiran.framework', 'tests/files/demo.jpg');
         $this->assertEquals([], FileHelper::getJson($file));
     }
 
     public function testDirPath(): void
     {
-        $file = poppy_path('poppy.framework', 'tests/files');
+        $file = poppy_path('weiran.framework', 'tests/files');
         $this->assertEquals($file . '/', FileHelper::dirPath($file));
     }
 
     public function testTouch(): void
     {
         $carbon = Carbon::now();
-        $dir    = poppy_path('poppy.framework', 'tests/files');
+        $dir    = poppy_path('weiran.framework', 'tests/files');
         $this->assertEquals(true, FileHelper::touch($dir));
-        $file = poppy_path('poppy.framework', 'tests/files/demo.jpg');
+        $file = poppy_path('weiran.framework', 'tests/files/demo.jpg');
         clearstatcache(false, $file);
         $fmtime = filemtime($file);
         $fatime = fileatime($file);

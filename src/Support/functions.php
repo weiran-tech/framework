@@ -275,7 +275,7 @@ if (!function_exists('is_production')) {
 
 if (!function_exists('home_path')) {
     /**
-     * Poppy home path.
+     * Weiran home path.
      * @param string $path
      * @return string
      */

@@ -36,7 +36,7 @@ abstract class Repository implements RepositoryContract
     /**
      * Constructor method.
      * @param Config     $config config
-     * @param Filesystem $files  files
+     * @param Filesystem $files files
      */
     public function __construct(Config $config, Filesystem $files)
     {
@@ -121,7 +121,7 @@ abstract class Repository implements RepositoryContract
     {
         $type   = Str::before($slug, '.');
         $module = Str::after($slug, '.');
-        if ($type === 'poppy') {
+        if ($type === 'weiran') {
             return home_path($module);
         }
         $modulePath = app('path.module');
