@@ -8,15 +8,15 @@ use Illuminate\Console\Command;
 use Weiran\Framework\Weiran\Weiran;
 
 /**
- * Poppy List
+ * Weiran List
  */
-class PoppyListCommand extends Command
+class WeiranListCommand extends Command
 {
     /**
      * The console command name.
      * @var string
      */
-    protected $name = 'poppy:list';
+    protected $name = 'weiran:list';
 
     /**
      * The console command description.
@@ -27,7 +27,7 @@ class PoppyListCommand extends Command
     /**
      * @var Weiran
      */
-    protected Weiran $poppy;
+    protected Weiran $weiran;
 
     /**
      * The table headers for the command.
@@ -37,13 +37,13 @@ class PoppyListCommand extends Command
 
     /**
      * Create a new command instance.
-     * @param Weiran $poppy
+     * @param Weiran $weiran
      */
-    public function __construct(Weiran $poppy)
+    public function __construct(Weiran $weiran)
     {
         parent::__construct();
 
-        $this->poppy = $poppy;
+        $this->weiran = $weiran;
     }
 
     /**
@@ -51,7 +51,7 @@ class PoppyListCommand extends Command
      */
     public function handle()
     {
-        $modules = $this->poppy->all();
+        $modules = $this->weiran->all();
 
         if (count($modules) === 0) {
             $this->error("Your application doesn't have any modules.");
@@ -70,7 +70,7 @@ class PoppyListCommand extends Command
      */
     protected function getModules(): array
     {
-        $modules = $this->poppy->all();
+        $modules = $this->weiran->all();
         $results = [];
 
         foreach ($modules as $module) {
@@ -92,7 +92,7 @@ class PoppyListCommand extends Command
             'name'        => $module['name'] ?? '',
             'slug'        => $module['slug'],
             'description' => $module['description'] ?? '',
-            'status'      => $this->poppy->isEnabled($module['slug']) ? 'Enabled' : 'Disabled',
+            'status'      => $this->weiran->isEnabled($module['slug']) ? 'Enabled' : 'Disabled',
         ];
     }
 

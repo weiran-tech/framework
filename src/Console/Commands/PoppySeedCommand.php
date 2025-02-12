@@ -36,11 +36,11 @@ class PoppySeedCommand extends Command
     /**
      * @inheritDoc
      */
-    public function __construct(Weiran $poppy)
+    public function __construct(Weiran $weiran)
     {
         parent::__construct();
 
-        $this->poppy = $poppy;
+        $this->poppy = $weiran;
     }
 
     /**

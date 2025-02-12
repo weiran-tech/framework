@@ -51,15 +51,15 @@ class PoppyMigrateResetCommand extends Command
 
     /**
      * Create a new command instance.
-     * @param Weiran     $poppy
+     * @param Weiran     $weiran
      * @param Filesystem $files
      * @param Migrator   $migrator
      */
-    public function __construct(Weiran $poppy, Filesystem $files, Migrator $migrator)
+    public function __construct(Weiran $weiran, Filesystem $files, Migrator $migrator)
     {
         parent::__construct();
 
-        $this->poppy    = $poppy;
+        $this->poppy    = $weiran;
         $this->files    = $files;
         $this->migrator = $migrator;
     }

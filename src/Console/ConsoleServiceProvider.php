@@ -7,7 +7,7 @@ namespace Weiran\Framework\Console;
 use Illuminate\Support\ServiceProvider;
 use Weiran\Framework\Console\Commands\PoppyDisableCommand;
 use Weiran\Framework\Console\Commands\PoppyEnableCommand;
-use Weiran\Framework\Console\Commands\PoppyListCommand;
+use Weiran\Framework\Console\Commands\WeiranListCommand;
 use Weiran\Framework\Console\Commands\PoppyMigrateCommand;
 use Weiran\Framework\Console\Commands\PoppyMigrateRefreshCommand;
 use Weiran\Framework\Console\Commands\PoppyMigrateResetCommand;
@@ -71,7 +71,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerListCommand()
     {
         $this->app->singleton('command.poppy.list', function ($app) {
-            return new PoppyListCommand($app['weiran']);
+            return new WeiranListCommand($app['weiran']);
         });
 
         $this->commands('command.poppy.list');
