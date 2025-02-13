@@ -48,6 +48,6 @@ class MakePolicyCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return poppy_class($this->argument('slug'), 'Models\Policies');
+        return weiran_class($this->argument('slug'), 'Models\Policies');
     }
 }

@@ -60,6 +60,6 @@ class MakeControllerCommand extends GeneratorCommand
             $type = 'web';
         }
 
-        return poppy_class($this->argument('slug'), 'Http\\Request\\' . Str::studly($type));
+        return weiran_class($this->argument('slug'), 'Http\\Request\\' . Str::studly($type));
     }
 }

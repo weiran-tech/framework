@@ -12,35 +12,35 @@ class FunctionsTest extends TestCase
     public function testPoppyPath(): void
     {
         // module - system
-        $systemPath = poppy_path('system', 'src/sample.php');
+        $systemPath = weiran_path('system', 'src/sample.php');
         $this->assertEquals(base_path('modules/system/src/sample.php'), $systemPath);
 
-        $systemPath = poppy_path('module.system', 'src/sample.php');
+        $systemPath = weiran_path('module.system', 'src/sample.php');
         $this->assertEquals(base_path('modules/system/src/sample.php'), $systemPath);
 
         // poppy - system
-        $poppySystemPath = poppy_path('weiran.system', 'src/sample.php');
+        $poppySystemPath = weiran_path('weiran.system', 'src/sample.php');
         $this->assertEquals(app('path.weiran') . '/system/src/sample.php', $poppySystemPath);
 
         // base Path = root/modules
-        $poppyRoot = poppy_path();
+        $poppyRoot = weiran_path();
         $this->assertEquals(base_path('modules/'), $poppyRoot);
     }
 
     public function testPoppyClass()
     {
-        $poppyCoreModel = poppy_class('weiran.core', 'Models');
+        $poppyCoreModel = weiran_class('weiran.core', 'Models');
         $this->assertEquals('Weiran\\Core\\Models', $poppyCoreModel);
 
-        $moduleSiteModal = poppy_class('module.site', 'Models');
+        $moduleSiteModal = weiran_class('module.site', 'Models');
         $this->assertEquals('Site\\Models', $moduleSiteModal);
     }
 
     public function testPoppyFriendly()
     {
-        $name = poppy_friendly('\Weiran\Framework\Weiran\Weiran');
+        $name = weiran_friendly('\Weiran\Framework\Weiran\Weiran');
         $this->assertEquals(trans('weiran::util.classes.poppy.poppy'), $name);
-        $name = poppy_friendly('\Demo\Models\NotExistModel');
+        $name = weiran_friendly('\Demo\Models\NotExistModel');
         $this->assertEquals('demo::util.classes.models.not_exist_model', $name);
     }
 

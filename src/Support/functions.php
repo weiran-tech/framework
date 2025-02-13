@@ -5,7 +5,7 @@ declare(strict_types = 1);
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 use Illuminate\Support\Str;
-use Weiran\Faker\Factory;
+use Poppy\Faker\Factory;
 use Weiran\Framework\Exceptions\ApplicationException;
 use Weiran\Framework\Foundation\Application;
 use Weiran\Framework\Foundation\Console\Kernel;
@@ -165,14 +165,14 @@ if (!function_exists('jwt_token')) {
     }
 }
 
-if (!function_exists('poppy_path')) {
+if (!function_exists('weiran_path')) {
     /**
      * Return the path to the given module file.
      * @param string|null $slug
      * @param string|null $file
      * @return string
      */
-    function poppy_path(string $slug = null, string $file = null): string
+    function weiran_path(string $slug = null, string $file = null): string
     {
         if (Str::contains($slug, 'weiran.')) {
             $modulesPath = app('path.weiran');
@@ -188,7 +188,7 @@ if (!function_exists('poppy_path')) {
     }
 }
 
-if (!function_exists('poppy_class')) {
+if (!function_exists('weiran_class')) {
     /**
      * Return the full path to the given module class or namespace.
      * Class may not exist
@@ -196,7 +196,7 @@ if (!function_exists('poppy_class')) {
      * @param string $class
      * @return string
      */
-    function poppy_class(string $slug, string $class = ''): string
+    function weiran_class(string $slug, string $class = ''): string
     {
         $type       = Str::before($slug, '.');
         $moduleName = Str::after($slug, '.');
@@ -209,13 +209,13 @@ if (!function_exists('poppy_class')) {
     }
 }
 
-if (!function_exists('poppy_friendly')) {
+if (!function_exists('weiran_friendly')) {
     /**
-     * 根据 Poppy / Module 的参数定义返回 util 中定义的 class 的友好名称
+     * 根据 Framework / Module 的参数定义返回 util 中定义的 class 的友好名称
      * @param string $class
      * @return string
      */
-    function poppy_friendly(string $class): string
+    function weiran_friendly(string $class): string
     {
         $snake = collect(explode('\\', trim($class, '\\')))->map(function ($path) {
             return Str::snake(lcfirst($path));
@@ -223,8 +223,8 @@ if (!function_exists('poppy_friendly')) {
 
         $part1 = $snake->first();
         $part2 = $snake->offsetGet(1);
-        if ($part1 === 'poppy') {
-            $namespace = $part2 === 'framework' ? 'poppy' : 'py-' . Str::slug($part2);
+        if ($part1 === 'weiran') {
+            $namespace = $part2 === 'framework' ? 'weiran' : 'weiran-' . Str::slug($part2);
             $path      = $snake->slice(2)->join('.');
         }
         else {
@@ -252,8 +252,8 @@ if (!function_exists('policy_friendly')) {
         $part1 = $snake->first();
         $part2 = $snake->offsetGet(1);
         $path  = $snake->last();
-        if ($part1 === 'poppy') {
-            $namespace = $part2 === 'framework' ? 'poppy' : 'py-' . $part2;
+        if ($part1 === 'weiran') {
+            $namespace = $part2 === 'framework' ? 'weiran' : 'weiran-' . $part2;
         }
         else {
             $namespace = $part1;
@@ -304,6 +304,7 @@ if (!function_exists('py_container')) {
     /**
      * Get IoC Container.
      * @return Container | Application
+     * @deprecated 1.x
      */
     function py_container(): Container
     {
@@ -326,7 +327,7 @@ if (!function_exists('py_console')) {
 if (!function_exists('py_faker')) {
     /**
      * Get Console Container.
-     * @return Poppy\Faker\Generator
+     * @return \Poppy\Faker\Generator|null
      * @throws ApplicationException
      */
     function py_faker(): ?Poppy\Faker\Generator

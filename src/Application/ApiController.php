@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Weiran\Framework\Application;
 
+use Illuminate\Container\Container;
+
 /**
  * Api Controller
  */
@@ -15,6 +17,6 @@ class ApiController extends Controller
     public function __construct()
     {
         parent::__construct();
-        py_container()->setExecutionContext('api');
+        Container::getInstance()->setExecutionContext('api');
     }
 }

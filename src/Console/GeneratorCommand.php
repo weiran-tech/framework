@@ -93,7 +93,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
             return Str::studly($item);
         }, $dirs);
         $dirname   = implode('/', $lowerDirs);
-        return poppy_path(
+        return weiran_path(
             $slug,
             $addSrc .
             $dirname . DIRECTORY_SEPARATOR .

@@ -16,20 +16,20 @@ class WeiranTest extends TestCase
      */
     public function testNamespace(): void
     {
-        $namespace = poppy_class('module.site', 'ServiceProvider');
+        $namespace = weiran_class('module.site', 'ServiceProvider');
         $this->assertEquals('Site\ServiceProvider', $namespace);
-        $namespace = poppy_class('module.site');
+        $namespace = weiran_class('module.site');
         $this->assertEquals('Site', $namespace);
-        $namespace = poppy_class('weiran.system', 'ServiceProvider');
+        $namespace = weiran_class('weiran.system', 'ServiceProvider');
         $this->assertEquals('Weiran\System\ServiceProvider', $namespace);
-        $namespace = poppy_class('weiran.system');
+        $namespace = weiran_class('weiran.system');
         $this->assertEquals('Weiran\System', $namespace);
     }
 
 
     public function testPath()
     {
-        $path = poppy_path('module.site', 'src/models/Default.php');
+        $path = weiran_path('module.site', 'src/models/Default.php');
         $this->assertTrue(Str::endsWith($path, 'modules/site/src/models/Default.php'));
     }
 

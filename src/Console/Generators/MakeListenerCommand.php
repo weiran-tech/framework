@@ -73,7 +73,7 @@ class MakeListenerCommand extends GeneratorCommand
         }
         else {
             // event with module
-            $fullEvent = poppy_class($this->argument('slug'), 'Events\\' . $event);
+            $fullEvent = weiran_class($this->argument('slug'), 'Events\\' . $event);
         }
 
 
@@ -93,6 +93,6 @@ class MakeListenerCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return poppy_class($this->argument('slug'), 'Listeners');
+        return weiran_class($this->argument('slug'), 'Listeners');
     }
 }

@@ -35,7 +35,7 @@ trait MigrationTrait
      */
     protected function getMigrationPath(string $module)
     {
-        return poppy_path($module, 'resources/migrations');
+        return weiran_path($module, 'resources/migrations');
     }
 }
 

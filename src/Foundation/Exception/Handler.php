@@ -100,7 +100,7 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof ModelNotFoundException) {
             $message = trans('weiran::resp.model_not_found_exception', [
-                'name' => poppy_friendly($e->getModel()) . ' id: [ ' . implode(', ', $e->getIds()) . ' ]',
+                'name' => weiran_friendly($e->getModel()) . ' id: [ ' . implode(', ', $e->getIds()) . ' ]',
             ]);
             return Resp::error($message);
         }

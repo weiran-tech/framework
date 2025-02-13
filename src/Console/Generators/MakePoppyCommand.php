@@ -167,11 +167,11 @@ class MakePoppyCommand extends Command
      */
     protected function generateModule()
     {
-        if (!$this->files->isDirectory(poppy_path())) {
-            $this->files->makeDirectory(poppy_path());
+        if (!$this->files->isDirectory(weiran_path())) {
+            $this->files->makeDirectory(weiran_path());
         }
 
-        $directory = poppy_path(null, $this->conf['slug']);
+        $directory = weiran_path(null, $this->conf['slug']);
         $source    = __DIR__ . '/../../../resources/stubs/poppy';
 
         $this->files->makeDirectory($directory);

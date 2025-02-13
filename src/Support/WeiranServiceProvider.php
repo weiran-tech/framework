@@ -43,7 +43,7 @@ abstract class WeiranServiceProvider extends ServiceProviderBase
             /*
              * Register paths for: config, translator, view
              */
-            $modulePath = poppy_path($module);
+            $modulePath = weiran_path($module);
 
             if (Str::start($module, 'weiran')) {
                 // 模块命名 weiran.mgr-page

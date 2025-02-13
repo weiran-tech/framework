@@ -88,7 +88,7 @@ class PoppySeedCommand extends Command
     {
         $module        = $this->poppy->where('slug', $slug);
         $params        = [];
-        $namespacePath = poppy_class($slug);
+        $namespacePath = weiran_class($slug);
 
         $rootSeeder = ucfirst(Str::camel(Str::after($module['slug'], '.'))) . 'DatabaseSeeder';
         $fullPath   = ucfirst(Str::camel($namespacePath)) . '\Seeders\\' . $rootSeeder;

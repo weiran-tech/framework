@@ -77,7 +77,7 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
      */
     protected function readJson($module, $path): array
     {
-        $filePath = poppy_path($module, $path);
+        $filePath = weiran_path($module, $path);
         if (file_exists($filePath)) {
             $config = file_get_contents($filePath);
             if (UtilHelper::isJson($config)) {
