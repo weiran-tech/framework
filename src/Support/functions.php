@@ -33,7 +33,7 @@ if (!function_exists('route_url')) {
             }
             $route_url = route($route, $route_params, $absolute);
         }
-        elseif (strpos($route, '.') === false) {
+        elseif (!str_contains($route, '.')) {
             $route_url = url($route, $route_params);
         }
         else {
@@ -53,7 +53,7 @@ if (!function_exists('route_prefix')) {
     /**
      * 路由前缀
      */
-    function route_prefix()
+    function route_prefix(): string
     {
         $route = Route::currentRouteName();
         if (!$route) {
