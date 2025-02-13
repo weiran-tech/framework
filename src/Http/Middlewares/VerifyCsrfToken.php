@@ -29,6 +29,6 @@ class VerifyCsrfToken extends BaseVerifier
     public function __construct(Application $app, Encrypter $encrypter)
     {
         parent::__construct($app, $encrypter);
-        $this->except = (array) config('poppy.framework.csrf_except');
+        $this->except = (array) config('weiran.framework.csrf_except');
     }
 }

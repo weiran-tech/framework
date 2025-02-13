@@ -25,7 +25,7 @@ class PageInfo
      */
     public function __construct(array $page_info)
     {
-        $sizeConfig = abs(config('poppy.framework.page_size')) ?: 15;
+        $sizeConfig = abs(config('weiran.framework.page_size')) ?: 15;
         $page       = abs($page_info['page'] ?? 1);
         $size       = abs($page_info['size'] ?? $sizeConfig);
         $this->page = $page ?: 1;
@@ -57,8 +57,8 @@ class PageInfo
     public static function pagesize(): int
     {
         // pagesize
-        $size        = (int) config('poppy.framework.page_size', 15);
-        $maxPagesize = (int) config('poppy.framework.page_max');
+        $size        = (int) config('weiran.framework.page_size', 15);
+        $maxPagesize = (int) config('weiran.framework.page_max');
         if (input('pagesize')) {
             $pagesize = abs((int) input('pagesize'));
             $pagesize = ($pagesize <= $maxPagesize) ? $pagesize : $maxPagesize;

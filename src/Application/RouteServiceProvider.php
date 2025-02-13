@@ -19,6 +19,6 @@ abstract class RouteServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         parent::__construct($app);
-        $this->prefix = config('poppy.framework.prefix') ?: 'mgr-page';
+        $this->prefix = config('weiran.framework.prefix') ?: 'mgr-page';
     }
 }

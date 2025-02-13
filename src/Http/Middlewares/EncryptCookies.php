@@ -15,6 +15,6 @@ class EncryptCookies extends \Illuminate\Cookie\Middleware\EncryptCookies
     public function __construct(EncrypterContract $encrypter)
     {
         parent::__construct($encrypter);
-        $this->except = (array) config('poppy.framework.plain_cookies');
+        $this->except = (array) config('weiran.framework.plain_cookies');
     }
 }

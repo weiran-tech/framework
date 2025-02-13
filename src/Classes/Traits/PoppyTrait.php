@@ -228,7 +228,7 @@ trait PoppyTrait
      */
     protected function pyPoppy(): Weiran
     {
-        return py_container()->make('poppy');
+        return py_container()->make('weiran');
     }
 
     /**
@@ -237,7 +237,7 @@ trait PoppyTrait
      */
     protected function pyIni(): Ini
     {
-        return py_container()->make('poppy.ini');
+        return py_container()->make('weiran.ini');
     }
 
     /**
@@ -246,7 +246,7 @@ trait PoppyTrait
      */
     protected function pyXml(): Xml
     {
-        return py_container()->make('poppy.xml');
+        return py_container()->make('weiran.xml');
     }
 
     /**
@@ -255,7 +255,7 @@ trait PoppyTrait
      */
     protected function pyYaml(): Yaml
     {
-        return py_container()->make('poppy.yaml');
+        return py_container()->make('weiran.yaml');
     }
 }
 

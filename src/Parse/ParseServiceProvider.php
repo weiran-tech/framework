@@ -19,15 +19,15 @@ class ParseServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function register()
     {
-        $this->app->singleton('poppy.yaml', function ($app) {
+        $this->app->singleton('weiran.yaml', function ($app) {
             return new Yaml();
         });
 
-        $this->app->singleton('poppy.ini', function ($app) {
+        $this->app->singleton('weiran.ini', function ($app) {
             return new Ini();
         });
 
-        $this->app->singleton('poppy.xml', function ($app) {
+        $this->app->singleton('weiran.xml', function ($app) {
             return new Xml();
         });
     }

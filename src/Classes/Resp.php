@@ -332,7 +332,7 @@ class Resp
             $return['data'] = $data;
         }
 
-        $format = config('poppy.framework.json_format', 0);
+        $format = config('weiran.framework.json_format', 0);
         return Response::json($return, 200, [], $format);
     }
 
