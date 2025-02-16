@@ -17,30 +17,18 @@ class ParseServiceProvider extends ServiceProvider implements DeferrableProvider
      * Register the service provider.
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        $this->app->singleton('weiran.yaml', function ($app) {
-            return new Yaml();
-        });
-
-        $this->app->singleton('weiran.ini', function ($app) {
-            return new Ini();
-        });
-
-        $this->app->singleton('weiran.xml', function ($app) {
-            return new Xml();
-        });
+        $this->app->singleton('weiran.yaml', fn() => new Yaml());
     }
 
     /**
      * @inheritDoc
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             'weiran.yaml',
-            'weiran.ini',
-            'weiran.xml',
         ];
     }
 }

@@ -19,11 +19,9 @@ class Yaml
      * @param string $contents YAML contents to parse
      * @return mixed the YAML contents as an array
      */
-    public function parse(string $contents)
+    public function parse(string $contents): mixed
     {
-        $yaml = new Parser();
-
-        return $yaml->parse($contents);
+        return (new Parser())->parse($contents);
     }
 
     /**
@@ -31,7 +29,7 @@ class Yaml
      * @param string $fileName file to read contents and parse
      * @return array the YAML contents as an array
      */
-    public function parseFile(string $fileName)
+    public function parseFile(string $fileName): array
     {
         $contents = file_get_contents($fileName);
 
@@ -40,7 +38,7 @@ class Yaml
 
     /**
      * Renders a PHP array to YAML format.
-     * @param array $vars    vars
+     * @param array $vars vars
      * @param array $options options
      *
      * Supported options:
@@ -49,14 +47,12 @@ class Yaml
      * - objectSupport: if object support is enabled.
      * @return string
      */
-    public function render($vars = [], $options = [])
+    public function render(array $vars = [], array $options = []): string
     {
         $options = array_merge([
             'inline' => 20,
         ], $options);
 
-        $yaml = new Dumper();
-
-        return $yaml->dump($vars, $options['inline'], 0);
+        return (new Dumper())->dump($vars, $options['inline']);
     }
 }
