@@ -7,15 +7,15 @@ namespace Weiran\Framework\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Migrations\Migrator;
-use Weiran\Framework\Classes\Traits\MigrationTrait;
-use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Weiran\Framework\Classes\Traits\MigrationTrait;
+use Weiran\Framework\Weiran\Weiran;
 
 /**
- * Poppy Migrate Rollback
+ * Weiran Migrate Rollback
  */
-class PoppyMigrateRollbackCommand extends Command
+class WeiranMigrateRollbackCommand extends Command
 {
     use MigrationTrait, ConfirmableTrait;
 
@@ -23,7 +23,7 @@ class PoppyMigrateRollbackCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $name = 'poppy:migrate:rollback';
+    protected $name = 'weiran:migrate:rollback';
 
     /**
      * The console command description.
@@ -40,19 +40,19 @@ class PoppyMigrateRollbackCommand extends Command
     /**
      * @var Weiran
      */
-    protected Weiran $poppy;
+    protected Weiran $weiran;
 
     /**
      * Create a new command instance.
      * @param Migrator $migrator
-     * @param Weiran   $poppy
+     * @param Weiran   $weiran
      */
-    public function __construct(Migrator $migrator, Weiran $poppy)
+    public function __construct(Migrator $migrator, Weiran $weiran)
     {
         parent::__construct();
 
         $this->migrator = $migrator;
-        $this->poppy    = $poppy;
+        $this->weiran   = $weiran;
     }
 
     /**
@@ -118,7 +118,7 @@ class PoppyMigrateRollbackCommand extends Command
             $paths[] = $this->getMigrationPath($slug);
         }
         else {
-            foreach ($this->poppy->slugs() as $module) {
+            foreach ($this->weiran->slugs() as $module) {
                 $paths[] = $this->getMigrationPath($module);
             }
         }

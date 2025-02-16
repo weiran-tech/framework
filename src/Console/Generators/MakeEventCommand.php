@@ -15,7 +15,7 @@ class MakeEventCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:event
+    protected $signature = 'weiran:event
     	{slug : The slug of the module.}
     	{name : The name of the model class.}
     ';

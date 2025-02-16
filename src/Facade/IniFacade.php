@@ -20,6 +20,6 @@ class IniFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'poppy.ini';
+        return 'weiran.ini';
     }
 }

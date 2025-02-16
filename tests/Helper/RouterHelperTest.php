@@ -64,7 +64,7 @@ class RouterHelperTest extends TestCase
 
     public function testGetSegmentDefaultValue(): void
     {
-        $url = 'poppy.com?a=t';
+        $url = 'weiran.tech?a=t';
         $this->assertEquals('a=t', RouterHelper::getSegmentDefaultValue($url));
     }
 

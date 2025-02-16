@@ -16,7 +16,7 @@ class MakeCommandCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:command 
+    protected $signature = 'weiran:command 
         {slug : The fully slug name} 
         {name : Base name of the command with studly case, suggest use `Command` suffix.}
     ';

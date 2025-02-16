@@ -19,7 +19,7 @@ class MakeMigrationCommand extends Command
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:migration
+    protected $signature = 'weiran:migration
     	{slug : The slug of the module.}
     	{name : The name of the migration.}
     	{--create= : The table to be created.}

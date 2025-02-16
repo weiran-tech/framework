@@ -15,7 +15,7 @@ class MakeProviderCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:provider
+    protected $signature = 'weiran:provider
     	{slug : The slug of the module.}
     	{name : The name of the service provider class.}
     ';

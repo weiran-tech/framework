@@ -15,7 +15,7 @@ class MakeSeederCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:seeder
+    protected $signature = 'weiran:seeder
     	{slug : The slug of the module.}
     	{name : The name of the seeder class.}
     ';

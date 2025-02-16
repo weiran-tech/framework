@@ -15,7 +15,7 @@ class MakeTestCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:test
+    protected $signature = 'weiran:test
     	{slug : The slug of the module}
     	{name : The name of the test class}
     ';

@@ -21,7 +21,7 @@ class MakePoppyCommand extends Command
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:make
+    protected $signature = 'weiran:make
         {slug : The slug of the module}
         {--Q|quick : Skip the make:module wizard and use default values}
     ';
@@ -53,14 +53,14 @@ class MakePoppyCommand extends Command
     /**
      * Create a new command instance.
      * @param Filesystem $files
-     * @param Weiran     $poppy
+     * @param Weiran     $weiran
      */
-    public function __construct(Filesystem $files, Weiran $poppy)
+    public function __construct(Filesystem $files, Weiran $weiran)
     {
         parent::__construct();
 
         $this->files = $files;
-        $this->poppy = $poppy;
+        $this->poppy = $weiran;
     }
 
     /**
@@ -198,12 +198,12 @@ class MakePoppyCommand extends Command
      */
     protected function optimizeModules()
     {
-        return $this->callSilent('poppy:optimize');
+        return $this->callSilent('weiran:optimize');
     }
 
     /**
      * Pull the given stub file contents and display them on screen.
-     * @param string $file  file
+     * @param string $file file
      * @param string $level info type
      * @return mixed
      * @throws FileNotFoundException

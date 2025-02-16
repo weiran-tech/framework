@@ -5,25 +5,25 @@ declare(strict_types = 1);
 namespace Weiran\Framework\Console\Commands;
 
 use Illuminate\Console\Command;
-use Weiran\Framework\Events\PoppyDisabled;
+use Weiran\Framework\Events\WeiranEnabled;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Poppy Disable
+ * Weiran Enable
  */
-class PoppyDisableCommand extends Command
+class WeiranEnableCommand extends Command
 {
     /**
      * The console command name.
      * @var string
      */
-    protected $name = 'poppy:disable';
+    protected $name = 'weiran:enable';
 
     /**
      * The console command description.
      * @var string
      */
-    protected $description = 'Disable a module';
+    protected $description = 'Enable a module';
 
     /**
      * Execute the console command.
@@ -32,17 +32,17 @@ class PoppyDisableCommand extends Command
     {
         $slug = $this->argument('slug');
 
-        if ($this->laravel['weiran']->isEnabled($slug)) {
-            $this->laravel['weiran']->disable($slug);
+        if ($this->laravel['weiran']->isDisabled($slug)) {
+            $this->laravel['weiran']->enable($slug);
 
             $module = $this->laravel['weiran']->where('slug', $slug);
 
-            event(new PoppyDisabled($module));
+            event(new WeiranEnabled($module));
 
-            $this->info('Module was disabled successfully.');
+            $this->info('Module was enabled successfully.');
         }
         else {
-            $this->comment('Module is already disabled.');
+            $this->comment('Module is already enabled.');
         }
 
         return 0;

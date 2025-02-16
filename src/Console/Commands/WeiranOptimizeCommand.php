@@ -7,9 +7,9 @@ namespace Weiran\Framework\Console\Commands;
 use Illuminate\Console\Command;
 
 /**
- * Poppy Optimize
+ * Weiran Optimize
  */
-class PoppyOptimizeCommand extends Command
+class WeiranOptimizeCommand extends Command
 {
     /**
      * The console command name.

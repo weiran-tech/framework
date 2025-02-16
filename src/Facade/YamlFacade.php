@@ -19,6 +19,6 @@ class YamlFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'poppy.yaml';
+        return 'weiran.yaml';
     }
 }

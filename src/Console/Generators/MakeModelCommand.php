@@ -17,7 +17,7 @@ class MakeModelCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:model
+    protected $signature = 'weiran:model
     	{slug : The slug of the module.}
     	{name : The name of the model class.}
         {--migration : Create a new migration file for the model.}
@@ -46,7 +46,7 @@ class MakeModelCommand extends GeneratorCommand
             if ($this->option('migration')) {
                 $table = Str::plural(Str::snake(class_basename($this->argument('name'))));
 
-                $this->call('poppy:migration', [
+                $this->call('weiran:migration', [
                     'slug'     => $this->argument('slug'),
                     'name'     => "create_{$table}_table",
                     '--create' => $table,

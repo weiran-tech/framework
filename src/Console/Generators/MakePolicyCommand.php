@@ -15,7 +15,7 @@ class MakePolicyCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:policy
+    protected $signature = 'weiran:policy
     	{slug : The slug of the module.}
     	{name : The name of the policy class.}
     ';

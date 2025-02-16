@@ -9,16 +9,16 @@ use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Weiran\Framework\Classes\Traits\MigrationTrait;
-use Weiran\Framework\Events\PoppyMigrateReset;
-use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Weiran\Framework\Classes\Traits\MigrationTrait;
+use Weiran\Framework\Events\WeiranMigrateReset;
+use Weiran\Framework\Weiran\Weiran;
 
 /**
- * Poppy Migrate Reset
+ * Weiran Migrate Reset
  */
-class PoppyMigrateResetCommand extends Command
+class WeiranMigrateResetCommand extends Command
 {
     use ConfirmableTrait, MigrationTrait;
 
@@ -26,7 +26,7 @@ class PoppyMigrateResetCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $name = 'poppy:migrate:reset';
+    protected $name = 'weiran:migrate:reset';
 
     /**
      * The console command description.
@@ -37,7 +37,7 @@ class PoppyMigrateResetCommand extends Command
     /**
      * @var Weiran
      */
-    protected Weiran $poppy;
+    protected Weiran $weiran;
 
     /**
      * @var Migrator
@@ -59,8 +59,8 @@ class PoppyMigrateResetCommand extends Command
     {
         parent::__construct();
 
-        $this->poppy    = $weiran;
-        $this->files    = $files;
+        $this->weiran = $weiran;
+        $this->files  = $files;
         $this->migrator = $migrator;
     }
 
@@ -117,7 +117,7 @@ class PoppyMigrateResetCommand extends Command
 
     /**
      * Run "down" a migration instance.
-     * @param string        $file      migrate file
+     * @param string        $file migrate file
      * @param string|object $migration migration file
      */
     protected function runDown(string $file, $migration)
@@ -143,7 +143,7 @@ class PoppyMigrateResetCommand extends Command
         foreach ($this->getSlugsToReset() as $slug) {
             $migrationPaths[] = $this->getMigrationPath($slug);
 
-            event(new PoppyMigrateReset($this->poppy, $this->option()));
+            event(new WeiranMigrateReset($this->weiran, $this->option()));
         }
 
         return $migrationPaths;
@@ -160,10 +160,10 @@ class PoppyMigrateResetCommand extends Command
         }
 
         if ($this->option('force')) {
-            return $this->poppy->all()->pluck('slug');
+            return $this->weiran->all()->pluck('slug');
         }
 
-        return $this->poppy->enabled()->pluck('slug');
+        return $this->weiran->enabled()->pluck('slug');
     }
 
     /**
@@ -177,7 +177,7 @@ class PoppyMigrateResetCommand extends Command
             return false;
         }
 
-        if ($this->poppy->isEnabled($this->argument('slug'))) {
+        if ($this->weiran->isEnabled($this->argument('slug'))) {
             return true;
         }
 

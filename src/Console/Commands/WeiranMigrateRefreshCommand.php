@@ -6,14 +6,14 @@ namespace Weiran\Framework\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
-use Weiran\Framework\Events\PoppyMigrateRefreshed;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Weiran\Framework\Events\WeiranMigrateRefreshed;
 
 /**
- * Poppy Migrate Refresh
+ * Weiran Migrate Refresh
  */
-class PoppyMigrateRefreshCommand extends Command
+class WeiranMigrateRefreshCommand extends Command
 {
     use ConfirmableTrait;
 
@@ -21,7 +21,7 @@ class PoppyMigrateRefreshCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $name = 'poppy:migrate:refresh';
+    protected $name = 'weiran:migrate:refresh';
 
     /**
      * The console command description.
@@ -40,14 +40,14 @@ class PoppyMigrateRefreshCommand extends Command
 
         $slug = $this->argument('slug');
 
-        $this->call('poppy:migrate:reset', [
+        $this->call('weiran:migrate:reset', [
             'slug'       => $slug,
             '--database' => $this->option('database'),
             '--force'    => $this->option('force'),
             '--pretend'  => $this->option('pretend'),
         ]);
 
-        $this->call('poppy:migrate', [
+        $this->call('weiran:migrate', [
             'slug'       => $slug,
             '--database' => $this->option('database'),
         ]);
@@ -59,7 +59,7 @@ class PoppyMigrateRefreshCommand extends Command
         if (isset($slug)) {
             $module = $this->laravel['weiran']->where('slug', $slug);
 
-            event(new PoppyMigrateRefreshed($module, $this->option()));
+            event(new WeiranMigrateRefreshed($module, $this->option()));
 
             $this->info('Module has been refreshed.');
         }
@@ -81,12 +81,12 @@ class PoppyMigrateRefreshCommand extends Command
 
     /**
      * Run the module seeder command.
-     * @param string|null $slug     slug
+     * @param string|null $slug slug
      * @param string|null $database database
      */
     protected function runSeeder(string $slug = null, string $database = null)
     {
-        $this->call('poppy:seed', [
+        $this->call('weiran:seed', [
             'slug'       => $slug,
             '--database' => $database,
         ]);

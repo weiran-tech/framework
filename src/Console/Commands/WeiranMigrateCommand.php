@@ -10,15 +10,15 @@ use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Weiran\Framework\Classes\Traits\MigrationTrait;
-use Weiran\Framework\Events\PoppyMigrated;
+use Weiran\Framework\Events\WeiranMigrated;
 use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Poppy Migrate
+ * Weiran Migrate
  */
-class PoppyMigrateCommand extends Command
+class WeiranMigrateCommand extends Command
 {
     use ConfirmableTrait, MigrationTrait;
 
@@ -26,7 +26,7 @@ class PoppyMigrateCommand extends Command
      * The console command name.
      * @var string
      */
-    protected $name = 'poppy:migrate';
+    protected $name = 'weiran:migrate';
 
     /**
      * The console command description.
@@ -37,7 +37,7 @@ class PoppyMigrateCommand extends Command
     /**
      * @var Weiran
      */
-    protected Weiran $poppy;
+    protected Weiran $weiran;
 
     /**
      * @var Migrator
@@ -47,14 +47,14 @@ class PoppyMigrateCommand extends Command
     /**
      * Create a new command instance.
      * @param Migrator $migrator
-     * @param Weiran   $poppy
+     * @param Weiran   $weiran
      */
-    public function __construct(Migrator $migrator, Weiran $poppy)
+    public function __construct(Migrator $migrator, Weiran $weiran)
     {
         parent::__construct();
 
         $this->migrator = $migrator;
-        $this->poppy    = $poppy;
+        $this->weiran   = $weiran;
     }
 
     /**
@@ -66,14 +66,14 @@ class PoppyMigrateCommand extends Command
 
         if (!empty($this->argument('slug'))) {
             /** @var Collection $module */
-            $module = $this->poppy->where('slug', $this->argument('slug'));
+            $module = $this->weiran->where('slug', $this->argument('slug'));
 
             if (!$module->count()) {
                 $this->error('Module `' . $this->argument('slug') . '` not found, module need add `module.` prefix');
                 return null;
             }
 
-            if ($this->poppy->isEnabled($module['slug'])) {
+            if ($this->weiran->isEnabled($module['slug'])) {
                 $this->migrate($module['slug']);
 
                 return null;
@@ -91,10 +91,10 @@ class PoppyMigrateCommand extends Command
         }
 
         if ($this->option('force')) {
-            $modules = $this->poppy->all();
+            $modules = $this->weiran->all();
         }
         else {
-            $modules = $this->poppy->enabled();
+            $modules = $this->weiran->enabled();
         }
 
         foreach ($modules as $module) {
@@ -111,8 +111,8 @@ class PoppyMigrateCommand extends Command
      */
     protected function migrate(string $slug)
     {
-        if ($this->poppy->exists($slug)) {
-            $module  = $this->poppy->where('slug', $slug);
+        if ($this->weiran->exists($slug)) {
+            $module  = $this->weiran->where('slug', $slug);
             $pretend = Arr::get($this->option(), 'pretend', false);
             $step    = Arr::get($this->option(), 'step', false);
             $path    = $this->getMigrationPath($slug);
@@ -123,7 +123,7 @@ class PoppyMigrateCommand extends Command
                 'step'    => $step,
             ]);
 
-            event(new PoppyMigrated($module, $this->option()));
+            event(new WeiranMigrated($module, $this->option()));
 
             // Once the migrator has run we will grab the note output and send it out to
             // the console screen, since the migrator itself functions without having

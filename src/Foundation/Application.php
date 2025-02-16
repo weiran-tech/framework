@@ -4,12 +4,11 @@ declare(strict_types = 1);
 
 namespace Weiran\Framework\Foundation;
 
-use Closure;
 use Illuminate\Foundation\Application as ApplicationBase;
 use Throwable;
 
 /**
- * poppy Application
+ * Weiran Application
  */
 class Application extends ApplicationBase
 {
@@ -17,22 +16,6 @@ class Application extends ApplicationBase
      * 请求执行上下文
      */
     protected string $executionContext = '';
-
-    /**
-     * namespace
-     * @var string
-     */
-    protected $namespace = 'app';
-
-    /**
-     * register "matched" event
-     * @param Closure $callback callback
-     * @return void
-     */
-    public function routeMatched(Closure $callback)
-    {
-        $this['router']->matched($callback);
-    }
 
 
     /**
@@ -59,7 +42,7 @@ class Application extends ApplicationBase
      * @param string $context
      * @return void
      */
-    public function setExecutionContext(string $context)
+    public function setExecutionContext(string $context): void
     {
         $this->executionContext = $context;
     }
@@ -72,7 +55,7 @@ class Application extends ApplicationBase
     {
         try {
             $this['db.connection']->getPdo();
-        } catch (Throwable $ex) {
+        } catch (Throwable) {
             return false;
         }
 
@@ -120,45 +103,29 @@ class Application extends ApplicationBase
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * Get cached routes path.
-     * @return string
-     */
+
     public function getCachedRoutesPath(): string
     {
-        return $this->storagePath() . '/framework/routes-v7.php';
+        return $this->storagePath() . '/framework/routes.php';
     }
 
-    /**
-     * Get cached packages path.
-     * @return string
-     */
     public function getCachedPackagesPath(): string
     {
         return $this->storagePath() . '/framework/packages.php';
     }
 
-    /**
-     * Get cached services file path.
-     * @return string
-     */
     public function getCachedServicesPath(): string
     {
         return $this->storagePath() . '/framework/services.php';
     }
 
-    /**
-     * Get the path to the bootstrap directory.
-     * @param string $path Optionally, a path to append to the bootstrap path
-     * @return string
-     */
     public function bootstrapPath($path = ''): string
     {
         return $this->storagePath() . '/bootstrap' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
     /**
-     * Get the path to the cached packages.php file.
+     * Get the path to the cached classes.php file.
      * @return string
      */
     public function getCachedClassesPath(): string
@@ -195,7 +162,7 @@ class Application extends ApplicationBase
      * 绑定路径到 container
      * @return void
      */
-    protected function bindPathsInContainer()
+    protected function bindPathsInContainer(): void
     {
         parent::bindPathsInContainer();
 

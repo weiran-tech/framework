@@ -10,7 +10,7 @@ use Weiran\Framework\Application\Event;
 /**
  * 启用一个模块
  */
-class PoppyEnabled extends Event
+class WeiranEnabled extends Event
 {
 
     /**

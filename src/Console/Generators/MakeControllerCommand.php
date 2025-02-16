@@ -16,7 +16,7 @@ class MakeControllerCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:controller
+    protected $signature = 'weiran:controller
     	{slug : The slug of the module}
     	{type : The type of the controller class}
     	{name : The name of the controller class}

@@ -17,7 +17,7 @@ class MakeListenerCommand extends GeneratorCommand
      * The name and signature of the console command.
      * @var string
      */
-    protected $signature = 'poppy:listener
+    protected $signature = 'weiran:listener
     	{slug : The slug of the module.}
     	{name : The name of the model class.}
     	{--E|event= : The event class being listened for}

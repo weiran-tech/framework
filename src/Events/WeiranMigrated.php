@@ -8,21 +8,27 @@ use Illuminate\Support\Collection;
 use Weiran\Framework\Application\Event;
 
 /**
- * 禁用一个模块
+ * 集成完成
  */
-class PoppyDisabled extends Event
+class WeiranMigrated extends Event
 {
-
     /**
      * @var Collection 模块
      */
     public $module;
 
     /**
-     * @param $module
+     * @var array|mixed
      */
-    public function __construct($module)
+    private $option;
+
+    /**
+     * @param Collection $module
+     * @param array      $option
+     */
+    public function __construct(Collection $module, $option = [])
     {
         $this->module = $module;
+        $this->option = $option;
     }
 }

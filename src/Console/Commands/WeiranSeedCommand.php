@@ -7,20 +7,20 @@ namespace Weiran\Framework\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Weiran\Framework\Weiran\Weiran;
 
 /**
- * Poppy Seed
+ * Weiran Seed
  */
-class PoppySeedCommand extends Command
+class WeiranSeedCommand extends Command
 {
     /**
      * The console command name.
      * @var string
      */
-    protected $name = 'poppy:seed';
+    protected $name = 'weiran:seed';
 
     /**
      * The console command description.
@@ -31,7 +31,7 @@ class PoppySeedCommand extends Command
     /**
      * @var Weiran
      */
-    protected Weiran $poppy;
+    protected Weiran $weiran;
 
     /**
      * @inheritDoc
@@ -40,7 +40,7 @@ class PoppySeedCommand extends Command
     {
         parent::__construct();
 
-        $this->poppy = $weiran;
+        $this->weiran = $weiran;
     }
 
     /**
@@ -51,12 +51,12 @@ class PoppySeedCommand extends Command
         $slug = $this->argument('slug');
 
         if (isset($slug)) {
-            if (!$this->poppy->exists($slug)) {
+            if (!$this->weiran->exists($slug)) {
                 $this->error('Module does not exist.');
                 return 1;
             }
 
-            if ($this->poppy->isEnabled($slug)) {
+            if ($this->weiran->isEnabled($slug)) {
                 $this->seed($slug);
             }
             elseif ($this->option('force')) {
@@ -67,10 +67,10 @@ class PoppySeedCommand extends Command
         }
 
         if ($this->option('force')) {
-            $modules = $this->poppy->all();
+            $modules = $this->weiran->all();
         }
         else {
-            $modules = $this->poppy->enabled();
+            $modules = $this->weiran->enabled();
         }
 
         foreach ($modules as $module) {
@@ -86,7 +86,7 @@ class PoppySeedCommand extends Command
      */
     protected function seed(string $slug)
     {
-        $module        = $this->poppy->where('slug', $slug);
+        $module        = $this->weiran->where('slug', $slug);
         $params        = [];
         $namespacePath = weiran_class($slug);
 

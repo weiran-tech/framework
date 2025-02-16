@@ -38,9 +38,9 @@ class ParseServiceProvider extends ServiceProvider implements DeferrableProvider
     public function provides()
     {
         return [
-            'poppy.yaml',
-            'poppy.ini',
-            'poppy.xml',
+            'weiran.yaml',
+            'weiran.ini',
+            'weiran.xml',
         ];
     }
 }

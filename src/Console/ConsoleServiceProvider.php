@@ -5,15 +5,15 @@ declare(strict_types = 1);
 namespace Weiran\Framework\Console;
 
 use Illuminate\Support\ServiceProvider;
-use Weiran\Framework\Console\Commands\PoppyDisableCommand;
-use Weiran\Framework\Console\Commands\PoppyEnableCommand;
+use Weiran\Framework\Console\Commands\WeiranDisableCommand;
+use Weiran\Framework\Console\Commands\WeiranEnableCommand;
 use Weiran\Framework\Console\Commands\WeiranListCommand;
-use Weiran\Framework\Console\Commands\PoppyMigrateCommand;
-use Weiran\Framework\Console\Commands\PoppyMigrateRefreshCommand;
-use Weiran\Framework\Console\Commands\PoppyMigrateResetCommand;
-use Weiran\Framework\Console\Commands\PoppyMigrateRollbackCommand;
-use Weiran\Framework\Console\Commands\PoppyOptimizeCommand;
-use Weiran\Framework\Console\Commands\PoppySeedCommand;
+use Weiran\Framework\Console\Commands\WeiranMigrateCommand;
+use Weiran\Framework\Console\Commands\WeiranMigrateRefreshCommand;
+use Weiran\Framework\Console\Commands\WeiranMigrateResetCommand;
+use Weiran\Framework\Console\Commands\WeiranMigrateRollbackCommand;
+use Weiran\Framework\Console\Commands\WeiranOptimizeCommand;
+use Weiran\Framework\Console\Commands\WeiranSeedCommand;
 use Weiran\Framework\Database\Migrations\Migrator;
 
 class ConsoleServiceProvider extends ServiceProvider
@@ -47,7 +47,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerDisableCommand()
     {
         $this->app->singleton('command.poppy.disable', function () {
-            return new PoppyDisableCommand();
+            return new WeiranDisableCommand();
         });
 
         $this->commands('command.poppy.disable');
@@ -59,7 +59,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerEnableCommand()
     {
         $this->app->singleton('command.poppy.enable', function () {
-            return new PoppyEnableCommand();
+            return new WeiranEnableCommand();
         });
 
         $this->commands('command.poppy.enable');
@@ -83,7 +83,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerMigrateCommand()
     {
         $this->app->singleton('command.poppy.migrate', function ($app) {
-            return new PoppyMigrateCommand($app['migrator'], $app['weiran']);
+            return new WeiranMigrateCommand($app['migrator'], $app['weiran']);
         });
 
         $this->commands('command.poppy.migrate');
@@ -95,7 +95,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerMigrateRefreshCommand()
     {
         $this->app->singleton('command.poppy.migrate.refresh', function () {
-            return new PoppyMigrateRefreshCommand();
+            return new WeiranMigrateRefreshCommand();
         });
 
         $this->commands('command.poppy.migrate.refresh');
@@ -107,7 +107,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerMigrateResetCommand()
     {
         $this->app->singleton('command.poppy.migrate.reset', function ($app) {
-            return new PoppyMigrateResetCommand($app['weiran'], $app['files'], $app['migrator']);
+            return new WeiranMigrateResetCommand($app['weiran'], $app['files'], $app['migrator']);
         });
 
         $this->commands('command.poppy.migrate.reset');
@@ -124,7 +124,7 @@ class ConsoleServiceProvider extends ServiceProvider
 
             $migrator = new Migrator($table, $repository, $app['db'], $app['files']);
 
-            return new PoppyMigrateRollbackCommand($migrator, $app['weiran']);
+            return new WeiranMigrateRollbackCommand($migrator, $app['weiran']);
         });
 
         $this->commands('command.poppy.migrate.rollback');
@@ -136,7 +136,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerOptimizeCommand()
     {
         $this->app->singleton('command.poppy.optimize', function () {
-            return new PoppyOptimizeCommand();
+            return new WeiranOptimizeCommand();
         });
 
         $this->commands('command.poppy.optimize');
@@ -148,7 +148,7 @@ class ConsoleServiceProvider extends ServiceProvider
     protected function registerSeedCommand()
     {
         $this->app->singleton('command.poppy.seed', function ($app) {
-            return new PoppySeedCommand($app['weiran']);
+            return new WeiranSeedCommand($app['weiran']);
         });
 
         $this->commands('command.poppy.seed');

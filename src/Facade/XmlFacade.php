@@ -19,6 +19,6 @@ class XmlFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'poppy.xml';
+        return 'weiran.xml';
     }
 }

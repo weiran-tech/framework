@@ -10,7 +10,7 @@ use Weiran\Framework\Weiran\Weiran;
 /**
  * Migrate Refresh
  */
-class PoppyMigrateReset extends Event
+class WeiranMigrateReset extends Event
 {
 
     /**
