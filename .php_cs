@@ -9,7 +9,7 @@ echo <<<COMMENT
 | Current Dir  : {$baseDir}
 */\n
 COMMENT;
-if (strpos($baseDir, 'vendor/poppy') !== false) {
+if (strpos($baseDir, 'vendor/weiran') !== false) {
     $baseDir = dirname(dirname(dirname(__DIR__)));
     $folders = [
         $baseDir.'/config',

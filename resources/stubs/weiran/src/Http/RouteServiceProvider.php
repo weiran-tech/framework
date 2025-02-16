@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace DummyNamespace\Http;
 
-use Weiran\Framework\Application\RouteServiceProvider as PoppyFrameworkRouteServiceProvider;
+use Weiran\Framework\Application\RouteServiceProvider as WeiranFrameworkRouteServiceProvider;
 use Route;
 
-class RouteServiceProvider extends PoppyFrameworkRouteServiceProvider
+class RouteServiceProvider extends WeiranFrameworkRouteServiceProvider
 {
     /**
      * Define your route model bindings, pattern filters, etc.

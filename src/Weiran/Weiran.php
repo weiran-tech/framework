@@ -24,7 +24,7 @@ use Weiran\Framework\Weiran\Contracts\Repository;
  * @method disabled()
  * @method isEnabled($slug)
  * @method isDisabled($slug)
- * @method isPoppy($slug)
+ * @method isWeiran($slug)
  * @method enable(string $slug)
  * @method disable(string $slug)
  */
@@ -42,7 +42,7 @@ class Weiran
     protected Repository $repository;
 
     /**
-     * Create a new Poppy Modules instance.
+     * Create a new Weiran Modules instance.
      * @param Application $app
      * @param Repository  $repository
      */

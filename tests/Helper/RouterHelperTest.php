@@ -58,8 +58,8 @@ class RouterHelperTest extends TestCase
 
     public function testGetSegmentRegExp(): void
     {
-        $url = '|poppy.com?a=t';
-        $this->assertEquals('/poppy.com?a=t/', RouterHelper::getSegmentRegExp($url));
+        $url = '|weiran.tech?a=t';
+        $this->assertEquals('/weiran.tech?a=t/', RouterHelper::getSegmentRegExp($url));
     }
 
     public function testGetSegmentDefaultValue(): void

@@ -7,8 +7,8 @@ namespace Weiran\Framework\Events;
 use Weiran\Framework\Application\Event;
 
 /**
- * PoppySchedule
+ * WeiranSchedule
  */
-class PoppySchedule extends Event
+class WeiranSchedule extends Event
 {
 }

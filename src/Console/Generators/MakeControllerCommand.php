@@ -26,13 +26,13 @@ class MakeControllerCommand extends GeneratorCommand
      * The console command description.
      * @var string
      */
-    protected $description = 'Create a new poppy module controller class';
+    protected $description = 'Create a new weiran module controller class';
 
     /**
      * String to store the command type.
      * @var string
      */
-    protected $type = 'Poppy module controller';
+    protected $type = 'Weiran module controller';
 
     /**
      * Get the stub file for the generator.

@@ -6,10 +6,10 @@ namespace Weiran\Framework\Foundation\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Weiran\Framework\Events\PoppySchedule;
+use Weiran\Framework\Events\WeiranSchedule;
 
 /**
- * poppy console kernel
+ * weiran console kernel
  */
 class Kernel extends ConsoleKernel
 {
@@ -19,6 +19,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $this->app['events']->dispatch(PoppySchedule::class, [$schedule]);
+        $this->app['events']->dispatch(WeiranSchedule::class, [$schedule]);
     }
 }

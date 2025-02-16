@@ -173,7 +173,7 @@ class StrHelperTest extends TestCase
 
     public function testGetClassId(): void
     {
-        $this->assertEquals('poppy_framework_helper_filehelper', StrHelper::getClassId(FileHelper::class));
+        $this->assertEquals('weiran_framework_helper_filehelper', StrHelper::getClassId(FileHelper::class));
     }
 
     public function testGetClassNamespace(): void

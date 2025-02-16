@@ -21,19 +21,19 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Session\SessionManager;
 use Illuminate\Session\Store;
 use Illuminate\View\Factory;
+use Psr\Log\LoggerInterface;
 use Weiran\Framework\Foundation\Application;
 use Weiran\Framework\Parse\Ini;
 use Weiran\Framework\Parse\Xml;
 use Weiran\Framework\Parse\Yaml;
-use Weiran\Framework\Weiran\Weiran;
 use Weiran\Framework\Translation\Translator;
-use Psr\Log\LoggerInterface;
+use Weiran\Framework\Weiran\Weiran;
 
 /**
- * PoppyTrait
+ * WeiranTrait
  * @see app
  */
-trait PoppyTrait
+trait WeiranTrait
 {
 
     /**
@@ -223,31 +223,14 @@ trait PoppyTrait
     }
 
     /**
-     * get poppy
+     * get weiran
      * @return Weiran
      */
-    protected function pyPoppy(): Weiran
+    protected function pyWeiran(): Weiran
     {
         return py_container()->make('weiran');
     }
 
-    /**
-     * Ini Parser
-     * @return Ini
-     */
-    protected function pyIni(): Ini
-    {
-        return py_container()->make('weiran.ini');
-    }
-
-    /**
-     * Ini Parser
-     * @return Xml
-     */
-    protected function pyXml(): Xml
-    {
-        return py_container()->make('weiran.xml');
-    }
 
     /**
      * Yaml Parser

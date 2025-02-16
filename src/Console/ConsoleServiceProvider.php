@@ -46,11 +46,11 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerDisableCommand()
     {
-        $this->app->singleton('command.poppy.disable', function () {
+        $this->app->singleton('command.weiran.disable', function () {
             return new WeiranDisableCommand();
         });
 
-        $this->commands('command.poppy.disable');
+        $this->commands('command.weiran.disable');
     }
 
     /**
@@ -58,11 +58,11 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerEnableCommand()
     {
-        $this->app->singleton('command.poppy.enable', function () {
+        $this->app->singleton('command.weiran.enable', function () {
             return new WeiranEnableCommand();
         });
 
-        $this->commands('command.poppy.enable');
+        $this->commands('command.weiran.enable');
     }
 
     /**
@@ -70,11 +70,11 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerListCommand()
     {
-        $this->app->singleton('command.poppy.list', function ($app) {
+        $this->app->singleton('command.weiran.list', function ($app) {
             return new WeiranListCommand($app['weiran']);
         });
 
-        $this->commands('command.poppy.list');
+        $this->commands('command.weiran.list');
     }
 
     /**
@@ -82,11 +82,11 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerMigrateCommand()
     {
-        $this->app->singleton('command.poppy.migrate', function ($app) {
+        $this->app->singleton('command.weiran.migrate', function ($app) {
             return new WeiranMigrateCommand($app['migrator'], $app['weiran']);
         });
 
-        $this->commands('command.poppy.migrate');
+        $this->commands('command.weiran.migrate');
     }
 
     /**
@@ -94,11 +94,11 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerMigrateRefreshCommand()
     {
-        $this->app->singleton('command.poppy.migrate.refresh', function () {
+        $this->app->singleton('command.weiran.migrate.refresh', function () {
             return new WeiranMigrateRefreshCommand();
         });
 
-        $this->commands('command.poppy.migrate.refresh');
+        $this->commands('command.weiran.migrate.refresh');
     }
 
     /**
@@ -106,11 +106,11 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerMigrateResetCommand()
     {
-        $this->app->singleton('command.poppy.migrate.reset', function ($app) {
+        $this->app->singleton('command.weiran.migrate.reset', function ($app) {
             return new WeiranMigrateResetCommand($app['weiran'], $app['files'], $app['migrator']);
         });
 
-        $this->commands('command.poppy.migrate.reset');
+        $this->commands('command.weiran.migrate.reset');
     }
 
     /**
@@ -118,7 +118,7 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerMigrateRollbackCommand()
     {
-        $this->app->singleton('command.poppy.migrate.rollback', function ($app) {
+        $this->app->singleton('command.weiran.migrate.rollback', function ($app) {
             $repository = $app['migration.repository'];
             $table      = $app['config']['database.migrations'];
 
@@ -127,7 +127,7 @@ class ConsoleServiceProvider extends ServiceProvider
             return new WeiranMigrateRollbackCommand($migrator, $app['weiran']);
         });
 
-        $this->commands('command.poppy.migrate.rollback');
+        $this->commands('command.weiran.migrate.rollback');
     }
 
     /**
@@ -135,11 +135,11 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerOptimizeCommand()
     {
-        $this->app->singleton('command.poppy.optimize', function () {
+        $this->app->singleton('command.weiran.optimize', function () {
             return new WeiranOptimizeCommand();
         });
 
-        $this->commands('command.poppy.optimize');
+        $this->commands('command.weiran.optimize');
     }
 
     /**
@@ -147,10 +147,10 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected function registerSeedCommand()
     {
-        $this->app->singleton('command.poppy.seed', function ($app) {
+        $this->app->singleton('command.weiran.seed', function ($app) {
             return new WeiranSeedCommand($app['weiran']);
         });
 
-        $this->commands('command.poppy.seed');
+        $this->commands('command.weiran.seed');
     }
 }

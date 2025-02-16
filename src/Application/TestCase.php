@@ -40,7 +40,7 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
      * Run Vendor Test
      * @param array $vendors test here is must class
      */
-    public function poppyTestVendor(array $vendors = []): void
+    public function weiranTestVendor(array $vendors = []): void
     {
         collect($vendors)->each(function ($class, $package) {
             PHPUnit::assertTrue(class_exists($class), "Class `{$class}` is not exist, run `composer require {$package}` to install");

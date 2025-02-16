@@ -13,7 +13,7 @@ use Weiran\Framework\Console\Generators\MakeMiddlewareCommand;
 use Weiran\Framework\Console\Generators\MakeMigrationCommand;
 use Weiran\Framework\Console\Generators\MakeModelCommand;
 use Weiran\Framework\Console\Generators\MakePolicyCommand;
-use Weiran\Framework\Console\Generators\MakePoppyCommand;
+use Weiran\Framework\Console\Generators\MakeWeiranCommand;
 use Weiran\Framework\Console\Generators\MakeProviderCommand;
 use Weiran\Framework\Console\Generators\MakeRequestCommand;
 use Weiran\Framework\Console\Generators\MakeSeederCommand;
@@ -27,7 +27,7 @@ class GeneratorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands([
-            MakePoppyCommand::class,
+            MakeWeiranCommand::class,
             MakeControllerCommand::class,
             MakeMiddlewareCommand::class,
             MakeMigrationCommand::class,

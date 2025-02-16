@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Weiran\Framework\Exceptions\ModuleNotFoundException;
 
 /**
- * Poppy Generator Command
+ * Weiran Generator Command
  */
 abstract class GeneratorCommand extends LaravelGeneratorCommand
 {
@@ -58,7 +58,7 @@ abstract class GeneratorCommand extends LaravelGeneratorCommand
         }
 
         // take everything after the module name in the given path (ignoring case)
-        if ($this->laravel['weiran']->isPoppy($slug)) {
+        if ($this->laravel['weiran']->isWeiran($slug)) {
             $trimSlug = Str::after($slug, 'weiran.');
             [, $mid] = explode('\\', $name);
             $midAfter  = str_replace('_', '-', Str::snake($mid));

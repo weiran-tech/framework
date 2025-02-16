@@ -59,12 +59,12 @@ class WeiranTest extends TestCase
 
     public function testOptimize(): void
     {
-        $poppyJson = storage_path('app/weiran.json');
-        if (app('files')->exists($poppyJson)) {
-            app('files')->delete($poppyJson);
+        $json = storage_path('app/weiran.json');
+        if (app('files')->exists($json)) {
+            app('files')->delete($json);
         }
         app('weiran')->optimize();
-        $this->assertFileExists($poppyJson);
+        $this->assertFileExists($json);
     }
 
     /**

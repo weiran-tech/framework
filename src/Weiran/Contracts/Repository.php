@@ -139,11 +139,11 @@ interface Repository
     public function isDisabled(string $slug): bool;
 
     /**
-     * Module is poppy module
+     * Module is weiran module
      * @param string $slug
      * @return bool
      */
-    public function isPoppy(string $slug): bool;
+    public function isWeiran(string $slug): bool;
 
     /**
      * Enables the specified module.

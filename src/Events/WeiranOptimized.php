@@ -8,9 +8,9 @@ use Illuminate\Support\Collection;
 use Weiran\Framework\Application\Event;
 
 /**
- * PoppyOptimized
+ * WeiranOptimized
  */
-class PoppyOptimized extends Event
+class WeiranOptimized extends Event
 {
     /**
      * Optimized module collection
@@ -19,7 +19,7 @@ class PoppyOptimized extends Event
     private $modules;
 
     /**
-     * PoppyOptimized constructor.
+     * WeiranOptimized constructor.
      * @param Collection $modules
      */
     public function __construct(Collection $modules)

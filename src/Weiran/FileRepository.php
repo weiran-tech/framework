@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Throwable;
-use Weiran\Framework\Events\PoppyOptimized;
+use Weiran\Framework\Events\WeiranOptimized;
 use Weiran\Framework\Exceptions\ApplicationException;
 use Weiran\Framework\Weiran\Abstracts\Repository;
 
@@ -195,9 +195,9 @@ class FileRepository extends Repository
     /**
      * @inerhitDoc
      */
-    public function isPoppy(string $slug): bool
+    public function isWeiran(string $slug): bool
     {
-        return Str::startsWith($slug, 'poppy');
+        return Str::startsWith($slug, 'weiran');
     }
 
 
@@ -265,7 +265,7 @@ class FileRepository extends Repository
 
         $this->files->put($cachePath, $content);
 
-        event(new PoppyOptimized(collect($modules->all())));
+        event(new WeiranOptimized(collect($modules->all())));
 
         return true;
     }

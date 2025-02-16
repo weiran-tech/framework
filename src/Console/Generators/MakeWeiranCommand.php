@@ -8,14 +8,14 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Weiran\Framework\Events\PoppyMake;
+use Weiran\Framework\Events\WeiranMake;
 use Weiran\Framework\Weiran\Weiran;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 /**
- * Make Poppy
+ * Make Weiran
  */
-class MakePoppyCommand extends Command
+class MakeWeiranCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -30,13 +30,13 @@ class MakePoppyCommand extends Command
      * The console command description.
      * @var string
      */
-    protected $description = 'Create a new Poppy module and bootstrap it';
+    protected $description = 'Create a new Weiran module and bootstrap it';
 
     /**
-     * The poppy instance.
+     * The weiran instance.
      * @var Weiran
      */
-    protected Weiran $poppy;
+    protected Weiran $weiran;
 
     /**
      * The filesystem instance.
@@ -59,8 +59,8 @@ class MakePoppyCommand extends Command
     {
         parent::__construct();
 
-        $this->files = $files;
-        $this->poppy = $weiran;
+        $this->files  = $files;
+        $this->weiran = $weiran;
     }
 
     /**
@@ -80,7 +80,7 @@ class MakePoppyCommand extends Command
         $this->conf['slug']        = Str::slug($this->argument('slug'));
         $this->conf['name']        = Str::snake($this->conf['slug']);
         $this->conf['version']     = '1.0';
-        $this->conf['description'] = 'This is the description for the poppy ' . $this->conf['name'] . ' module.';
+        $this->conf['description'] = 'This is the description for the weiran ' . $this->conf['name'] . ' module.';
 
         if ($this->option('quick')) {
             $this->conf['basename']  = Str::snake($this->conf['slug']);
@@ -154,12 +154,12 @@ class MakePoppyCommand extends Command
 
         $progress->finish();
 
-        event(new PoppyMake($this->conf['slug']));
+        event(new WeiranMake($this->conf['slug']));
 
         // 移除 js 文件
-        $this->poppy->optimize();
+        $this->weiran->optimize();
 
-        $this->info("\nPoppy Module generated successfully.");
+        $this->info("\nWeiran Module generated successfully.");
     }
 
     /**
@@ -172,7 +172,7 @@ class MakePoppyCommand extends Command
         }
 
         $directory = weiran_path(null, $this->conf['slug']);
-        $source    = __DIR__ . '/../../../resources/stubs/poppy';
+        $source    = __DIR__ . '/../../../resources/stubs/weiran';
 
         $this->files->makeDirectory($directory);
 

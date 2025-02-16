@@ -18,7 +18,7 @@ use Weiran\Framework\Http\Middlewares\EncryptCookies;
 use Weiran\Framework\Http\Middlewares\VerifyCsrfToken;
 
 /**
- * poppy http kernel
+ * weiran http kernel
  */
 class Kernel extends HttpKernel
 {

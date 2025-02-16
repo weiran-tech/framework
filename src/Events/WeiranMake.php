@@ -7,9 +7,9 @@ namespace Weiran\Framework\Events;
 use Weiran\Framework\Application\Event;
 
 /**
- * PoppyMake
+ * WeiranMake
  */
-class PoppyMake extends Event
+class WeiranMake extends Event
 {
     /**
      * @var string
@@ -17,7 +17,7 @@ class PoppyMake extends Event
     public $slug;
 
     /**
-     * PoppyMake constructor.
+     * WeiranMake constructor.
      * @param string $slug slug
      */
     public function __construct(string $slug)

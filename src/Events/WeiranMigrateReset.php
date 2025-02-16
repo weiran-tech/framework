@@ -16,7 +16,7 @@ class WeiranMigrateReset extends Event
     /**
      * @var Weiran 模块
      */
-    public $poppy;
+    public $weiran;
 
     /**
      * @var array|mixed
@@ -24,12 +24,12 @@ class WeiranMigrateReset extends Event
     private $option;
 
     /**
-     * @param Weiran $poppy
+     * @param Weiran $weiran
      * @param array  $option
      */
-    public function __construct(Weiran $poppy, $option = [])
+    public function __construct(Weiran $weiran, $option = [])
     {
-        $this->poppy  = $poppy;
+        $this->weiran = $weiran;
         $this->option = $option;
     }
 }

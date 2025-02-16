@@ -14,7 +14,7 @@ use Weiran\Framework\Helper\EnvHelper;
 use Weiran\Framework\Http\Pagination\PageInfo;
 
 /**
- * poppy controller
+ * weiran controller
  */
 abstract class Controller extends BaseController
 {

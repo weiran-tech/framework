@@ -87,7 +87,7 @@ abstract class Repository implements RepositoryContract
     /**
      * 获取所有模块的基本名称
      * Get all module base names.
-     * module.{mod}, poppy.{mod}
+     * module.{mod}, weiran.{mod}
      * @return Collection
      */
     protected function getAllBaseNames(): Collection

@@ -27,7 +27,7 @@ class BladeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
-            // @poppy($slug)
+            // @weiran($slug)
             $bladeCompiler->directive('weiran', function ($slug) {
                 return "<?php if(app('weiran')->exists({$slug}) && app('weiran')->isEnabled({$slug})): ?>";
             });

@@ -2,8 +2,8 @@
 
 return [
     'classes' => [
-        'poppy' => [
-            'poppy' => 'Poppy Class',
+        'weiran' => [
+            'weiran' => 'Weiran Class',
         ],
     ],
 ];
