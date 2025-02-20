@@ -98,6 +98,6 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
      */
     protected function faker(): Generator
     {
-        return py_faker();
+        return poppy_faker();
     }
 }

@@ -7,8 +7,8 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 use Illuminate\Support\Str;
 use Poppy\Faker\Factory;
 use Weiran\Framework\Exceptions\ApplicationException;
-use Weiran\Framework\Foundation\Application;
-use Weiran\Framework\Foundation\Console\Kernel;
+use Weiran\Framework\Foundation\Application as WeiranHttpContainer;
+use Weiran\Framework\Foundation\Console\Kernel as WeiranConsoleKernel;
 use Weiran\Framework\Helper\HtmlHelper;
 
 
@@ -116,6 +116,7 @@ if (!function_exists('input')) {
      * @param string|null $name
      * @param mixed       $default
      * @return string|array
+     * @deprecated 1.x 已废弃, 使用 Request 替代
      */
     function input(string $name = null, $default = null)
     {
@@ -151,6 +152,17 @@ if (!function_exists('is_post')) {
     }
 }
 
+if (!function_exists('is_production')) {
+    /**
+     * Check Env If Production
+     * @return bool
+     */
+    function is_production(): bool
+    {
+        return config('app.env') === 'production';
+    }
+}
+
 if (!function_exists('jwt_token')) {
     /**
      * 是否是 Jwt 请求
@@ -164,6 +176,84 @@ if (!function_exists('jwt_token')) {
         return (string) app('tymon.jwt')->setRequest(Request::instance())->getToken();
     }
 }
+
+
+if (!function_exists('policy_friendly')) {
+    /**
+     * 策略的友好提示
+     * @param string $model
+     * @param        $policy
+     * @return string
+     */
+    function policy_friendly(string $model, $policy): string
+    {
+        $snake = collect(explode('\\', trim($model, '\\')))->map(function ($path) {
+            return Str::snake(lcfirst($path));
+        })->filter();
+
+        $part1 = $snake->first();
+        $part2 = $snake->offsetGet(1);
+        $path  = $snake->last();
+        if ($part1 === 'weiran') {
+            $namespace = $part2 === 'framework' ? 'weiran' : 'weiran-' . $part2;
+        }
+        else {
+            $namespace = $part1;
+        }
+        return trans("{$namespace}::util.policy.{$path}.{$policy}");
+    }
+}
+
+
+if (!function_exists('home_path')) {
+    /**
+     * Weiran home path.
+     * @param string $path
+     * @return string
+     */
+    function home_path(string $path = ''): string
+    {
+        return app('path.weiran') . ($path ? DIRECTORY_SEPARATOR . $path : '');
+    }
+}
+
+if (!function_exists('framework_path')) {
+    /**
+     * weiran framework path.
+     * @param string $path
+     * @return string
+     */
+    function framework_path(string $path = ''): string
+    {
+        /** @var WeiranHttpContainer $container */
+        $container = Container::getInstance();
+        return $container->frameworkPath($path);
+    }
+}
+
+
+if (!function_exists('weiran_container')) {
+    /**
+     * Get IoC Container.
+     * @return WeiranHttpContainer
+     */
+    function weiran_container(): Container
+    {
+        return Container::getInstance();
+    }
+}
+
+if (!function_exists('weiran_console')) {
+    /**
+     * Get Console Container.
+     * @return WeiranConsoleKernel
+     */
+    function weiran_console(): WeiranConsoleKernel
+    {
+        return app(ConsoleKernelContract::class);
+    }
+}
+
 
 if (!function_exists('weiran_path')) {
     /**
@@ -236,101 +326,13 @@ if (!function_exists('weiran_friendly')) {
 }
 
 
-if (!function_exists('policy_friendly')) {
+if (!function_exists('poppy_faker')) {
     /**
-     * 策略的友好提示
-     * @param string $model
-     * @param        $policy
-     * @return string
-     */
-    function policy_friendly(string $model, $policy): string
-    {
-        $snake = collect(explode('\\', trim($model, '\\')))->map(function ($path) {
-            return Str::snake(lcfirst($path));
-        })->filter();
-
-        $part1 = $snake->first();
-        $part2 = $snake->offsetGet(1);
-        $path  = $snake->last();
-        if ($part1 === 'weiran') {
-            $namespace = $part2 === 'framework' ? 'weiran' : 'weiran-' . $part2;
-        }
-        else {
-            $namespace = $part1;
-        }
-        return trans("{$namespace}::util.policy.{$path}.{$policy}");
-    }
-}
-
-if (!function_exists('is_production')) {
-    /**
-     * Check Env If Production
-     * @return bool
-     */
-    function is_production(): bool
-    {
-        return config('app.env') === 'production';
-    }
-}
-
-if (!function_exists('home_path')) {
-    /**
-     * Weiran home path.
-     * @param string $path
-     * @return string
-     */
-    function home_path(string $path = ''): string
-    {
-        return app('path.weiran') . ($path ? DIRECTORY_SEPARATOR . $path : '');
-    }
-}
-
-if (!function_exists('framework_path')) {
-    /**
-     * weiran framework path.
-     * @param string $path
-     * @return string
-     */
-    function framework_path(string $path = ''): string
-    {
-        /** @var Application $container */
-        $container = Container::getInstance();
-        return $container->frameworkPath($path);
-    }
-}
-
-
-if (!function_exists('py_container')) {
-    /**
-     * Get IoC Container.
-     * @return Container | Application
-     * @deprecated 1.x
-     */
-    function py_container(): Container
-    {
-        return Container::getInstance();
-    }
-}
-
-if (!function_exists('py_console')) {
-    /**
-     * Get Console Container.
-     * @return Kernel | ConsoleKernelContract
-     */
-    function py_console()
-    {
-        return app(ConsoleKernelContract::class);
-    }
-}
-
-
-if (!function_exists('py_faker')) {
-    /**
-     * Get Console Container.
-     * @return \Poppy\Faker\Generator|null
+     * Get Faker Container.
+     * @return \Poppy\Faker\Generator
      * @throws ApplicationException
      */
-    function py_faker(): ?Poppy\Faker\Generator
+    function poppy_faker(): Poppy\Faker\Generator
     {
         if (class_exists(Factory::class)) {
             return Factory::create('zh_CN');

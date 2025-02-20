@@ -42,7 +42,7 @@ trait WeiranTrait
      */
     protected function pyAuth(): AuthManager
     {
-        return py_container()->make('auth');
+        return weiran_container()->make('auth');
     }
 
     /**
@@ -51,7 +51,7 @@ trait WeiranTrait
      */
     protected function pyTranslator(): Translator
     {
-        return py_container()->make('translator');
+        return weiran_container()->make('translator');
     }
 
 
@@ -61,7 +61,7 @@ trait WeiranTrait
      */
     protected function pyConfig()
     {
-        return py_container()->make('config');
+        return weiran_container()->make('config');
     }
 
 
@@ -71,7 +71,7 @@ trait WeiranTrait
      */
     protected function pyDb(): DatabaseManager
     {
-        return py_container()->make('db');
+        return weiran_container()->make('db');
     }
 
     /**
@@ -80,7 +80,7 @@ trait WeiranTrait
      */
     protected function pyConsole()
     {
-        return py_container()->make(Kernel::class);
+        return weiran_container()->make(Kernel::class);
     }
 
     /**
@@ -98,7 +98,7 @@ trait WeiranTrait
      */
     protected function pyMailer(): Mailer
     {
-        return py_container()->make('mailer');
+        return weiran_container()->make('mailer');
     }
 
     /**
@@ -107,7 +107,7 @@ trait WeiranTrait
      */
     protected function pySession()
     {
-        return py_container()->make('session');
+        return weiran_container()->make('session');
     }
 
     /**
@@ -116,7 +116,7 @@ trait WeiranTrait
      */
     protected function pyRequest(): Request
     {
-        return py_container()->make('request');
+        return weiran_container()->make('request');
     }
 
 
@@ -126,7 +126,7 @@ trait WeiranTrait
      */
     protected function pyRedirector(): Redirector
     {
-        return py_container()->make('redirect');
+        return weiran_container()->make('redirect');
     }
 
     /**
@@ -135,7 +135,7 @@ trait WeiranTrait
      */
     protected function pyValidation(): \Illuminate\Validation\Factory
     {
-        return py_container()->make('validator');
+        return weiran_container()->make('validator');
     }
 
 
@@ -145,7 +145,7 @@ trait WeiranTrait
      */
     protected function pyEvent(): Dispatcher
     {
-        return py_container()->make('events');
+        return weiran_container()->make('events');
     }
 
 
@@ -155,7 +155,7 @@ trait WeiranTrait
      */
     protected function pyLogger(): LoggerInterface
     {
-        return py_container()->make('log');
+        return weiran_container()->make('log');
     }
 
 
@@ -165,7 +165,7 @@ trait WeiranTrait
      */
     protected function pyResponse()
     {
-        return py_container()->make(ResponseFactory::class);
+        return weiran_container()->make(ResponseFactory::class);
     }
 
 
@@ -175,7 +175,7 @@ trait WeiranTrait
      */
     protected function pyFile()
     {
-        return py_container()->make('files');
+        return weiran_container()->make('files');
     }
 
 
@@ -185,7 +185,7 @@ trait WeiranTrait
      */
     protected function pyUrl()
     {
-        return py_container()->make('url');
+        return weiran_container()->make('url');
     }
 
 
@@ -196,7 +196,7 @@ trait WeiranTrait
      */
     protected function pyCache($tag = '')
     {
-        $cache = py_container()->make('cache');
+        $cache = weiran_container()->make('cache');
         if ($tag && $cache->getStore() instanceof TaggableStore) {
             return $cache->tags($tag);
         }
@@ -210,7 +210,7 @@ trait WeiranTrait
      */
     protected function pyRedis(): RedisManager
     {
-        return py_container()->make('redis');
+        return weiran_container()->make('redis');
     }
 
     /**
@@ -219,7 +219,7 @@ trait WeiranTrait
      */
     protected function pyView(): Factory
     {
-        return py_container()->make('view');
+        return weiran_container()->make('view');
     }
 
     /**
@@ -228,7 +228,7 @@ trait WeiranTrait
      */
     protected function pyWeiran(): Weiran
     {
-        return py_container()->make('weiran');
+        return weiran_container()->make('weiran');
     }
 
 
@@ -238,7 +238,7 @@ trait WeiranTrait
      */
     protected function pyYaml(): Yaml
     {
-        return py_container()->make('weiran.yaml');
+        return weiran_container()->make('weiran.yaml');
     }
 }
 

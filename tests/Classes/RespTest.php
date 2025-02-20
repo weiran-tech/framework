@@ -14,7 +14,7 @@ class RespTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        py_container()->setExecutionContext('api');
+        weiran_container()->setExecutionContext('api');
     }
 
     public function testStr(): void

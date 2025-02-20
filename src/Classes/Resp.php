@@ -180,7 +180,7 @@ class Resp
         if (($arrAppend['_json'] ?? false) ||
             Request::ajax() ||
             Request::bearerToken() ||
-            py_container()->isRunningIn('api')
+            weiran_container()->isRunningIn('api')
         ) {
             $isJson = true;
             unset($arrAppend['_json']);
@@ -253,7 +253,7 @@ class Resp
         $view = 'weiran::template.message';
         if ($messageTpl) {
             foreach ($messageTpl as $context => $tplView) {
-                if (py_container()->isRunningIn($context)) {
+                if (weiran_container()->isRunningIn($context)) {
                     $view = $tplView;
                 }
             }
