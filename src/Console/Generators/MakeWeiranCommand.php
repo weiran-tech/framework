@@ -8,9 +8,9 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Weiran\Framework\Events\WeiranMake;
 use Weiran\Framework\Weiran\Weiran;
-use Symfony\Component\Console\Helper\ProgressBar;
 
 /**
  * Make Weiran
@@ -65,10 +65,9 @@ class MakeWeiranCommand extends Command
 
     /**
      * Execute the console command.
-     * @return mixed|void
      * @throws FileNotFoundException
      */
-    public function handle()
+    public function handle(): void
     {
         $slug = Str::slug($this->argument('slug'));
         if (app('weiran')->exists($slug)) {
@@ -92,16 +91,14 @@ class MakeWeiranCommand extends Command
         $this->displayHeader('make_module_introduction');
 
         $this->stepOne();
-
-        return 0;
     }
 
     /**
      * Step 1: Configure module manifest.
-     * @return mixed
+     * @return bool
      * @throws FileNotFoundException
      */
-    protected function stepOne()
+    protected function stepOne(): bool
     {
         $this->displayHeader('make_module_step_1');
 
@@ -134,7 +131,7 @@ class MakeWeiranCommand extends Command
     /**
      * Generate the module.
      */
-    protected function generate()
+    protected function generate(): void
     {
         $steps = [
             'Generating module...'       => 'generateModule',
@@ -165,7 +162,7 @@ class MakeWeiranCommand extends Command
     /**
      * Generate defined module folders.
      */
-    protected function generateModule()
+    protected function generateModule(): void
     {
         if (!$this->files->isDirectory(weiran_path())) {
             $this->files->makeDirectory(weiran_path());

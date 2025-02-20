@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace DummyNamespace\Http;
 
-use Weiran\Framework\Application\RouteServiceProvider as WeiranFrameworkRouteServiceProvider;
 use Route;
+use Weiran\Framework\Application\RouteServiceProvider as WeiranFrameworkRouteServiceProvider;
 
 class RouteServiceProvider extends WeiranFrameworkRouteServiceProvider
 {
@@ -53,7 +53,7 @@ class RouteServiceProvider extends WeiranFrameworkRouteServiceProvider
     {
         Route::group([
             // todo auth
-            'prefix' => 'api/DummySlug',
+            'prefix' => 'api/web/v1/DummySlug',
         ], function () {
             require_once __DIR__ . '/Routes/api.php';
         });
