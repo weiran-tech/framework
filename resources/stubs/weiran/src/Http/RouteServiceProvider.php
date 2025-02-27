@@ -53,9 +53,9 @@ class RouteServiceProvider extends WeiranFrameworkRouteServiceProvider
     {
         Route::group([
             // todo auth
-            'prefix' => 'api/web/v1/DummySlug',
+            'prefix' => 'api/web/DummySlug/v1',
         ], function () {
-            require_once __DIR__ . '/Routes/api.php';
+            require_once __DIR__ . '/Routes/api_v1.php';
         });
     }
 }

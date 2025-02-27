@@ -8,7 +8,7 @@ declare(strict_types = 1);
 |
 */
 
-use DummyNamespace\Http\Request\Web\Api\DemoController;
+use DummyNamespace\Http\Request\Web\ApiV1\DemoController;
 
 Route::group([
     'middleware' => ['cross'],
