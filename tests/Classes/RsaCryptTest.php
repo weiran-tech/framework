@@ -28,7 +28,7 @@ class RsaCryptTest extends TestCase
         $this->pubKey     = file_get_contents(dirname(__DIR__) . '/files/public.pem');
     }
 
-    public function testEncrypt()
+    public function testEncrypt(): void
     {
         $rsa = new RsaCrypt();
         $rsa->setPrivateKey($this->privateKey);
@@ -38,7 +38,7 @@ class RsaCryptTest extends TestCase
         $this->assertTrue($rsa->verify('abc', $encrypt), 'crypt is not correct!');
     }
 
-    public function testDecrypt()
+    public function testDecrypt(): void
     {
         $rsa = new RsaCrypt();
         $rsa->setPrivateKey($this->privateKey);

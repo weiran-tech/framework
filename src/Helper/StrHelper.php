@@ -6,6 +6,7 @@ namespace Weiran\Framework\Helper;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
+use Random\RandomException;
 
 /**
  * 字串处理
@@ -13,61 +14,9 @@ use Illuminate\Support\Str;
 class StrHelper
 {
     /**
-     * 获取 markdown 索引
-     * @param string $content content
-     * @return array
-     */
-    public function mdToc(string $content): array
-    {
-        // ensure using only "\n" as line-break
-        $source  = str_replace(["\r\n", "\r"], "\n", $content);
-        $raw_toc = [];
-        // look for markdown TOC items
-        preg_match_all(
-            '/^(?:=|-|#).*$/m',
-            $source,
-            $matches,
-            PREG_PATTERN_ORDER | PREG_OFFSET_CAPTURE
-        );
-
-        // pre process: iterate matched lines to create an array of items
-        // where each item is an array(level, text)
-        $file_size = strlen($source);
-        foreach ($matches[0] as $item) {
-            $found_mark = substr($item[0], 0, 1);
-            if ($found_mark === '#') {
-                // text is the found item
-                $item_text  = $item[0];
-                $item_level = strrpos($item_text, '#') + 1;
-                $item_text  = substr($item_text, $item_level);
-            }
-            else {
-                // text is the previous line (empty if <hr>)
-                $item_offset      = $item[1];
-                $prev_line_offset = strrpos($source, "\n", -($file_size - $item_offset + 2));
-                $item_text        =
-                    substr($source, $prev_line_offset, $item_offset - $prev_line_offset - 1);
-                $item_text        = trim($item_text);
-                $item_level       = $found_mark === '=' ? 1 : 2;
-            }
-            if (!trim($item_text) or strpos($item_text, '|') !== false) {
-                // item is an horizontal separator or a table header, don't mind
-                continue;
-            }
-            $raw_toc[] = [
-                'level' => $item_level,
-                'text'  => trim($item_text),
-            ];
-        }
-
-        // create a JSON list (the easiest way to generate HTML structure is using JS)
-        return $raw_toc;
-    }
-
-    /**
      * 获取文件名后缀名
      * @param string $string string
-     * @param string $split  split
+     * @param string $split split
      * @return string
      */
     public static function suffix(string $string, $split = '.')
@@ -88,7 +37,7 @@ class StrHelper
     /**
      * 获取文件名前缀
      * @param string $string string
-     * @param string $split  string
+     * @param string $split string
      * @return string
      */
     public static function prefix(string $string, $split = '.')
@@ -128,7 +77,7 @@ class StrHelper
 
     /**
      * 转义特殊字符
-     * @param mixed $input             input
+     * @param mixed $input input
      * @param bool  $preserveAmpersand preserveAmpersand
      * @return array|mixed|string
      */
@@ -163,7 +112,9 @@ class StrHelper
             return array_map([self::class, __FUNCTION__], $input);
         }
 
-        if (strlen($input) < 20) return $input;
+        if (strlen($input) < 20) {
+            return $input;
+        }
         $match   = [
             '/&#([a-z0-9]+)([;]*)/i',
             "/(j[\s\r\n\t]*a[\s\r\n\t]*v[\s\r\n\t]*a[\s\r\n\t]*s[\s\r\n\t]*c[\s\r\n\t]*r[\s\r\n\t]*i[\s\r\n\t]*p[\s\r\n\t]*t|jscript|js|vbscript|vbs|about|expression|script|frame|link|import)/i",
@@ -181,10 +132,10 @@ class StrHelper
     /**
      * 删除代码中的换行符
      * @param string $string string
-     * @param bool   $js     js
+     * @param bool   $js js
      * @return mixed
      */
-    public static function trimEOL(string $string, $js = false)
+    public static function trimEOL(string $string, bool $js = false): mixed
     {
         $string = str_replace([chr(10), chr(13)], '', $string);
 
@@ -198,9 +149,7 @@ class StrHelper
      */
     public static function trimSpace(string $string): string
     {
-        $string = str_replace([chr(13), chr(10), "\n", "\r", "\t", '  '], '', $string);
-
-        return $string;
+        return str_replace([chr(13), chr(10), "\n", "\r", "\t", '  '], '', $string);
     }
 
     /**
@@ -208,7 +157,7 @@ class StrHelper
      * @param string $string 带截取的字符串
      * @param int    $length 长度
      * @param string $suffix 后缀
-     * @param int    $start  开始字符
+     * @param int    $start 开始字符
      * @param string $char_code
      * @return mixed|string 中文截断字符方法
      */
@@ -280,7 +229,7 @@ class StrHelper
      * @param string $str str
      * @return string
      */
-    public static function toHex(string $str)
+    public static function toHex(string $str): string
     {
         return bin2hex($str);
     }
@@ -290,32 +239,24 @@ class StrHelper
      * @param string $hex hex
      * @return string
      */
-    public static function fromHex(string $hex)
+    public static function fromHex(string $hex): string
     {
-        // php5.4
-        if (function_exists('hex2bin')) {
-            return hex2bin($hex);
-        }
-        $str = '';
-        for ($i = 0; $i < strlen($hex) - 1; $i += 2) {
-            $str .= chr(hexdec($hex[$i] . $hex[$i + 1]));
-        }
-
-        return $str;
+        return hex2bin($hex);
     }
 
     /**
      * 返回随机字串, 区分大小写
      * @param int    $length length
-     * @param string $chars  chars
+     * @param string $chars chars
      * @return string
+     * @throws RandomException
      */
-    public static function randomCustom(int $length, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz')
+    public static function randomCustom(int $length, string $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz'): string
     {
         $hash = '';
         $max  = strlen($chars) - 1;
         for ($i = 0; $i < $length; $i++) {
-            $hash .= $chars[mt_rand(0, $max)];
+            $hash .= $chars[random_int(0, $max)];
         }
 
         return $hash;
@@ -325,12 +266,13 @@ class StrHelper
      * 随机ASCII字符
      * @param int $length length
      * @return string
+     * @throws RandomException
      */
-    public static function randomAscii($length = 8)
+    public static function randomAscii(int $length = 8): string
     {
         $str = '';
         for ($i = 0; $i < $length; $i++) {
-            $str .= chr(mt_rand(33, 126));
+            $str .= chr(random_int(33, 126));
         }
 
         return $str;
@@ -341,17 +283,18 @@ class StrHelper
      * @param int $min 最小值
      * @param int $max 最大值
      * @return string
+     * @throws RandomException
      */
-    public static function randomNumber(int $min, int $max)
+    public static function randomNumber(int $min, int $max): string
     {
-        return sprintf('%0' . strlen((string) $max) . 'd', mt_rand($min, $max));
+        return sprintf('%0' . strlen((string) $max) . 'd', random_int($min, $max));
     }
 
     /**
      * 转换字符
-     * @param string $str         str
+     * @param string $str str
      * @param string $fromCharset fromCharset
-     * @param string $toCharset   toCharset
+     * @param string $toCharset toCharset
      * @return array|string
      */
     public static function convert(string $str, $fromCharset = 'utf-8', $toCharset = 'gbk')
@@ -397,9 +340,9 @@ class StrHelper
 
     /**
      * 批量转换
-     * @param mixed  $str         str
+     * @param mixed  $str str
      * @param string $fromCharset fromCharset
-     * @param string $toCharset   toCharset
+     * @param string $toCharset toCharset
      * @return array
      */
     public static function batchConvert($str, $fromCharset = 'utf-8', $toCharset = 'gbk')
@@ -419,48 +362,20 @@ class StrHelper
     }
 
     /**
-     * 中文->Utf8
-     * @param string $char char
-     * @return string
-     */
-    public static function ch2Utf8(string $char)
-    {
-        $str = '';
-        if ($char < 0x80) {
-            $str .= $char;
-        }
-        elseif ($char < 0x800) {
-            $str .= (0xC0 | $char >> 6);
-            $str .= (0x80 | $char & 0x3F);
-        }
-        elseif ($char < 0x10000) {
-            $str .= (0xE0 | $char >> 12);
-            $str .= (0x80 | $char >> 6 & 0x3F);
-            $str .= (0x80 | $char & 0x3F);
-        }
-        elseif ($char < 0x200000) {
-            $str .= (0xF0 | $char >> 18);
-            $str .= (0x80 | $char >> 12 & 0x3F);
-            $str .= (0x80 | $char >> 6 & 0x3F);
-            $str .= (0x80 | $char & 0x3F);
-        }
-
-        return $str;
-    }
-
-    /**
      * 计算字符长度
      * @param mixed $string string
      * @return int
      */
     public static function count($string)
     {
-        $string = self::convert($string, 'utf-8', 'gbk');
+        $string = self::convert($string);
         $length = strlen($string);
         $count  = 0;
         for ($i = 0; $i < $length; $i++) {
             $t = ord($string[$i]);
-            if ($t > 127) $i++;
+            if ($t > 127) {
+                $i++;
+            }
             $count++;
         }
 
@@ -520,7 +435,7 @@ class StrHelper
 
     /**
      * 分割 separate, 去除空格
-     * @param string $str       str
+     * @param string $str str
      * @param string $separator separator
      * @return array
      */
@@ -590,7 +505,7 @@ class StrHelper
 
     /**
      * reverse for match
-     * @param mixed      $ids   ids
+     * @param mixed      $ids ids
      * @param bool|false $array array
      * @return array|mixed
      */
@@ -599,7 +514,7 @@ class StrHelper
         $ids = trim($ids, ',_');
         $ids = trim($ids, '_,');
         if ($array) {
-            if (strpos($ids, '_,_') !== false) {
+            if (str_contains($ids, '_,_')) {
                 return explode('_,_', $ids);
             }
 
@@ -611,9 +526,9 @@ class StrHelper
 
     /**
      * 隐藏联系方式
-     * @param string $input   输入内容
-     * @param int    $start   开始位数
-     * @param int    $end     结束位数
+     * @param string $input 输入内容
+     * @param int    $start 开始位数
+     * @param int    $end 结束位数
      * @param string $replace 替换字串
      * @return string
      */
@@ -685,9 +600,7 @@ class StrHelper
             $name = get_class($name);
         }
 
-        $name = '\\' . ltrim($name, '\\');
-
-        return $name;
+        return '\\' . ltrim($name, '\\');
     }
 
     /**
@@ -697,8 +610,9 @@ class StrHelper
      */
     public static function getClassId($name)
     {
-        if (is_object($name))
+        if (is_object($name)) {
             $name = get_class($name);
+        }
 
         $name = ltrim($name, '\\');
         $name = str_replace('\\', '_', $name);
@@ -745,7 +659,7 @@ class StrHelper
     /**
      * 将内容截取到介绍中
      * @param string $content 有待截取的内容
-     * @param int    $length  带截取的长度
+     * @param int    $length 带截取的长度
      * @return mixed|string 截取内容的一部分
      */
     public static function intro(string $content, $length = 0)
@@ -774,10 +688,10 @@ class StrHelper
 
     /**
      * 返回唯一的值
-     * @param string $current   current
-     * @param string $str       str
+     * @param string $current current
+     * @param string $str str
      * @param string $delimiter delimiter
-     * @param bool   $remove    remove
+     * @param bool   $remove remove
      * @return mixed
      */
     public static function unique(string $current, string $str, $delimiter = ',', $remove = false)
@@ -793,5 +707,57 @@ class StrHelper
         return collect($arr)->unique()->filter(function ($item) use ($remove, $str) {
             return $remove ? ($item && $item != $str) : $item;
         })->implode($delimiter);
+    }
+
+    /**
+     * 获取 markdown 索引
+     * @param string $content content
+     * @return array
+     */
+    public function mdToc(string $content): array
+    {
+        // ensure using only "\n" as line-break
+        $source  = str_replace(["\r\n", "\r"], "\n", $content);
+        $raw_toc = [];
+        // look for markdown TOC items
+        preg_match_all(
+            '/^(?:=|-|#).*$/m',
+            $source,
+            $matches,
+            PREG_PATTERN_ORDER | PREG_OFFSET_CAPTURE
+        );
+
+        // pre process: iterate matched lines to create an array of items
+        // where each item is an array(level, text)
+        $file_size = strlen($source);
+        foreach ($matches[0] as $item) {
+            $found_mark = substr($item[0], 0, 1);
+            if ($found_mark === '#') {
+                // text is the found item
+                $item_text  = $item[0];
+                $item_level = strrpos($item_text, '#') + 1;
+                $item_text  = substr($item_text, $item_level);
+            }
+            else {
+                // text is the previous line (empty if <hr>)
+                $item_offset      = $item[1];
+                $prev_line_offset = strrpos($source, "\n", -($file_size - $item_offset + 2));
+                $item_text        =
+                    substr($source, $prev_line_offset, $item_offset - $prev_line_offset - 1);
+                $item_text        = trim($item_text);
+                $item_level       = $found_mark === '=' ? 1 : 2;
+            }
+            if (!trim($item_text) || str_contains($item_text, '|')) {
+                // item is an horizontal separator or a table header, don't mind
+                continue;
+            }
+            $raw_toc[] = [
+                'level' => $item_level,
+                'text'  => trim($item_text),
+            ];
+        }
+
+        // create a JSON list (the easiest way to generate HTML structure is using JS)
+        return $raw_toc;
     }
 }

@@ -100,11 +100,6 @@ class StrHelperTest extends TestCase
         $this->assertEquals('act&lt;', StrHelper::convert('act&lt;'));
     }
 
-    public function testCh2Utf8(): void
-    {
-        $this->assertEquals('头条H', StrHelper::ch2Utf8('头条H'));
-    }
-
     public function testCount(): void
     {
         $this->assertEquals('4', StrHelper::count('YL娱乐'));

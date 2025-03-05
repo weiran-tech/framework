@@ -30,7 +30,7 @@ class TraitTest extends TestCase
     }
 
 
-    public function testKeyParser()
+    public function testKeyParser(): void
     {
         $class = new TraitDemo();
         [$n, $g, $k] = $class->parseKey('n::g.k');

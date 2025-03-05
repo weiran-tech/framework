@@ -6,10 +6,10 @@ namespace Weiran\Framework\Application;
 
 use Illuminate\Contracts\Console\Kernel;
 use JsonException;
-use Weiran\Faker\Generator;
-use Weiran\Framework\Exceptions\ApplicationException;
-use Weiran\Framework\Helper\UtilHelper;
 use PHPUnit\Framework\Assert as PHPUnit;
+use Poppy\Faker\Factory;
+use Poppy\Faker\Generator;
+use Weiran\Framework\Helper\UtilHelper;
 
 /**
  * Main Test Case
@@ -94,10 +94,9 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
 
 
     /**
-     * @throws ApplicationException
      */
     protected function faker(): Generator
     {
-        return poppy_faker();
+        return Factory::create('zh_CN');
     }
 }
