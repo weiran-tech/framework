@@ -164,14 +164,12 @@ class MakeWeiranCommand extends Command
      */
     protected function generateModule(): void
     {
-        if (!$this->files->isDirectory(weiran_path())) {
-            $this->files->makeDirectory(weiran_path());
-        }
+        $this->files->ensureDirectoryExists(weiran_path());
 
         $directory = weiran_path(null, $this->conf['slug']);
         $source    = __DIR__ . '/../../../resources/stubs/weiran';
 
-        $this->files->makeDirectory($directory);
+        $this->files->ensureDirectoryExists($directory);
 
         $sourceFiles = $this->files->allFiles($source, true);
 
@@ -182,9 +180,7 @@ class MakeWeiranCommand extends Command
             $filePath = $directory . '/' . $subPath;
             $dir      = dirname($filePath);
 
-            if (!$this->files->isDirectory($dir)) {
-                $this->files->makeDirectory($dir, 0755, true);
-            }
+            $this->files->ensureDirectoryExists($dir);
 
             $this->files->put($filePath, $contents);
         }
