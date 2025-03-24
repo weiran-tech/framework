@@ -121,7 +121,7 @@ class Application extends ApplicationBase
 
     public function bootstrapPath($path = ''): string
     {
-        return $this->storagePath() . '/bootstrap' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+        return $this->basePath() . '/bootstrap' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
     /**
