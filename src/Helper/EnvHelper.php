@@ -145,41 +145,17 @@ class EnvHelper
     }
 
     /**
-     * 浏览器头部
-     * @return string
-     * @see        Request::userAgent()
-     * @deprecated 4.1
-     */
-    public static function agent(): string
-    {
-        return Request::userAgent();
-    }
-
-    /**
      * 是否是代理
      * @return bool
      */
     public static function isProxy(): bool
     {
         return
-            (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])) ||
+            !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ||
             isset($_SERVER['HTTP_VIA']) ||
             isset($_SERVER['HTTP_PROXY_CONNECTION']) ||
             isset($_SERVER['HTTP_USER_AGENT_VIA']) ||
             isset($_SERVER['HTTP_CACHE_INFO']);
-    }
-
-    /**
-     * 是否win 服务器
-     * @return bool
-     */
-    public static function isWindows(): bool
-    {
-        if ('DARWIN' === strtoupper(PHP_OS)) {
-            return false;
-        }
-
-        return stripos(PHP_OS, 'WIN') !== false;
     }
 
     /**
