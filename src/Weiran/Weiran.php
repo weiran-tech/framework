@@ -53,19 +53,6 @@ class Weiran
     }
 
     /**
-     * Register the module service provider file from all modules.
-     * @return void
-     */
-    public function register(): void
-    {
-        $modules = $this->repository->enabled();
-
-        $modules->each(function ($module) {
-            $this->registerServiceProvider($module);
-        });
-    }
-
-    /**
      * @return Repository
      */
     public function repository(): Repository
@@ -82,19 +69,5 @@ class Weiran
     public function __call(string $method, $arguments)
     {
         return call_user_func_array([$this->repository, $method], $arguments);
-    }
-
-    /**
-     * Register the module service provider.
-     * @param array $module module
-     * @return void
-     */
-    private function registerServiceProvider(array $module): void
-    {
-        $serviceProvider = weiran_class($module['slug'], 'ServiceProvider');
-
-        if (class_exists($serviceProvider)) {
-            $this->app->register($serviceProvider);
-        }
     }
 }

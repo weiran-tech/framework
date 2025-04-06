@@ -57,9 +57,7 @@ class FileRepository extends Repository
      */
     public function sortBy(string $key): Collection
     {
-        $collection = $this->all();
-
-        return $collection->sortBy($key);
+        return $this->all()->sortBy($key);
     }
 
     /**
@@ -68,8 +66,7 @@ class FileRepository extends Repository
      */
     public function sortByDesc(string $key): Collection
     {
-        $collection = $this->all();
-        return $collection->sortByDesc($key);
+        return $this->all()->sortByDesc($key);
     }
 
     /**
@@ -98,9 +95,7 @@ class FileRepository extends Repository
     {
         [$slug, $key] = explode('::', $property);
 
-        $module = $this->where('slug', $slug);
-
-        return $module->get($key, $default);
+        return $this->where('slug', $slug)->get($key, $default);
     }
 
     /**
@@ -125,7 +120,7 @@ class FileRepository extends Repository
             $module = collect([$module['slug'] => $module]);
 
             $merged  = $cache->merge($module);
-            $content = json_encode($merged->all(), JSON_PRETTY_PRINT);
+            $content = json_encode($merged->all(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
             $this->files->put($cachePath, $content);
             return true;
         } catch (Throwable $e) {
@@ -261,7 +256,7 @@ class FileRepository extends Repository
             throw new ApplicationException($depends);
         }
 
-        $content = json_encode($modules->all(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        $content = json_encode($modules->all(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
         $this->files->put($cachePath, $content);
 
@@ -284,13 +279,13 @@ class FileRepository extends Repository
 
                 // create empty cache
                 $cachePath = $this->getCachePath();
-                $content   = json_encode([], JSON_PRETTY_PRINT);
+                $content   = json_encode([], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
                 $this->files->put($cachePath, $content);
 
                 $this->optimize();
             }
 
-            return collect(json_decode($this->files->get($cachePath), true));
+            return collect(json_decode($this->files->get($cachePath), true, 512, JSON_THROW_ON_ERROR));
         } catch (Throwable $e) {
             throw new ApplicationException($e->getMessage());
         }

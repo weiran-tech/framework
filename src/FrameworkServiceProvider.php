@@ -15,9 +15,6 @@ use Weiran\Framework\Helper\UtilHelper;
  */
 class FrameworkServiceProvider extends ServiceProvider
 {
-
-    protected static bool $registered = false;
-
     /**
      * Bootstrap the application events.
      * @return void
@@ -28,12 +25,6 @@ class FrameworkServiceProvider extends ServiceProvider
         $this->publishes([
             framework_path('config/weiran.php') => config_path('weiran.php'),
         ], 'weiran');
-
-        // framework register
-        if (!self::$registered) {
-            app('weiran')->register();
-            self::$registered = true;
-        }
 
         // views an lang
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'weiran');
