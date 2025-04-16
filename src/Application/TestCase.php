@@ -22,8 +22,10 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
     public function createApplication()
     {
         $app          = null;
-        $file         = __DIR__ . '/../../../bootstrap/app.php';
-        $fileInVendor = __DIR__ . '/../../../../bootstrap/app.php';
+        // develop
+        $file         = __DIR__ . '/../../../../bootstrap/app.php';
+        // installed packages
+        $fileInVendor = __DIR__ . '/../../../../../bootstrap/app.php';
         if (file_exists($file)) {
             $app = require_once $file;
         }
