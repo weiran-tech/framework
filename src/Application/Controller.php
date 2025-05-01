@@ -94,8 +94,10 @@ abstract class Controller extends BaseController
     protected function seo(...$args): void
     {
         [$title, $description] = parse_seo($args);
-        $title       = $title ? $title . '-' . config('weiran.framework.title') : config('weiran.framework.title');
-        $description = $description ?: config('weiran.framework.description');
+        $siteName        = config('weiran.framework.title');
+        $siteDescription = config('weiran.framework.description');
+        $title           = $title ? $title . ($siteName ? ' - ' . $siteName : '') : $siteName;
+        $description     = $description ?: $siteDescription;
 
         $this->title = $title;
 
