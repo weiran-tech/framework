@@ -18,7 +18,7 @@ class UtilHelperTest extends TestCase
     public function testFormatBytes(): void
     {
         $bytes  = 3378170;
-        $format = UtilHelper::formatBytes($bytes, 2);
+        $format = UtilHelper::formatBytes($bytes);
         $this->assertEquals('3.22 MB', $format);
     }
 
@@ -37,7 +37,7 @@ class UtilHelperTest extends TestCase
         $format = UtilHelper::isChId('110101190001011009');
         $this->assertTrue($format);
 
-        // fix 1dailian 身份认证
+        // fix 身份认证
         $isChid = UtilHelper::isChId('110101190,,1011009');
         $this->assertFalse($isChid);
 
@@ -91,7 +91,7 @@ class UtilHelperTest extends TestCase
         $this->assertFalse(UtilHelper::isUsername('demo.jpg'));
         $this->assertFalse(UtilHelper::isUsername('username*()'));
         $this->assertTrue(UtilHelper::isUsername('username'));
-        $this->assertTrue(UtilHelper::isUsername('username:wolegequ', true));
+        $this->assertTrue(UtilHelper::isUsername('username:my_username', true));
     }
 
     public function testIsMobile(): void
@@ -210,12 +210,6 @@ class UtilHelperTest extends TestCase
     {
         $str = UtilHelper::objToArray((object) ['a', 'b', 'c']);
         $this->assertEquals(['a', 'b', 'c'], $str);
-    }
-
-    public function testSqlTime(): void
-    {
-        $str = UtilHelper::sqlTime(1606091957);
-        $this->assertEquals('2020-11-23 08:39:17', $str);
     }
 
     public function testToHour(): void

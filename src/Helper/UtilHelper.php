@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Weiran\Framework\Helper;
 
-use Carbon\Carbon;
 use Illuminate\Support\Str;
 use JsonException;
 
@@ -14,40 +13,13 @@ use JsonException;
 class UtilHelper
 {
     /**
-     * 计算某个经纬度的周围某段距离的正方形的四个点
-     * @param float $lng      经度
-     * @param float $lat      纬度
-     * @param float $distance 该点所在圆的半径，该圆与此正方形内切，默认值为0.5千米
-     * @return array 正方形的四个点的经纬度坐标
-     */
-    public function squarePoint($lng, $lat, $distance = 0.5): array
-    {
-        //地球半径，平均半径为6371km
-        $EARTH_RADIUS = 6371;
-        $dlng         = 2 * asin(sin($distance / (2 * $EARTH_RADIUS)) / cos(deg2rad($lat)));
-        $dlng         = rad2deg($dlng);
-
-        $dlat = $distance / $EARTH_RADIUS;
-        $dlat = rad2deg($dlat);
-
-        //使用此函数计算得到结果后，带入sql查询。
-        // $info_sql = "select id,locateinfo,lat,lng from `lbs_info` where lat<>0 and lat> {$squares['right-bottom']['lat']} and lat<{$squares['left-top']['lat']} and lng>{$squares['left-top']['lng']} and lng<{$squares['right-bottom']['lng']}";
-        return [
-            'left-top'     => ['lat' => $lat + $dlat, 'lng' => $lng - $dlng],
-            'right-top'    => ['lat' => $lat + $dlat, 'lng' => $lng + $dlng],
-            'left-bottom'  => ['lat' => $lat - $dlat, 'lng' => $lng - $dlng],
-            'right-bottom' => ['lat' => $lat - $dlat, 'lng' => $lng + $dlng],
-        ];
-    }
-
-    /**
      * 检测是否email
      * @param string $email Email address
      * @return bool
      */
     public static function isEmail(string $email): bool
     {
-        return strlen($email) > 6 && preg_match("/^[\w\-.]+@[\w\-.]+(\.\w+)+$/", $email);
+        return strlen($email) > 6 && preg_match('/^[\w\-.]+@[\w\-.]+(\.\w+)+$/', $email);
     }
 
     /**
@@ -60,12 +32,11 @@ class UtilHelper
         return (bool) preg_match('/^http(s?):\/\//', $url);
     }
 
-
     /**
      * 是否是用户名, 子用户比主用户多一个英文版本的 `:`
      * @url https://regex101.com/r/otDXQG/1/
      * @param string $username 用户名
-     * @param false  $is_sub   是否是子用户
+     * @param false  $is_sub 是否是子用户
      * @return bool
      */
     public static function isUsername(string $username, bool $is_sub = false): bool
@@ -82,7 +53,7 @@ class UtilHelper
      */
     public static function isRobot(): bool
     {
-        if (isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], '://') === false && preg_match('/(MSIE|Netscape|Opera|Konqueror|Mozilla)/i', $_SERVER['HTTP_USER_AGENT'])) {
+        if (isset($_SERVER['HTTP_USER_AGENT']) && !str_contains($_SERVER['HTTP_USER_AGENT'], '://') && preg_match('/(MSIE|Netscape|Opera|Konqueror|Mozilla)/i', $_SERVER['HTTP_USER_AGENT'])) {
             return false;
         }
 
@@ -103,7 +74,6 @@ class UtilHelper
         return (bool) preg_match('/^(\d{1,3}\.){3}\d{1,3}$/', $ip);
     }
 
-
     /**
      * 是否是局域网IP
      * @param string $ip
@@ -111,7 +81,7 @@ class UtilHelper
      */
     public static function isLocalIp(string $ip): bool
     {
-        if (strpos($ip, '127.0.') === 0) {
+        if (str_starts_with($ip, '127.0.')) {
             return true;
         }
         return (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE));
@@ -170,7 +140,7 @@ class UtilHelper
     {
         //return preg_match("/^[0-9\-\+]{7,}$/", $telephone);
         //return preg_match("/^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$/", $telephone);
-        return (bool) preg_match('/((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/', $telephone);
+        return (bool) preg_match('/((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d)|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d))$)/', $telephone);
     }
 
     /**
@@ -182,7 +152,6 @@ class UtilHelper
     {
         return (bool) preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $str);
     }
-
 
     /**
      * 是否存在汉字
@@ -201,30 +170,31 @@ class UtilHelper
      */
     public static function isChId(string $id_card): bool
     {
-        if (strlen($id_card) === 18) {
-            return self::chidChecksum18($id_card);
+        if (strlen($id_card) !== 18) {
+            return false;
+
         }
-
-        if (strlen($id_card) === 15) {
-            $id = self::chid15to18($id_card);
-
-            return self::chidChecksum18($id);
-        }
-
-        return false;
+        return self::chidChecksum18($id_card);
     }
 
     /**
-     * 是否是标准的银行账号
-     * // todo
+     * 移除所有空格
+     * @param string $str
+     * @return string
+     */
+    public static function trimAll(string $str): string
+    {
+        return preg_replace('/\s+/', '', $str);
+    }
+
+    /**
+     * 为了避免兼容问题, 这里银行卡账号不保存空格
      * @param string $bank_account 银行账号
      * @return bool
      */
     public static function isBankNumber(string $bank_account): bool
     {
-        $bank = str_replace(' ', '', $bank_account);
-
-        return (bool) preg_match('/^[0-9]{16,19}$/', $bank);
+        return (bool) preg_match('/^\d{16,19}$/', $bank_account);
     }
 
     /**
@@ -242,7 +212,7 @@ class UtilHelper
      * @param string $letter 检测是否单词
      * @return bool
      */
-    public static function isWord(string $letter)
+    public static function isWord(string $letter): bool
     {
         $letter_match = preg_match('/^[A-Za-z]+$/', $letter);
         return !(empty($letter_match) || strlen($letter) > 1);
@@ -260,19 +230,14 @@ class UtilHelper
 
     /**
      * 格式化小数, 也可以用于货币的格式化
-     * @param string $input     value
-     * @param bool   $sprinft   是否格式化
+     * @param string $input value
      * @param int    $precision 保留小数
-     * @return float|string
+     * @return string
      */
-    public static function formatDecimal(string $input, bool $sprinft = true, int $precision = 2)
+    public static function formatDecimal(string $input, int $precision = 2): string
     {
         $var = round((float) $input, $precision);
-        if ($sprinft) {
-            $var = sprintf('%.' . $precision . 'f', $var);
-        }
-
-        return $var;
+        return sprintf('%.' . $precision . 'f', $var);
     }
 
     /**
@@ -287,21 +252,21 @@ class UtilHelper
             return '';
         }
 
-        return strpos($url, '://') === false ? ($is_https ? 'https://' : 'http://') . $url : $url;
+        return !str_contains($url, '://') ? ($is_https ? 'https://' : 'http://') . $url : $url;
     }
 
     /**
      * 18位身份证校验码有效性检查
-     * @param string $idcard 18 位身份证号码
+     * @param string $chid 18 位身份证号码
      * @return bool
      */
-    public static function chidChecksum18(string $idcard)
+    public static function chidChecksum18(string $chid): bool
     {
-        if (strlen($idcard) !== 18) {
+        if (strlen($chid) !== 18) {
             return false;
         }
-        $idcard_base = substr($idcard, 0, 17);
-        return !(self::chidVerify($idcard_base) !== strtoupper($idcard[17]));
+        $base = substr($chid, 0, 17);
+        return !(self::chidVerify($base) !== strtoupper($chid[17]));
     }
 
     /**
@@ -309,7 +274,7 @@ class UtilHelper
      * @param string|array $str need md5 string
      * @return string
      */
-    public static function md5($str): string
+    public static function md5(string|array $str): string
     {
         $key = '';
         foreach (func_get_args() as $v) {
@@ -321,13 +286,13 @@ class UtilHelper
 
     /**
      * 生成递归数列
-     * @param array|object $items 条目
-     * @param string       $id    id键
-     * @param string       $pid   父级元素
-     * @param string       $son   子元素
+     * @param array  $items 条目
+     * @param string $id id键
+     * @param string $pid 父级元素
+     * @param string $son 子元素
      * @return array        返回的排序好的数组
      */
-    public static function genTree($items, string $id = 'id', string $pid = 'pid', string $son = 'children', $reserve_pid = true): array
+    public static function genTree(array $items, string $id = 'id', string $pid = 'pid', string $son = 'children', $reserve_pid = true): array
     {
         $items = self::objToArray($items);
 
@@ -366,7 +331,7 @@ class UtilHelper
      * @param object|array $obj 需要转换的对象
      * @return array
      */
-    public static function objToArray($obj): array
+    public static function objToArray(mixed $obj): array
     {
         try {
             $arr = json_decode(json_encode($obj, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
@@ -377,26 +342,11 @@ class UtilHelper
             }
 
             return $arr;
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             return [];
         }
     }
 
-    /**
-     * 返回 sql 中存储的时间信息
-     * @param int|null $time time
-     * @return bool|string
-     * @see        Carbon
-     * @deprecated 4.2
-     */
-    public static function sqlTime(int $time = null)
-    {
-        if (!$time) {
-            $time = EnvHelper::time();
-        }
-
-        return date('Y-m-d H:i:s', $time);
-    }
 
     /**
      * Kv 转化成Id/Title 类型
@@ -416,7 +366,7 @@ class UtilHelper
     /**
      * 转换成小时
      * @param int $hour hour
-     * @param int $day  day num
+     * @param int $day day num
      * @return int
      */
     public static function toHour(int $hour, int $day = 0): int
@@ -426,7 +376,7 @@ class UtilHelper
 
     /**
      * 格式化文件大小
-     * @param int $bytes     长度
+     * @param int $bytes 长度
      * @param int $precision 分数
      * @return string
      */
@@ -471,15 +421,15 @@ class UtilHelper
      */
     public static function isVersion(string $version): bool
     {
-        return (bool) preg_match("/\d\.\d\..+/", $version);
+        return (bool) preg_match('/\d\.\d\..+/', $version);
     }
 
     /**
      * 根据两点间的经纬度计算距离
-     * @param float|int $lng1 lng1
-     * @param float|int $lat1 lat1
-     * @param float|int $lng2 lng2
-     * @param float|int $lat2 lat2
+     * @param float $lng1 lng1
+     * @param float $lat1 lat1
+     * @param float $lng2 lng2
+     * @param float $lat2 lat2
      * @return string
      */
     public static function getDistance(float $lng1, float $lat1, float $lng2, float $lat2): string
@@ -491,8 +441,7 @@ class UtilHelper
         $radLng2 = deg2rad($lng2);
         $a       = $radLat1 - $radLat2;
         $b       = $radLng1 - $radLng2;
-        $s       = 2 * asin(sqrt(pow(sin($a / 2), 2) + cos($radLat1) * cos($radLat2) * pow(sin($b / 2), 2))) * 6378.137;
-
+        $s       = 2 * asin(sqrt((sin($a / 2) ** 2) + cos($radLat1) * cos($radLat2) * (sin($b / 2) ** 2))) * 6378.137;
         return round($s, 2) . 'km';
     }
 
@@ -503,29 +452,28 @@ class UtilHelper
     public static function guid(): string
     {
         mt_srand(); //optional for php 4.2.0 and up.
-        $charid = strtoupper(md5(uniqid((string) mt_rand(), true)));
+        $id     = strtoupper(md5(uniqid((string) mt_rand(), true)));
         $hyphen = chr(45); // "-"
-        $uuid   = chr(123) // "{"
-            . substr($charid, 0, 8) . $hyphen
-            . substr($charid, 8, 4) . $hyphen
-            . substr($charid, 12, 4) . $hyphen
-            . substr($charid, 16, 4) . $hyphen
-            . substr($charid, 20, 12)
+        return chr(123) // "{"
+            . substr($id, 0, 8) . $hyphen
+            . substr($id, 8, 4) . $hyphen
+            . substr($id, 12, 4) . $hyphen
+            . substr($id, 16, 4) . $hyphen
+            . substr($id, 20, 12)
             . chr(125); // "}"
-        return $uuid;
     }
 
     /**
      * 检测是否是有效的json数据格式
-     * @param mixed $string string
+     * @param string $string string
      * @return bool
      */
-    public static function isJson($string): bool
+    public static function isJson(string $string): bool
     {
         try {
             json_decode($string, false, 512, JSON_THROW_ON_ERROR);
             return true;
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             return false;
         }
     }
@@ -538,7 +486,7 @@ class UtilHelper
         try {
             $parse = json_decode($string, true, 512, JSON_THROW_ON_ERROR);
             return is_array($parse);
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             return false;
         }
     }
@@ -608,12 +556,13 @@ class UtilHelper
     /**
      * 计算身份证校验码，根据国家标准GB 11643-1999
      * @param string $id_base chid base
-     * @return string|bool
+     * @return string
      */
-    private static function chidVerify(string $id_base)
+    private static function chidVerify(string $id_base): string
     {
+        // 返回一个永远不会匹配的字符串
         if (!preg_match('/\d{17}/', $id_base)) {
-            return false;
+            return '';
         }
         //加权因子
         $factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
@@ -628,26 +577,28 @@ class UtilHelper
     }
 
     /**
-     * 将15位身份证升级到18位
-     * @param string $chid 身份证号
-     * @return bool|string
+     * 计算某个经纬度的周围某段距离的正方形的四个点
+     * @param float $lng 经度
+     * @param float $lat 纬度
+     * @param float $distance 该点所在圆的半径，该圆与此正方形内切，默认值为0.5千米
+     * @return array 正方形的四个点的经纬度坐标
      */
-    private static function chid15to18(string $chid)
+    public function squarePoint(float $lng, float $lat, float $distance = 0.5): array
     {
-        if (strlen($chid) !== 15) {
-            return false;
-        }
+        //地球半径，平均半径为6371km
+        $EARTH_RADIUS = 6371;
+        $degLng       = 2 * asin(sin($distance / (2 * $EARTH_RADIUS)) / cos(deg2rad($lat)));
+        $degLng       = rad2deg($degLng);
 
-        // 如果身份证顺序码是996 997 998 999，这些是为百岁以上老人的特殊编码
-        if (in_array(substr($chid, 12, 3), ['996', '997', '998', '999'], true)) {
-            $chid = substr($chid, 0, 6) . '18' . substr($chid, 6, 9);
-        }
-        else {
-            $chid = substr($chid, 0, 6) . '19' . substr($chid, 6, 9);
-        }
+        $degLat = $distance / $EARTH_RADIUS;
+        $degLat = rad2deg($degLat);
 
-        $chid .= self::chidVerify($chid);
-
-        return $chid;
+        // 使用此函数计算得到结果后，带入sql查询
+        return [
+            'left-top'     => ['lat' => $lat + $degLat, 'lng' => $lng - $degLng],
+            'right-top'    => ['lat' => $lat + $degLat, 'lng' => $lng + $degLng],
+            'left-bottom'  => ['lat' => $lat - $degLat, 'lng' => $lng - $degLng],
+            'right-bottom' => ['lat' => $lat - $degLat, 'lng' => $lng + $degLng],
+        ];
     }
 }
