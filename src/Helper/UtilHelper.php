@@ -158,7 +158,7 @@ class UtilHelper
      */
     public static function isChMobile(string $mobile): bool
     {
-        return (bool) preg_match("/^(\+86|86-)?1(3|4|5|6|8|7|9)\d{9}$/", $mobile);
+        return (bool) preg_match('/^(\+86|86-)?1(3|4|5|6|8|7|9)\d{9}$/', $mobile);
     }
 
     /**
@@ -170,7 +170,7 @@ class UtilHelper
     {
         //return preg_match("/^[0-9\-\+]{7,}$/", $telephone);
         //return preg_match("/^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$/", $telephone);
-        return (bool) preg_match("/((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/", $telephone);
+        return (bool) preg_match('/((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/', $telephone);
     }
 
     /**
