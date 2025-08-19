@@ -198,7 +198,7 @@ class Resp
         $time     = $arrAppend['_time'] ?? true;
 
         if (isset($arrAppend['_reload'])) {
-            $location = Session::previousUrl();
+            $location = (string) Session::previousUrl();
         }
 
         return self::webView($resp->getCode(), $resp->getMessage(), $time, $location, $input);
@@ -242,11 +242,11 @@ class Resp
     /**
      * 显示界面
      * @param int|bool|null $time 时间
-     * @param string|null   $location location
+     * @param string   $location location
      * @param array|null    $input input
      * @return RedirectResponse|\Illuminate\Http\Response
      */
-    private static function webView($code, $message, $time = null, string $location = null, array $input = null)
+    private static function webView($code, $message, $time = null, string $location = '', array $input = null)
     {
         $messageTpl = config('weiran.framework.message_template');
         // default message template
