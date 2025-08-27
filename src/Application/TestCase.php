@@ -21,9 +21,9 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        $app          = null;
+        $app = null;
         // develop
-        $file         = __DIR__ . '/../../../../bootstrap/app.php';
+        $file = __DIR__ . '/../../../../bootstrap/app.php';
         // installed packages
         $fileInVendor = __DIR__ . '/../../../../../bootstrap/app.php';
         if (file_exists($file)) {
@@ -62,7 +62,7 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
         if (is_array($vars)) {
             try {
                 fwrite(STDOUT, print_r(json_encode($vars, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL, true));
-            } catch (JsonException $e) {
+            } catch (JsonException) {
                 fwrite(STDERR, 'Wrong format with error format with output variables');
             }
         }
