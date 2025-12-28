@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * ArithmeticException
  */
-class ArithmeticException extends BaseException
-{
-}
+class ArithmeticException extends BaseException {}

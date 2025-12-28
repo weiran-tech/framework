@@ -11,10 +11,10 @@ class SearchHelper
 {
     /**
      * 获取排序的key
+     *
      * @param string $default_order 默认的排序
      * @param array  $allowed       允许的key
      * @param string $input_key     默认的input键
-     * @return string
      */
     public static function key(string $default_order, array $allowed = [], string $input_key = '_order'): string
     {
@@ -39,8 +39,8 @@ class SearchHelper
 
     /**
      * 排序类型
+     *
      * @param string $key key
-     * @return string
      */
     public static function order(string $key = '_order'): string
     {

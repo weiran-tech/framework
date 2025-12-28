@@ -26,7 +26,6 @@ class WeiranTest extends TestCase
         $this->assertEquals('Weiran\System', $namespace);
     }
 
-
     public function testPath()
     {
         $path = weiran_path('module.site', 'src/models/Default.php');

@@ -7,6 +7,4 @@ namespace Weiran\Framework\Application;
 /**
  * Base job in laravel
  */
-abstract class Job
-{
-}
+abstract class Job {}

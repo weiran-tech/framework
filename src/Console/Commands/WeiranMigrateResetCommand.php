@@ -24,43 +24,33 @@ class WeiranMigrateResetCommand extends Command
 
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $name = 'weiran:migrate:reset';
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Rollback all database migrations for a specific or all modules';
 
-    /**
-     * @var Weiran
-     */
     protected Weiran $weiran;
 
-    /**
-     * @var Migrator
-     */
     protected Migrator $migrator;
 
-    /**
-     * @var Filesystem
-     */
     protected Filesystem $files;
 
     /**
      * Create a new command instance.
-     * @param Weiran     $weiran
-     * @param Filesystem $files
-     * @param Migrator   $migrator
      */
     public function __construct(Weiran $weiran, Filesystem $files, Migrator $migrator)
     {
         parent::__construct();
 
-        $this->weiran = $weiran;
-        $this->files  = $files;
+        $this->weiran   = $weiran;
+        $this->files    = $files;
         $this->migrator = $migrator;
     }
 
@@ -117,7 +107,8 @@ class WeiranMigrateResetCommand extends Command
 
     /**
      * Run "down" a migration instance.
-     * @param string        $file migrate file
+     *
+     * @param string        $file      migrate file
      * @param string|object $migration migration file
      */
     protected function runDown(string $file, $migration)
@@ -134,7 +125,6 @@ class WeiranMigrateResetCommand extends Command
 
     /**
      * Generate a list of all migration paths, given the arguments/operations supplied.
-     * @return array
      */
     protected function getMigrationPaths(): array
     {
@@ -151,6 +141,7 @@ class WeiranMigrateResetCommand extends Command
 
     /**
      * Using the arguments, generate a list of slugs to reset the migrations for.
+     *
      * @return Collection|array
      */
     protected function getSlugsToReset()
@@ -169,7 +160,6 @@ class WeiranMigrateResetCommand extends Command
     /**
      * Determine if a valid slug has been provided as an argument.
      * We will accept a slug as long as it is not empty and is enabled (or force is passed).
-     * @return bool
      */
     protected function validSlugProvided(): bool
     {
@@ -190,8 +180,8 @@ class WeiranMigrateResetCommand extends Command
 
     /**
      * Get the console command parameters.
+     *
      * @param string $slug slug
-     * @return array
      */
     protected function getParameters(string $slug): array
     {
@@ -216,7 +206,6 @@ class WeiranMigrateResetCommand extends Command
 
     /**
      * Get the console command arguments.
-     * @return array
      */
     protected function getArguments(): array
     {
@@ -227,7 +216,6 @@ class WeiranMigrateResetCommand extends Command
 
     /**
      * Get the console command options.
-     * @return array
      */
     protected function getOptions(): array
     {

@@ -13,12 +13,14 @@ class WeiranOptimizeCommand extends Command
 {
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $name = 'weiran:optimize';
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Optimize the module cache for better performance';

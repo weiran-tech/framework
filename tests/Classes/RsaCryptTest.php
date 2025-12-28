@@ -10,18 +10,11 @@ use Weiran\Framework\Classes\RsaCrypt;
 
 class RsaCryptTest extends TestCase
 {
-
-    /**
-     * @var string
-     */
     private string $privateKey;
 
-    /**
-     * @var string
-     */
     private string $pubKey;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->privateKey = file_get_contents(dirname(__DIR__) . '/files/private.pem');

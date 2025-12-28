@@ -15,12 +15,10 @@ use Weiran\Framework\Helper\UtilHelper;
  */
 class FrameworkServiceProvider extends ServiceProvider
 {
-
     protected static bool $registered = false;
 
     /**
      * Bootstrap the application events.
-     * @return void
      */
     public function boot(): void
     {
@@ -47,7 +45,6 @@ class FrameworkServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     * @return void
      */
     public function register(): void
     {
@@ -66,7 +63,6 @@ class FrameworkServiceProvider extends ServiceProvider
 
     /**
      * Get the services provided by the provider.
-     * @return array
      */
     public function provides(): array
     {
@@ -79,16 +75,17 @@ class FrameworkServiceProvider extends ServiceProvider
 
     private function bootValidation(): void
     {
-        app('validator')->extend('mobile', fn($attribute, $value) => UtilHelper::isMobile($value));
-        app('validator')->extend('json', fn($attribute, $value) => UtilHelper::isJson($value));
-        app('validator')->extend('date', fn($attribute, $value) => UtilHelper::isDate($value));
-        app('validator')->extend('chid', fn($attribute, $value) => UtilHelper::isChId($value));
-        app('validator')->extend('simple_pwd', fn($attribute, $value) => UtilHelper::isPwd($value));
+        app('validator')->extend('mobile', fn ($attribute, $value) => UtilHelper::isMobile($value));
+        app('validator')->extend('json', fn ($attribute, $value) => UtilHelper::isJson($value));
+        app('validator')->extend('date', fn ($attribute, $value) => UtilHelper::isDate($value));
+        app('validator')->extend('chid', fn ($attribute, $value) => UtilHelper::isChId($value));
+        app('validator')->extend('simple_pwd', fn ($attribute, $value) => UtilHelper::isPwd($value));
         app('validator')->extend('username', function ($attribute, $value, $parameters) {
             $first = Arr::first($parameters);
+
             return UtilHelper::isUsername($value, $first === 'sub');
         });
-        app('validator')->extend('date_range', fn($attribute, $value) => TimeHelper::isDateRange($value));
+        app('validator')->extend('date_range', fn ($attribute, $value) => TimeHelper::isDateRange($value));
         app('validator')->extend('urls', function ($attribute, $value) {
             if (!is_array($value)) {
                 return false;
@@ -98,6 +95,7 @@ class FrameworkServiceProvider extends ServiceProvider
                     return false;
                 }
             }
+
             return true;
         });
     }

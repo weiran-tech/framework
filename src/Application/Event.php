@@ -7,6 +7,4 @@ namespace Weiran\Framework\Application;
 /**
  * Event
  */
-abstract class Event
-{
-}
+abstract class Event {}

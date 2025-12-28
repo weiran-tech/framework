@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * TransactionException
  */
-class TransactionException extends BaseException
-{
-}
+class TransactionException extends BaseException {}

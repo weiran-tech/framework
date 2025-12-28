@@ -45,7 +45,7 @@ class StrHelperTest extends TestCase
 
     public function testHtmlSpecialChars(): void
     {
-        $this->assertEquals('&lt;a&gt;&lt;/a&gt;', StrHelper::htmlSpecialChars("<a></a>"));
+        $this->assertEquals('&lt;a&gt;&lt;/a&gt;', StrHelper::htmlSpecialChars('<a></a>'));
     }
 
     public function testSafe(): void

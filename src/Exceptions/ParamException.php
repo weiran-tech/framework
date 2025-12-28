@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * ParamException
  */
-class ParamException extends BaseException implements Warningable
-{
-}
+class ParamException extends BaseException implements Warningable {}

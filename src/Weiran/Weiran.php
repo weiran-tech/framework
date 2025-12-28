@@ -30,21 +30,12 @@ use Weiran\Framework\Weiran\Contracts\Repository;
  */
 class Weiran
 {
-
-    /**
-     * @var Application
-     */
     protected Application $app;
 
-    /**
-     * @var Repository
-     */
     protected Repository $repository;
 
     /**
      * Create a new Weiran Modules instance.
-     * @param Application $app
-     * @param Repository  $repository
      */
     public function __construct(Application $app, Repository $repository)
     {
@@ -54,7 +45,6 @@ class Weiran
 
     /**
      * Register the module service provider file from all modules.
-     * @return void
      */
     public function register(): void
     {
@@ -65,9 +55,6 @@ class Weiran
         });
     }
 
-    /**
-     * @return Repository
-     */
     public function repository(): Repository
     {
         return $this->repository;
@@ -75,8 +62,9 @@ class Weiran
 
     /**
      * magical method.
-     * @param string $method
-     * @param mixed  $arguments
+     *
+     * @param mixed $arguments
+     *
      * @return mixed
      */
     public function __call(string $method, $arguments)
@@ -86,8 +74,8 @@ class Weiran
 
     /**
      * Register the module service provider.
+     *
      * @param array $module module
-     * @return void
      */
     private function registerServiceProvider(array $module): void
     {

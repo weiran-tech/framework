@@ -18,14 +18,8 @@ use Weiran\Framework\Weiran\Contracts\Repository as RepositoryContract;
  */
 abstract class Repository implements RepositoryContract
 {
-    /**
-     * @var Config
-     */
     protected Config $config;
 
-    /**
-     * @var Filesystem
-     */
     protected Filesystem $files;
 
     /**
@@ -35,8 +29,9 @@ abstract class Repository implements RepositoryContract
 
     /**
      * Constructor method.
+     *
      * @param Config     $config config
-     * @param Filesystem $files files
+     * @param Filesystem $files  files
      */
     public function __construct(Config $config, Filesystem $files)
     {
@@ -47,8 +42,9 @@ abstract class Repository implements RepositoryContract
 
     /**
      * Get a module's manifest contents.
+     *
      * @param string $slug slug
-     * @return Collection
+     *
      * @throws Exception
      */
     public function getManifest(string $slug): Collection
@@ -67,7 +63,6 @@ abstract class Repository implements RepositoryContract
 
     /**
      * Get modules path.
-     * @return string
      */
     public function getPath(): string
     {
@@ -76,8 +71,6 @@ abstract class Repository implements RepositoryContract
 
     /**
      * Get path of module manifest file.
-     * @param $slug
-     * @return string
      */
     protected function getManifestPath($slug): string
     {
@@ -88,7 +81,6 @@ abstract class Repository implements RepositoryContract
      * 获取所有模块的基本名称
      * Get all module base names.
      * module.{mod}, weiran.{mod}
-     * @return Collection
      */
     protected function getAllBaseNames(): Collection
     {
@@ -106,16 +98,16 @@ abstract class Repository implements RepositoryContract
                     $baseNames->push('weiran.' . basename($item));
                 }
             });
+
             return $baseNames;
-        } catch (InvalidArgumentException $e) {
+        }
+        catch (InvalidArgumentException $e) {
             return collect([]);
         }
     }
 
     /**
      * Get path for the specified module.
-     * @param string $slug
-     * @return string
      */
     private function getModulePath(string $slug): string
     {
@@ -125,6 +117,7 @@ abstract class Repository implements RepositoryContract
             return home_path($module);
         }
         $modulePath = app('path.module');
+
         return $modulePath . "/{$module}";
     }
 }

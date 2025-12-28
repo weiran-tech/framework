@@ -9,11 +9,11 @@ use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Weiran\Framework\Classes\Traits\MigrationTrait;
 use Weiran\Framework\Events\WeiranMigrated;
 use Weiran\Framework\Weiran\Weiran;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Weiran Migrate
@@ -24,30 +24,24 @@ class WeiranMigrateCommand extends Command
 
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $name = 'weiran:migrate';
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Run the database migrations for a specific or all modules';
 
-    /**
-     * @var Weiran
-     */
     protected Weiran $weiran;
 
-    /**
-     * @var Migrator
-     */
     protected Migrator $migrator;
 
     /**
      * Create a new command instance.
-     * @param Migrator $migrator
-     * @param Weiran   $weiran
      */
     public function __construct(Migrator $migrator, Weiran $weiran)
     {
@@ -70,6 +64,7 @@ class WeiranMigrateCommand extends Command
 
             if (!$module->count()) {
                 $this->error('Module `' . $this->argument('slug') . '` not found, module need add `module.` prefix');
+
                 return null;
             }
 
@@ -106,7 +101,9 @@ class WeiranMigrateCommand extends Command
 
     /**
      * Run migrations for the specified module.
+     *
      * @param string $slug slug
+     *
      * @return null
      */
     protected function migrate(string $slug)
@@ -119,9 +116,9 @@ class WeiranMigrateCommand extends Command
 
             $this->migrator->setOutput($this->output)->run(
                 $path, [
-                'pretend' => $pretend,
-                'step'    => $step,
-            ]);
+                    'pretend' => $pretend,
+                    'step'    => $step,
+                ]);
 
             event(new WeiranMigrated($module, $this->option()));
 
@@ -166,7 +163,6 @@ class WeiranMigrateCommand extends Command
 
     /**
      * Get the console command arguments.
-     * @return array
      */
     protected function getArguments(): array
     {
@@ -177,7 +173,6 @@ class WeiranMigrateCommand extends Command
 
     /**
      * Get the console command options.
-     * @return array
      */
     protected function getOptions(): array
     {

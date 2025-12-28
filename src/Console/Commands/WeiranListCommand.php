@@ -14,30 +14,27 @@ class WeiranListCommand extends Command
 {
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $name = 'weiran:list';
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'List all application modules';
 
-    /**
-     * @var Weiran
-     */
     protected Weiran $weiran;
 
     /**
      * The table headers for the command.
-     * @var array
      */
     protected array $headers = ['#', 'Name', 'Slug', 'Description', 'Status'];
 
     /**
      * Create a new command instance.
-     * @param Weiran $weiran
      */
     public function __construct(Weiran $weiran)
     {
@@ -66,7 +63,6 @@ class WeiranListCommand extends Command
 
     /**
      * Get all modules.
-     * @return array
      */
     protected function getModules(): array
     {
@@ -82,8 +78,8 @@ class WeiranListCommand extends Command
 
     /**
      * Returns module manifest information.
+     *
      * @param array $module module
-     * @return array
      */
     protected function getModuleInformation(array $module): array
     {
@@ -98,6 +94,7 @@ class WeiranListCommand extends Command
 
     /**
      * Display the module information on the console.
+     *
      * @param array $modules modules
      */
     protected function displayModules(array $modules)

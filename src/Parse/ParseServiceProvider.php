@@ -12,18 +12,16 @@ use Illuminate\Support\ServiceProvider;
  */
 class ParseServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-
     /**
      * Register the service provider.
-     * @return void
      */
     public function register(): void
     {
-        $this->app->singleton('weiran.yaml', fn() => new Yaml());
+        $this->app->singleton('weiran.yaml', fn () => new Yaml());
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function provides(): array
     {

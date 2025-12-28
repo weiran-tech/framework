@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 /*
@@ -11,5 +12,5 @@ declare(strict_types = 1);
 use DummyNamespace\Http\Request\Backend\DemoController;
 
 Route::group([], function (Illuminate\Routing\Router $route) {
-    $route->get('/', [DemoController::class, 'index']);;
+    $route->get('/', [DemoController::class, 'index']);
 });

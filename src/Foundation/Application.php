@@ -17,10 +17,8 @@ class Application extends ApplicationBase
      */
     protected string $executionContext = '';
 
-
     /**
      * 检测运行上下文
-     * @return bool
      */
     public function runningInBackend(): bool
     {
@@ -29,7 +27,9 @@ class Application extends ApplicationBase
 
     /**
      * 检测运行环境
+     *
      * @param string $context context
+     *
      * @return mixed
      */
     public function isRunningIn(string $context): bool
@@ -39,8 +39,6 @@ class Application extends ApplicationBase
 
     /**
      * 设置运行上下文
-     * @param string $context
-     * @return void
      */
     public function setExecutionContext(string $context): void
     {
@@ -49,13 +47,13 @@ class Application extends ApplicationBase
 
     /**
      * 检测数据库是否链接
-     * @return bool
      */
     public function hasDatabase(): bool
     {
         try {
             $this['db.connection']->getPdo();
-        } catch (Throwable) {
+        }
+        catch (Throwable) {
             return false;
         }
 
@@ -64,7 +62,6 @@ class Application extends ApplicationBase
 
     /**
      * Get application installation status.
-     * @return bool
      */
     public function isInstalled(): bool
     {
@@ -81,16 +78,14 @@ class Application extends ApplicationBase
 
     /**
      * Get cached config path.
-     * @return string
      */
     public function getCachedConfigPath(): string
     {
         return $this['path.storage'] . '/framework/config.php';
     }
 
-
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function databasePath($path = ''): string
     {
@@ -102,7 +97,6 @@ class Application extends ApplicationBase
     | Laravel framework Config Path
     |--------------------------------------------------------------------------
     */
-
 
     public function getCachedRoutesPath(): string
     {
@@ -126,7 +120,6 @@ class Application extends ApplicationBase
 
     /**
      * Get the path to the cached classes.php file.
-     * @return string
      */
     public function getCachedClassesPath(): string
     {
@@ -135,8 +128,8 @@ class Application extends ApplicationBase
 
     /**
      * Get weiran framework path or assigned path.
+     *
      * @param string $path path
-     * @return string
      */
     public function frameworkPath(string $path = ''): string
     {
@@ -151,7 +144,6 @@ class Application extends ApplicationBase
 
     /**
      * Get weiran module path.
-     * @return string
      */
     public function modulePath(): string
     {
@@ -160,7 +152,6 @@ class Application extends ApplicationBase
 
     /**
      * 绑定路径到 container
-     * @return void
      */
     protected function bindPathsInContainer(): void
     {

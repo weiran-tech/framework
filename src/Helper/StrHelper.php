@@ -15,8 +15,10 @@ class StrHelper
 {
     /**
      * 获取文件名后缀名
+     *
      * @param string $string string
-     * @param string $split split
+     * @param string $split  split
+     *
      * @return string
      */
     public static function suffix(string $string, $split = '.')
@@ -26,7 +28,7 @@ class StrHelper
 
     /**
      * 获取中杠线分割的单词
-     * @param string $string
+     *
      * @return array|string|string[]
      */
     public static function slug(string $string)
@@ -36,8 +38,10 @@ class StrHelper
 
     /**
      * 获取文件名前缀
+     *
      * @param string $string string
-     * @param string $split string
+     * @param string $split  string
+     *
      * @return string
      */
     public static function prefix(string $string, $split = '.')
@@ -47,7 +51,9 @@ class StrHelper
 
     /**
      * 检测是否含有空格符
+     *
      * @param string $value value
+     *
      * @return int
      */
     public static function hasSpace(string $value)
@@ -57,7 +63,9 @@ class StrHelper
 
     /**
      * 取消转义
+     *
      * @param mixed $input input
+     *
      * @return array|string
      */
     public static function stripSlashes($input)
@@ -67,7 +75,9 @@ class StrHelper
 
     /**
      * 转义操作
+     *
      * @param mixed $input input
+     *
      * @return array|string
      */
     public static function addSlashes($input)
@@ -77,8 +87,10 @@ class StrHelper
 
     /**
      * 转义特殊字符
-     * @param mixed $input input
+     *
+     * @param mixed $input             input
      * @param bool  $preserveAmpersand preserveAmpersand
+     *
      * @return array|mixed|string
      */
     public static function htmlSpecialChars($input, $preserveAmpersand = true)
@@ -103,7 +115,9 @@ class StrHelper
 
     /**
      * 能做到代码不危害大众, 但是还不能把代码安全展示出来
+     *
      * @param mixed $input input
+     *
      * @return array|mixed
      */
     public static function safe($input)
@@ -131,9 +145,9 @@ class StrHelper
 
     /**
      * 删除代码中的换行符
+     *
      * @param string $string string
-     * @param bool   $js js
-     * @return mixed
+     * @param bool   $js     js
      */
     public static function trimEOL(string $string, bool $js = false): mixed
     {
@@ -144,8 +158,8 @@ class StrHelper
 
     /**
      * 去除空格, 换行
+     *
      * @param string $string string
-     * @return string
      */
     public static function trimSpace(string $string): string
     {
@@ -154,11 +168,13 @@ class StrHelper
 
     /**
      * 截取字符串
-     * @param string $string 带截取的字符串
-     * @param int    $length 长度
-     * @param string $suffix 后缀
-     * @param int    $start 开始字符
+     *
+     * @param string $string    带截取的字符串
+     * @param int    $length    长度
+     * @param string $suffix    后缀
+     * @param int    $start     开始字符
      * @param string $char_code
+     *
      * @return mixed|string 中文截断字符方法
      */
     public static function cut(string $string, int $length, $suffix = '', $start = 0, $char_code = 'utf-8')
@@ -168,7 +184,9 @@ class StrHelper
             $string = substr($string, strlen($tmp));
         }
         $strlen = strlen($string);
-        if ($strlen <= $length) return $string;
+        if ($strlen <= $length) {
+            return $string;
+        }
         $string = str_replace(['&quot;', '&lt;', '&gt;'], ['"', '<', '>'], $string);
         $length = $length - strlen($suffix);
         $str    = '';
@@ -176,42 +194,46 @@ class StrHelper
             $n = $tn = $noc = 0;
             while ($n < $strlen) {
                 $t = ord($string[$n]);
-                if ($t == 9 || $t == 10 || (32 <= $t && $t <= 126)) {
+                if ($t == 9 || $t == 10 || ($t >= 32 && $t <= 126)) {
                     $tn = 1;
                     $n++;
                     $noc++;
                 }
-                elseif (194 <= $t && $t <= 223) {
+                elseif ($t >= 194 && $t <= 223) {
                     $tn  = 2;
-                    $n   += 2;
+                    $n += 2;
                     $noc += 2;
                 }
-                elseif (224 <= $t && $t <= 239) {
+                elseif ($t >= 224 && $t <= 239) {
                     $tn  = 3;
-                    $n   += 3;
+                    $n += 3;
                     $noc += 2;
                 }
-                elseif (240 <= $t && $t <= 247) {
+                elseif ($t >= 240 && $t <= 247) {
                     $tn  = 4;
-                    $n   += 4;
+                    $n += 4;
                     $noc += 2;
                 }
-                elseif (248 <= $t && $t <= 251) {
+                elseif ($t >= 248 && $t <= 251) {
                     $tn  = 5;
-                    $n   += 5;
+                    $n += 5;
                     $noc += 2;
                 }
                 elseif ($t == 252 || $t == 253) {
                     $tn  = 6;
-                    $n   += 6;
+                    $n += 6;
                     $noc += 2;
                 }
                 else {
                     $n++;
                 }
-                if ($noc >= $length) break;
+                if ($noc >= $length) {
+                    break;
+                }
             }
-            if ($noc > $length) $n -= $tn;
+            if ($noc > $length) {
+                $n -= $tn;
+            }
             $str = substr($string, 0, $n);
         }
         else {
@@ -226,8 +248,8 @@ class StrHelper
 
     /**
      * 文字 -> 16进制表示
+     *
      * @param string $str str
-     * @return string
      */
     public static function toHex(string $str): string
     {
@@ -236,8 +258,8 @@ class StrHelper
 
     /**
      * 16进制转换为字串
+     *
      * @param string $hex hex
-     * @return string
      */
     public static function fromHex(string $hex): string
     {
@@ -246,9 +268,10 @@ class StrHelper
 
     /**
      * 返回随机字串, 区分大小写
+     *
      * @param int    $length length
-     * @param string $chars chars
-     * @return string
+     * @param string $chars  chars
+     *
      * @throws RandomException
      */
     public static function randomCustom(int $length, string $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz'): string
@@ -264,8 +287,9 @@ class StrHelper
 
     /**
      * 随机ASCII字符
+     *
      * @param int $length length
-     * @return string
+     *
      * @throws RandomException
      */
     public static function randomAscii(int $length = 8): string
@@ -280,9 +304,10 @@ class StrHelper
 
     /**
      * 获取一定范围内的随机数字 位数不足补零
+     *
      * @param int $min 最小值
      * @param int $max 最大值
-     * @return string
+     *
      * @throws RandomException
      */
     public static function randomNumber(int $min, int $max): string
@@ -292,17 +317,23 @@ class StrHelper
 
     /**
      * 转换字符
-     * @param string $str str
+     *
+     * @param string $str         str
      * @param string $fromCharset fromCharset
-     * @param string $toCharset toCharset
+     * @param string $toCharset   toCharset
+     *
      * @return array|string
      */
     public static function convert(string $str, $fromCharset = 'utf-8', $toCharset = 'gbk')
     {
-        if (!$str) return '';
+        if (!$str) {
+            return '';
+        }
         $fromCharset = strtolower($fromCharset);
         $toCharset   = strtolower($toCharset);
-        if ($fromCharset == $toCharset) return $str;
+        if ($fromCharset == $toCharset) {
+            return $str;
+        }
         $fromCharset = str_replace('gbk', 'gb2312', $fromCharset);
         $toCharset   = str_replace('gbk', 'gb2312', $toCharset);
         $fromCharset = str_replace('utf8', 'utf-8', $fromCharset);
@@ -314,7 +345,9 @@ class StrHelper
         if ($toCharset == 'gbk' && !self::isUtf8($str)) {
             return $str;
         }
-        if ($toCharset == $fromCharset) return $str;
+        if ($toCharset == $fromCharset) {
+            return $str;
+        }
         $tmp = [];
         if (function_exists('iconv')) {
             if (is_array($str)) {
@@ -340,9 +373,11 @@ class StrHelper
 
     /**
      * 批量转换
-     * @param mixed  $str str
+     *
+     * @param mixed  $str         str
      * @param string $fromCharset fromCharset
-     * @param string $toCharset toCharset
+     * @param string $toCharset   toCharset
+     *
      * @return array
      */
     public static function batchConvert($str, $fromCharset = 'utf-8', $toCharset = 'gbk')
@@ -363,7 +398,9 @@ class StrHelper
 
     /**
      * 计算字符长度
+     *
      * @param mixed $string string
+     *
      * @return int
      */
     public static function count($string)
@@ -384,7 +421,9 @@ class StrHelper
 
     /**
      * 检测字符是否为UTF8编码
+     *
      * @param string $str str
+     *
      * @return int
      */
     public static function isUtf8(string $str)
@@ -403,7 +442,9 @@ class StrHelper
 
     /**
      * 菊花文生成
+     *
      * @param string $str str
+     *
      * @return string
      */
     public static function chrysanthemum(string $str)
@@ -425,7 +466,9 @@ class StrHelper
 
     /**
      * JS 转义函数
+     *
      * @param string $str str
+     *
      * @return string
      */
     public static function jsEscape(string $str)
@@ -435,8 +478,10 @@ class StrHelper
 
     /**
      * 分割 separate, 去除空格
-     * @param string $str str
+     *
+     * @param string $str       str
      * @param string $separator separator
+     *
      * @return array
      */
     public static function separate(string $separator, string $str)
@@ -458,7 +503,9 @@ class StrHelper
 
     /**
      * 解析 a|1;b|2  样式的字串到数组
+     *
      * @param mixed $str str
+     *
      * @return mixed
      */
     public static function parseKey(mixed $str)
@@ -478,8 +525,8 @@ class StrHelper
             foreach ($arr as $v) {
                 if ($v && str_contains($v, '|')) {
                     [$key, $value] = explode('|', $v);
-                    $key          = trim($key);
-                    $return[$key] = trim($value);
+                    $key           = trim($key);
+                    $return[$key]  = trim($value);
                 }
             }
 
@@ -491,7 +538,9 @@ class StrHelper
 
     /**
      * sql against encode
+     *
      * @param mixed $ids ids
+     *
      * @return string
      */
     public static function matchEncode($ids)
@@ -505,8 +554,10 @@ class StrHelper
 
     /**
      * reverse for match
-     * @param mixed      $ids ids
+     *
+     * @param mixed      $ids   ids
      * @param bool|false $array array
+     *
      * @return array|mixed
      */
     public static function matchDecode($ids, $array = false)
@@ -526,30 +577,32 @@ class StrHelper
 
     /**
      * 隐藏联系方式
-     * @param string $input 输入内容
-     * @param int    $start 开始位数
-     * @param int    $end 结束位数
+     *
+     * @param string $input   输入内容
+     * @param int    $start   开始位数
+     * @param int    $end     结束位数
      * @param string $replace 替换字串
-     * @return string
      */
     public static function hideContact(string $input, int $start = 3, int $end = -4, string $replace = '****'): string
     {
         if ($input) {
             return str_replace(mb_substr($input, $start, $end), $replace, $input);
         }
+
         return '';
     }
 
     /**
      * 隐藏邮箱
+     *
      * @param string $input input
-     * @return string
      */
     public static function hideEmail(string $input): string
     {
         if ($input) {
             return substr_replace($input, '****', 3, strpos($input, '@') - 3);
         }
+
         return '';
     }
 
@@ -559,6 +612,7 @@ class StrHelper
      * This method converts 13 to 13th, 2 to 2nd ...
      *
      * @param int $number Number to get its ordinal value
+     *
      * @return string ordinal representation of given string
      */
     public static function ordinal(int $number): string
@@ -568,16 +622,18 @@ class StrHelper
         }
 
         return match ($number % 10) {
-            1 => $number . 'st',
-            2 => $number . 'nd',
-            3 => $number . 'rd',
+            1       => $number . 'st',
+            2       => $number . 'nd',
+            3       => $number . 'rd',
             default => $number . 'th',
         };
     }
 
     /**
      * Converts line breaks to a standard \r\n pattern.
+     *
      * @param string $string string
+     *
      * @return mixed
      */
     public static function normalizeEol(string $string)
@@ -587,7 +643,9 @@ class StrHelper
 
     /**
      * Removes the starting slash from a class namespace \
+     *
      * @param mixed $name name
+     *
      * @return string
      */
     public static function normalizeClassName($name)
@@ -601,7 +659,9 @@ class StrHelper
 
     /**
      * 从对象或者类名中生成 class id
+     *
      * @param mixed $name name
+     *
      * @return string
      */
     public static function getClassId($name)
@@ -618,7 +678,9 @@ class StrHelper
 
     /**
      * 返回一个类的命名空间
+     *
      * @param string $name name
+     *
      * @return bool|string
      */
     public static function getClassNamespace(string $name)
@@ -630,7 +692,9 @@ class StrHelper
 
     /**
      * 清除链接
+     *
      * @param string $content content
+     *
      * @return mixed
      */
     public static function clearLink(string $content)
@@ -642,20 +706,26 @@ class StrHelper
 
     /**
      * 完善链接
+     *
      * @param string $url url
+     *
      * @return string
      */
     public static function fixLink(string $url)
     {
-        if (strlen($url) < 10) return '';
+        if (strlen($url) < 10) {
+            return '';
+        }
 
         return strpos($url, '://') === false ? 'http://' . $url : $url;
     }
 
     /**
      * 将内容截取到介绍中
+     *
      * @param string $content 有待截取的内容
-     * @param int    $length 带截取的长度
+     * @param int    $length  带截取的长度
+     *
      * @return mixed|string 截取内容的一部分
      */
     public static function intro(string $content, $length = 0)
@@ -674,7 +744,9 @@ class StrHelper
 
     /**
      * 格式化ID
+     *
      * @param string|string[] $string
+     *
      * @return string|string[]
      */
     public static function formatId($string)
@@ -684,10 +756,12 @@ class StrHelper
 
     /**
      * 返回唯一的值
-     * @param string $current current
-     * @param string $str str
+     *
+     * @param string $current   current
+     * @param string $str       str
      * @param string $delimiter delimiter
-     * @param bool   $remove remove
+     * @param bool   $remove    remove
+     *
      * @return mixed
      */
     public static function unique(string $current, string $str, $delimiter = ',', $remove = false)
@@ -707,8 +781,8 @@ class StrHelper
 
     /**
      * 获取 markdown 索引
+     *
      * @param string $content content
-     * @return array
      */
     public function mdToc(string $content): array
     {

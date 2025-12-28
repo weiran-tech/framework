@@ -7,7 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * ApplicationException
  */
-class ApplicationException extends BaseException
-{
-
-}
+class ApplicationException extends BaseException {}

@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Weiran\Framework\Classes\Traits;
 
-
 /**
  * MigrationTrait
  */
@@ -38,4 +37,3 @@ trait MigrationTrait
         return weiran_path($module, 'resources/migrations');
     }
 }
-

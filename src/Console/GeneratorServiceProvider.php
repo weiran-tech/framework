@@ -13,11 +13,11 @@ use Weiran\Framework\Console\Generators\MakeMiddlewareCommand;
 use Weiran\Framework\Console\Generators\MakeMigrationCommand;
 use Weiran\Framework\Console\Generators\MakeModelCommand;
 use Weiran\Framework\Console\Generators\MakePolicyCommand;
-use Weiran\Framework\Console\Generators\MakeWeiranCommand;
 use Weiran\Framework\Console\Generators\MakeProviderCommand;
 use Weiran\Framework\Console\Generators\MakeRequestCommand;
 use Weiran\Framework\Console\Generators\MakeSeederCommand;
 use Weiran\Framework\Console\Generators\MakeTestCommand;
+use Weiran\Framework\Console\Generators\MakeWeiranCommand;
 
 class GeneratorServiceProvider extends ServiceProvider
 {

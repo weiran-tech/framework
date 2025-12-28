@@ -19,6 +19,7 @@ class MakeWeiranCommand extends Command
 {
     /**
      * The name and signature of the console command.
+     *
      * @var string
      */
     protected $signature = 'weiran:make
@@ -28,32 +29,28 @@ class MakeWeiranCommand extends Command
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Create a new Weiran module and bootstrap it';
 
     /**
      * The weiran instance.
-     * @var Weiran
      */
     protected Weiran $weiran;
 
     /**
      * The filesystem instance.
-     * @var Filesystem
      */
     protected Filesystem $files;
 
     /**
      * Array to store the configuration details.
-     * @var array
      */
     protected array $conf;
 
     /**
      * Create a new command instance.
-     * @param Filesystem $files
-     * @param Weiran     $weiran
      */
     public function __construct(Filesystem $files, Weiran $weiran)
     {
@@ -65,6 +62,7 @@ class MakeWeiranCommand extends Command
 
     /**
      * Execute the console command.
+     *
      * @throws FileNotFoundException
      */
     public function handle(): void
@@ -72,9 +70,9 @@ class MakeWeiranCommand extends Command
         $slug = Str::slug($this->argument('slug'));
         if (app('weiran')->exists($slug)) {
             $this->error('Slug `' . $slug . '` exists');
+
             return;
         }
-
 
         $this->conf['slug']        = Str::slug($this->argument('slug'));
         $this->conf['name']        = Str::snake($this->conf['slug']);
@@ -85,6 +83,7 @@ class MakeWeiranCommand extends Command
             $this->conf['basename']  = Str::snake($this->conf['slug']);
             $this->conf['namespace'] = Str::studly($this->conf['basename']);
             $this->generate();
+
             return;
         }
 
@@ -95,7 +94,7 @@ class MakeWeiranCommand extends Command
 
     /**
      * Step 1: Configure module manifest.
-     * @return bool
+     *
      * @throws FileNotFoundException
      */
     protected function stepOne(): bool
@@ -196,21 +195,25 @@ class MakeWeiranCommand extends Command
 
     /**
      * Pull the given stub file contents and display them on screen.
-     * @param string $file file
+     *
+     * @param string $file  file
      * @param string $level info type
+     *
      * @return mixed
+     *
      * @throws FileNotFoundException
      */
     protected function displayHeader(string $file = '', string $level = 'info')
     {
         $stub = $this->files->get(__DIR__ . '/../../../resources/stubs/console/' . $file . '.stub');
+
         return $this->$level($stub);
     }
 
     /**
      * Replace Placeholder
+     *
      * @param string $contents Replace Content
-     * @return string
      */
     protected function replacePlaceholders(string $contents): string
     {

@@ -22,6 +22,7 @@ class Translator extends IlluminateTranslator
 
     /**
      * Translator constructor.
+     *
      * @param Loader     $loader loader
      * @param string     $locale locale
      * @param Filesystem $files  files
@@ -34,9 +35,11 @@ class Translator extends IlluminateTranslator
 
     /**
      * Add translation lines to the given locale.
+     *
      * @param array  $lines     line
      * @param string $locale    locale
      * @param string $namespace namespace
+     *
      * @return void
      */
     public function addLines(array $lines, $locale, $namespace = '*')
@@ -50,7 +53,9 @@ class Translator extends IlluminateTranslator
 
     /**
      * Fetch all language line from a local.
+     *
      * @param string $local local
+     *
      * @return Collection
      */
     public function fetch($local)
@@ -74,6 +79,7 @@ class Translator extends IlluminateTranslator
 
     /**
      * loop
+     *
      * @param mixed      $data data
      * @param mixed      $pre  pre
      * @param Collection $list list
@@ -93,11 +99,13 @@ class Translator extends IlluminateTranslator
 
     /**
      * Retrieve a language line out the loaded array.
+     *
      * @param string $namespace namespace
      * @param string $group     group
      * @param string $locale    locale
      * @param string $item      item
      * @param array  $replace   replace
+     *
      * @return string|array|null
      */
     protected function getLine($namespace, $group, $locale, $item, array $replace)
@@ -117,9 +125,11 @@ class Translator extends IlluminateTranslator
 
     /**
      * Load the specified language group.
+     *
      * @param string $namespace namespace
      * @param string $group     group
      * @param string $locale    locale
+     *
      * @return void
      */
     public function load($namespace, $group, $locale)
@@ -134,14 +144,15 @@ class Translator extends IlluminateTranslator
 
     /**
      * Determine if the given group has been loaded.
+     *
      * @param string $namespace namespace
      * @param string $group     group
      * @param string $locale    locale
+     *
      * @return bool
      */
     protected function isLoaded($namespace, $group, $locale)
     {
         return isset($this->loaded[$locale][$namespace][$group]);
     }
-
 }

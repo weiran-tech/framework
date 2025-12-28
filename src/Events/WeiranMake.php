@@ -18,6 +18,7 @@ class WeiranMake extends Event
 
     /**
      * WeiranMake constructor.
+     *
      * @param string $slug slug
      */
     public function __construct(string $slug)

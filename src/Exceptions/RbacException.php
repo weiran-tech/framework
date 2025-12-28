@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * RbacException
  */
-class RbacException extends BaseException
-{
-}
+class RbacException extends BaseException {}

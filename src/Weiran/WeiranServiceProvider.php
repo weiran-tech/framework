@@ -15,7 +15,7 @@ class WeiranServiceProvider extends ServiceProvider
     /**
      * Register the application services.
      */
-    public function register():void
+    public function register(): void
     {
         $this->app->bind(Repository::class, FileRepository::class);
 
@@ -28,7 +28,6 @@ class WeiranServiceProvider extends ServiceProvider
 
     /**
      * Get the services provided by the provider.
-     * @return array
      */
     public function provides(): array
     {

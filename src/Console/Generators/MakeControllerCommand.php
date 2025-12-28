@@ -14,6 +14,7 @@ class MakeControllerCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
+     *
      * @var string
      */
     protected $signature = 'weiran:controller
@@ -24,19 +25,20 @@ class MakeControllerCommand extends GeneratorCommand
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Create a new weiran module controller class';
 
     /**
      * String to store the command type.
+     *
      * @var string
      */
     protected $type = 'Weiran module controller';
 
     /**
      * Get the stub file for the generator.
-     * @return string
      */
     protected function getStub(): string
     {
@@ -49,8 +51,8 @@ class MakeControllerCommand extends GeneratorCommand
 
     /**
      * Get the default namespace for the class.
+     *
      * @param string $rootNamespace namespace
-     * @return string
      */
     protected function getDefaultNamespace($rootNamespace): string
     {

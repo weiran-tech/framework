@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * DoException
  */
-class DoException extends BaseException
-{
-}
+class DoException extends BaseException {}

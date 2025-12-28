@@ -22,6 +22,7 @@ namespace Weiran\Framework\Classes;
  * limitations under the License.
  *
  * @copyright 2013 Moontoast, Inc.
+ *
  * @license   http://alphabase.moontoast.com/licenses/apache-2.0.txt Apache 2.0
  */
 
@@ -38,15 +39,11 @@ class Number
 {
     /**
      * Number value, as a string
-     *
-     * @var string $numberValue
      */
     protected string $numberValue;
 
     /**
      * The scale for the current number
-     *
-     * @var int $numberScale
      */
     protected int $numberScale = 0;
 
@@ -55,9 +52,9 @@ class Number
      * object that may be cast to a string, resulting in a numeric string value
      *
      * @param float|string|numeric $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
-     * @param int                  $scale (optional) Specifies the default number of digits after the decimal
-     *                      place to be used in operations for this BigNumber
+     *                                     representation of a base 10 number
+     * @param int                  $scale  (optional) Specifies the default number of digits after the decimal
+     *                                     place to be used in operations for this BigNumber
      */
     public function __construct(mixed $number, int $scale = 2)
     {
@@ -72,10 +69,9 @@ class Number
      * 进制转换
      * Converts a number between arbitrary bases (from 2 to 36)
      *
-     * @param int|string $number The number to convert
+     * @param int|string $number   The number to convert
      * @param int        $fromBase (optional) The base $number is in; defaults to 10
-     * @param int        $toBase (optional) The base to convert $number to; defaults to 16
-     * @return string
+     * @param int        $toBase   (optional) The base to convert $number to; defaults to 16
      */
     public static function baseConvert(int|string $number, int $fromBase = 10, int $toBase = 16): string
     {
@@ -90,7 +86,7 @@ class Number
      *
      * @param int|string $number The number to convert
      * @param int        $toBase The base to convert $number to
-     * @return string
+     *
      * @throws InvalidArgumentException if $toBase is outside the range 2 to 36
      */
     public static function convertFromBase10(int|string $number, int $toBase): string
@@ -123,9 +119,9 @@ class Number
      * 转换成 10 进制
      * Converts a number from an arbitrary base (from 2 to 36) to base 10
      *
-     * @param int|string $number The number to convert
+     * @param int|string $number   The number to convert
      * @param int        $fromBase The base $number is in
-     * @return string
+     *
      * @throws InvalidArgumentException if $fromBase is outside the range 2 to 36
      */
     public static function convertToBase10(int|string $number, int $fromBase): string
@@ -169,7 +165,6 @@ class Number
      * Changes the default scale used by all Binary Calculator functions
      *
      * @param int $scale scale
-     * @return void
      */
     public static function setDefaultScale(int $scale): void
     {
@@ -206,8 +201,10 @@ class Number
      * Adds the given number to the current number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
+     *                                        representation of a base 10 number
+     *
      * @return $this
+     *
      * @link http://www.php.net/bcadd
      */
     public function add(mixed $number): static
@@ -253,8 +250,8 @@ class Number
      * larger than the given number, -1 otherwise.
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
-     * @return int
+     *                                        representation of a base 10 number
+     *
      * @link http://www.php.net/bccomp
      */
     public function compareTo(float|int|string|Number $number): int
@@ -271,6 +268,7 @@ class Number
      * Returns the current value converted to an arbitrary base
      *
      * @param int $base The base to convert the current number to
+     *
      * @return string String representation of the number in the given base
      */
     public function convertToBase(int $base): string
@@ -292,9 +290,12 @@ class Number
      * Divides the current number by the given number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
+     *                                        representation of a base 10 number
+     *
      * @return $this
+     *
      * @throws ArithmeticException if $number is zero
+     *
      * @link http://www.php.net/bcdiv
      */
     public function divide(mixed $number): static
@@ -344,8 +345,6 @@ class Number
      *
      * If no scale was set, this will default to the value of `bcmath.scale`
      * in php.ini.
-     *
-     * @return int
      */
     public function getScale(): int
     {
@@ -366,7 +365,6 @@ class Number
     /**
      * 增加
      * Increases the value of the current number by one
-     *
      */
     public function increment(): static
     {
@@ -378,8 +376,7 @@ class Number
      * Returns true if the current number equals the given number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
-     * @return bool
+     *                                        representation of a base 10 number
      */
     public function isEqualTo(float|int|string|Number $number): bool
     {
@@ -391,8 +388,7 @@ class Number
      * Returns true if the current number is greater than the given number
      *
      * @param string|int|float|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
-     * @return bool
+     *                                        representation of a base 10 number
      */
     public function isGreaterThan(string|int|float|Number $number): bool
     {
@@ -404,8 +400,7 @@ class Number
      * Returns true if the current number is greater than or equal to the given number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
-     * @return bool
+     *                                        representation of a base 10 number
      */
     public function isGreaterThanOrEqualTo(float|int|string|Number $number): bool
     {
@@ -417,8 +412,7 @@ class Number
      * Returns true if the current number is less than the given number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
-     * @return bool
+     *                                        representation of a base 10 number
      */
     public function isLessThan(mixed $number): bool
     {
@@ -430,8 +424,7 @@ class Number
      * Returns true if the current number is less than or equal to the given number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
-     * @return bool
+     *                                        representation of a base 10 number
      */
     public function isLessThanOrEqualTo(mixed $number): bool
     {
@@ -441,8 +434,6 @@ class Number
     /**
      * 是否是负数
      * Returns true if the current number is a negative number
-     *
-     * @return bool
      */
     public function isNegative(): bool
     {
@@ -452,8 +443,6 @@ class Number
     /**
      * 是否是正数
      * Returns true if the current number is a positive number
-     *
-     * @return bool
      */
     public function isPositive(): bool
     {
@@ -465,9 +454,12 @@ class Number
      * Finds the modulus of the current number divided by the given number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
+     *                                        representation of a base 10 number
+     *
      * @return $this
+     *
      * @throws ArithmeticException if $number is zero
+     *
      * @link http://www.php.net/bcmod
      */
     public function mod(mixed $number): static
@@ -491,8 +483,10 @@ class Number
      * Multiplies the current number by the given number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
+     *                                        representation of a base 10 number
+     *
      * @return $this
+     *
      * @link http://www.php.net/bcmul
      */
     public function multiply(mixed $number): static
@@ -520,8 +514,10 @@ class Number
      * Raises current number to the given number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
+     *                                        representation of a base 10 number
+     *
      * @return $this
+     *
      * @link http://www.php.net/bcpow
      */
     public function pow(mixed $number): static
@@ -551,11 +547,14 @@ class Number
      * parameters.
      *
      * @param float|int|string $pow May be of any type that can be cast to a string
-     *                   representation of a base 10 number
+     *                              representation of a base 10 number
      * @param float|int|string $mod May be of any type that can be cast to a string
-     *                   representation of a base 10 number
+     *                              representation of a base 10 number
+     *
      * @return $this
+     *
      * @throws ArithmeticException if $number is zero
+     *
      * @link http://www.php.net/bcpowmod
      */
     public function powMod(float|int|string $pow, float|int|string $mod): static
@@ -586,7 +585,6 @@ class Number
      * Rounds the current number to the nearest integer
      *
      * @param int $precision precision
-     * @return Number
      */
     public function round(int $precision = 0): self
     {
@@ -615,6 +613,7 @@ class Number
      *
      * @param int $scale Specifies the default number of digits after the decimal
      *                   place to be used in operations for this BigNumber
+     *
      * @return $this
      */
     public function setScale(int $scale): static
@@ -629,7 +628,8 @@ class Number
      * Sets the value of this BigNumber to a new value
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
+     *                                        representation of a base 10 number
+     *
      * @return $this
      */
     public function setValue(mixed $number): static
@@ -651,6 +651,7 @@ class Number
      * Shifts the current number $bits to the left
      *
      * @param int $bits bits
+     *
      * @return $this
      */
     public function shiftLeft(int $bits): static
@@ -668,6 +669,7 @@ class Number
      * Shifts the current number $bits to the right
      *
      * @param int $bits bits
+     *
      * @return $this
      */
     public function shiftRight(int $bits): static
@@ -719,8 +721,10 @@ class Number
      * Subtracts the given number from the current number
      *
      * @param float|int|string|static $number May be of any type that can be cast to a string
-     *                      representation of a base 10 number
+     *                                        representation of a base 10 number
+     *
      * @return $this
+     *
      * @link http://www.php.net/bcsub
      */
     public function subtract(mixed $number): static
@@ -739,7 +743,6 @@ class Number
      * Filters a number, converting it to a string value
      *
      * @param float|int|string $number number
-     * @return string
      */
     protected function filterNumber(mixed $number): string
     {

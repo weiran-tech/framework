@@ -16,7 +16,6 @@ use Illuminate\Support\Collection;
  */
 class Migrator extends BaseMigrator
 {
-
     /**
      * @var string Table name
      */
@@ -25,18 +24,14 @@ class Migrator extends BaseMigrator
     /**
      * Create a new migrator instance.
      *
-     * @param string                       $table
-     * @param MigrationRepositoryInterface $repository
-     * @param Resolver                     $resolver
-     * @param Filesystem                   $files
+     * @param string $table
      */
     public function __construct(
         $table,
         MigrationRepositoryInterface $repository,
         Resolver $resolver,
         Filesystem $files
-    )
-    {
+    ) {
         $this->table = $table;
 
         parent::__construct($repository, $resolver, $files);

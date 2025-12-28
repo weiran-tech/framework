@@ -39,19 +39,20 @@ class Resp
 
     /**
      * code
-     * @var int $code
      */
     private int $code;
 
     /**
      * message
-     * @var array|Translator|string|null $message
+     *
+     * @var array|Translator|string|null
      */
     private $message = '操作出错了';
 
     /**
      * Resp constructor.
-     * @param int               $code code
+     *
+     * @param int               $code    code
      * @param string|MessageBag $message message
      */
     public function __construct(int $code, $message = '')
@@ -70,22 +71,22 @@ class Resp
         if ($message instanceof MessageBag) {
             $formatMessage = [];
             foreach ($message->all(':message') as $msg) {
-                $formatMessage [] = $msg;
+                $formatMessage[] = $msg;
             }
             $this->message = $formatMessage;
         }
 
         if (!$message) {
             $message       = match ($code) {
-                self::SUCCESS => (string) trans('weiran::resp.success'),
-                self::ERROR => (string) trans('weiran::resp.error'),
-                self::TOKEN_MISS => (string) trans('weiran::resp.token_miss'),
+                self::SUCCESS       => (string) trans('weiran::resp.success'),
+                self::ERROR         => (string) trans('weiran::resp.error'),
+                self::TOKEN_MISS    => (string) trans('weiran::resp.token_miss'),
                 self::TOKEN_TIMEOUT => (string) trans('weiran::resp.token_timeout'),
-                self::TOKEN_ERROR => (string) trans('weiran::resp.token_error'),
-                self::PARAM_ERROR => (string) trans('weiran::resp.param_error'),
-                self::SIGN_ERROR => (string) trans('weiran::resp.sign_error'),
-                self::NO_AUTH => (string) trans('weiran::resp.no_auth'),
-                default => (string) trans('weiran::resp.inner_error'),
+                self::TOKEN_ERROR   => (string) trans('weiran::resp.token_error'),
+                self::PARAM_ERROR   => (string) trans('weiran::resp.param_error'),
+                self::SIGN_ERROR    => (string) trans('weiran::resp.sign_error'),
+                self::NO_AUTH       => (string) trans('weiran::resp.no_auth'),
+                default             => (string) trans('weiran::resp.inner_error'),
             };
             $this->message = $message;
         }
@@ -93,9 +94,10 @@ class Resp
 
     /**
      * @param null|string $key Key
+     *
      * @return array|string
      */
-    public static function desc(string $key = null)
+    public static function desc(?string $key = null)
     {
         $desc = [
             self::SUCCESS       => (string) trans('weiran::resp.success'),
@@ -108,22 +110,25 @@ class Resp
             self::NO_AUTH       => (string) trans('weiran::resp.no_auth'),
             self::INNER_ERROR   => (string) trans('weiran::resp.inner_error'),
         ];
+
         return kv($desc, $key);
     }
 
     /**
      * 错误输出
-     * @param int                     $type 错误码
-     * @param string|array|MessageBag $msg 类型
+     *
+     * @param int                     $type   错误码
+     * @param string|array|MessageBag $msg    类型
      * @param string|null|array       $append
      *                                        _json: 强制以 json 数据返回
      *                                        _location : 重定向
      *                                        _reload : 刷新页面, 需要提前设定 Session::previousUrl()
      *                                        _time   : 刷新或者重定向的时间(毫秒), 如果为null, 则显示页面信息, false 为立即刷新或者重定向, true 默认为 3S, 指定时间则为 xx ms
-     * @param array|null              $input 表单提交的数据, 是否连带返回
+     * @param array|null              $input  表单提交的数据, 是否连带返回
+     *
      * @return JsonResponse|RedirectResponse
      */
-    public static function web(int $type, $msg, $append = null, array $input = null)
+    public static function web(int $type, $msg, $append = null, ?array $input = null)
     {
         if ($msg instanceof ValidationException) {
             $messages = $msg->errors();
@@ -153,7 +158,6 @@ class Resp
             $resp = $msg;
         }
 
-
         $parsed = StrHelper::parseKey($append);
 
         // is JSON or forced JSON
@@ -173,6 +177,7 @@ class Resp
             if ($append && is_string($append) && !Str::contains($append, '|')) {
                 return self::webSplash($resp, $append);
             }
+
             return self::webSplash($resp, !is_null($append) ? $parsed : null);
         }
 
@@ -189,33 +194,37 @@ class Resp
 
     /**
      * 返回成功输入
-     * @param string|array|MessageBag $msg 提示消息
+     *
+     * @param string|array|MessageBag $msg    提示消息
      * @param string|null|array       $append 追加的信息
-     * @param array|null              $input 保留输入的数据
+     * @param array|null              $input  保留输入的数据
+     *
      * @return JsonResponse|RedirectResponse
      */
-    public static function success($msg, $append = null, array $input = null)
+    public static function success($msg, $append = null, ?array $input = null)
     {
         return self::web(self::SUCCESS, $msg, $append, $input);
     }
 
     /**
      * 返回错误数组
-     * @param string|array|MessageBag $msg 提示消息
+     *
+     * @param string|array|MessageBag $msg    提示消息
      * @param string|null|array       $append 追加的信息
-     * @param array|null              $input 保留输入的数据
+     * @param array|null              $input  保留输入的数据
+     *
      * @return JsonResponse|RedirectResponse
      */
-    public static function error($msg, $append = null, array $input = null)
+    public static function error($msg, $append = null, ?array $input = null)
     {
         return self::web(self::ERROR, $msg, $append, $input);
     }
 
     /**
      * 返回自定义信息
-     * @param int    $code code
+     *
+     * @param int    $code    code
      * @param string $message message
-     * @return array
      */
     public static function custom(int $code, string $message = ''): array
     {
@@ -224,12 +233,14 @@ class Resp
 
     /**
      * 显示界面
-     * @param int|bool|null $time 时间
+     *
+     * @param int|bool|null $time     时间
      * @param string        $location location
-     * @param array|null    $input input
+     * @param array|null    $input    input
+     *
      * @return RedirectResponse|\Illuminate\Http\Response
      */
-    private static function webView($code, $message, $time = null, string $location = '', array $input = null)
+    private static function webView($code, $message, $time = null, string $location = '', ?array $input = null)
     {
         $messageTpl = config('weiran.framework.message_template');
         // default message template
@@ -245,6 +256,7 @@ class Resp
         // 立即
         if ($time === false) {
             $re = ($location !== 'back') ? Redirect::to($location) : Redirect::back();
+
             return $input ? $re->withInput($input) : $re;
         }
 
@@ -281,9 +293,9 @@ class Resp
     /**
      * 不支持 location
      * splash 不支持 location | back (Mark Zhao)
-     * @param Resp                $resp resp
+     *
+     * @param Resp                $resp   resp
      * @param array|string|object $append append
-     * @return JsonResponse
      */
     private static function webSplash(Resp $resp, mixed $append = ''): JsonResponse
     {
@@ -308,7 +320,7 @@ class Resp
             }
             $data = $returnData;
         }
-        else if (is_string($append) || is_object($append)) {
+        elseif (is_string($append) || is_object($append)) {
             $data = $append;
         }
         if (!is_null($data)) {
@@ -316,12 +328,12 @@ class Resp
         }
 
         $format = config('weiran.framework.json_format', 0);
+
         return Response::json($return, 200, [], $format);
     }
 
     /**
      * 返回错误代码
-     * @return int
      */
     public function getCode(): int
     {
@@ -330,6 +342,7 @@ class Resp
 
     /**
      * 返回错误信息
+     *
      * @return null|string
      */
     public function getMessage(): string
@@ -357,7 +370,6 @@ class Resp
 
     /**
      * to array
-     * @return array
      */
     public function toArray(): array
     {

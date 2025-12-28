@@ -72,7 +72,6 @@ class TimeHelperTest extends TestCase
         $this->assertEquals('2020-11-20 16:00', TimeHelper::format('1605859200'));
     }
 
-
     public function testIsDateRange(): void
     {
         $this->assertTrue(TimeHelper::isDateRange('2020-11-20 - 2020-11-20'));

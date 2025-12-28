@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * LoadConfigurationException
  */
-class LoadConfigurationException extends BaseException
-{
-}
+class LoadConfigurationException extends BaseException {}

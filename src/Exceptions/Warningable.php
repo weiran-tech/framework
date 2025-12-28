@@ -7,7 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * 告警类型
  */
-interface Warningable
-{
-
-}
+interface Warningable {}

@@ -30,7 +30,6 @@ class Invoker
             ])
             ->depth('== 0');
 
-
         // check if there are any search results
         if ($Finder->hasResults()) {
             foreach ($Finder as $file) {
@@ -42,6 +41,7 @@ class Invoker
         @unlink($this->path . '/storage/app/weiran.json');
 
         echo 'Weiran Clear succeeded.';
+
         return true;
     }
 }

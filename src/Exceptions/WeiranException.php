@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * 模块异常
  */
-class WeiranException extends BaseException
-{
-}
+class WeiranException extends BaseException {}

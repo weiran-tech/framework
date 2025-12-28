@@ -12,7 +12,6 @@ use Weiran\Framework\Parse\Ini;
  */
 class IniFacade extends Facade
 {
-
     /**
      * Get the registered name of the component.
      *

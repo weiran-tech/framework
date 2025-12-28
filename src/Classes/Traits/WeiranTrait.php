@@ -23,22 +23,19 @@ use Illuminate\Session\Store;
 use Illuminate\View\Factory;
 use Psr\Log\LoggerInterface;
 use Weiran\Framework\Foundation\Application;
-use Weiran\Framework\Parse\Ini;
-use Weiran\Framework\Parse\Xml;
 use Weiran\Framework\Parse\Yaml;
 use Weiran\Framework\Translation\Translator;
 use Weiran\Framework\Weiran\Weiran;
 
 /**
  * WeiranTrait
+ *
  * @see app
  */
 trait WeiranTrait
 {
-
     /**
      * get auth
-     * @return AuthManager
      */
     protected function pyAuth(): AuthManager
     {
@@ -47,16 +44,15 @@ trait WeiranTrait
 
     /**
      * get translator
-     * @return Translator
      */
     protected function pyTranslator(): Translator
     {
         return weiran_container()->make('translator');
     }
 
-
     /**
      * Get configuration instance.
+     *
      * @return Repository
      */
     protected function pyConfig()
@@ -64,10 +60,8 @@ trait WeiranTrait
         return weiran_container()->make('config');
     }
 
-
     /**
      * get db
-     * @return DatabaseManager
      */
     protected function pyDb(): DatabaseManager
     {
@@ -76,6 +70,7 @@ trait WeiranTrait
 
     /**
      * Get console instance.
+     *
      * @return Kernel
      */
     protected function pyConsole()
@@ -85,6 +80,7 @@ trait WeiranTrait
 
     /**
      * Get IoC Container.
+     *
      * @return Container | Application
      */
     protected function pyContainer(): Container
@@ -94,7 +90,6 @@ trait WeiranTrait
 
     /**
      * Get mailer instance.
-     * @return Mailer
      */
     protected function pyMailer(): Mailer
     {
@@ -103,6 +98,7 @@ trait WeiranTrait
 
     /**
      * Get session instance.
+     *
      * @return SessionManager|Store
      */
     protected function pySession()
@@ -112,17 +108,14 @@ trait WeiranTrait
 
     /**
      * get request
-     * @return Request
      */
     protected function pyRequest(): Request
     {
         return weiran_container()->make('request');
     }
 
-
     /**
      * get redirector
-     * @return Redirector
      */
     protected function pyRedirector(): Redirector
     {
@@ -131,36 +124,31 @@ trait WeiranTrait
 
     /**
      * get validation
-     * @return \Illuminate\Validation\Factory
      */
     protected function pyValidation(): \Illuminate\Validation\Factory
     {
         return weiran_container()->make('validator');
     }
 
-
     /**
      * get event
-     * @return Dispatcher
      */
     protected function pyEvent(): Dispatcher
     {
         return weiran_container()->make('events');
     }
 
-
     /**
      * get logger
-     * @return LoggerInterface
      */
     protected function pyLogger(): LoggerInterface
     {
         return weiran_container()->make('log');
     }
 
-
     /**
      * get response
+     *
      * @return ResponseFactory
      */
     protected function pyResponse()
@@ -168,9 +156,9 @@ trait WeiranTrait
         return weiran_container()->make(ResponseFactory::class);
     }
 
-
     /**
      * get file
+     *
      * @return Filesystem
      */
     protected function pyFile()
@@ -178,9 +166,9 @@ trait WeiranTrait
         return weiran_container()->make('files');
     }
 
-
     /**
      * get url
+     *
      * @return UrlGenerator
      */
     protected function pyUrl()
@@ -188,10 +176,11 @@ trait WeiranTrait
         return weiran_container()->make('url');
     }
 
-
     /**
      * get cache
+     *
      * @param string $tag tag
+     *
      * @return mixed
      */
     protected function pyCache($tag = '')
@@ -206,7 +195,6 @@ trait WeiranTrait
 
     /**
      * get redis
-     * @return RedisManager
      */
     protected function pyRedis(): RedisManager
     {
@@ -215,7 +203,6 @@ trait WeiranTrait
 
     /**
      * get view
-     * @return Factory
      */
     protected function pyView(): Factory
     {
@@ -224,21 +211,17 @@ trait WeiranTrait
 
     /**
      * get weiran
-     * @return Weiran
      */
     protected function pyWeiran(): Weiran
     {
         return weiran_container()->make('weiran');
     }
 
-
     /**
      * Yaml Parser
-     * @return Yaml
      */
     protected function pyYaml(): Yaml
     {
         return weiran_container()->make('weiran.yaml');
     }
 }
-

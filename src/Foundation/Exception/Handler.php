@@ -13,14 +13,14 @@ use Illuminate\Http\Exceptions\PostTooLargeException;
 use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Throwable;
 use Weiran\Framework\Classes\Resp;
 use Weiran\Framework\Classes\Traits\PjaxTrait;
 use Weiran\Framework\Exceptions\AjaxException;
 use Weiran\Framework\Exceptions\BaseException;
 use Weiran\Framework\Exceptions\HintException;
 use Weiran\Framework\Exceptions\Warningable;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Throwable;
 
 /**
  * weiran handler
@@ -31,6 +31,7 @@ class Handler extends ExceptionHandler
 
     /**
      * A list of the exception types that should not be reported.
+     *
      * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
@@ -40,8 +41,10 @@ class Handler extends ExceptionHandler
 
     /**
      * Render an exception into an HTTP response.
+     *
      * @param Request   $request request
-     * @param Throwable $e throwable
+     * @param Throwable $e       throwable
+     *
      * @throws Throwable
      */
     public function render($request, Throwable $e)
@@ -62,8 +65,10 @@ class Handler extends ExceptionHandler
                 foreach ($e->validator->errors()->messages() as $message) {
                     $arrMsg[] = implode(' ', $message);
                 }
+
                 return $this->pjaxError(implode(', ', $arrMsg));
             }
+
             return Resp::error($e->validator->errors());
         }
 
@@ -71,6 +76,7 @@ class Handler extends ExceptionHandler
             if ($e->getMessage() !== 'This action is unauthorized.') {
                 return Resp::error($e->getMessage());
             }
+
             return Resp::error(trans('weiran::resp.authorization_default_exception'));
         }
 
@@ -95,6 +101,7 @@ class Handler extends ExceptionHandler
                 'message' => $e->getMessage(),
                 'code'    => $e->getCode(),
             ]);
+
             return Resp::error(trans('weiran::resp.query_exception'));
         }
 
@@ -102,6 +109,7 @@ class Handler extends ExceptionHandler
             $message = trans('weiran::resp.model_not_found_exception', [
                 'name' => weiran_friendly($e->getModel()) . ' id: [ ' . implode(', ', $e->getIds()) . ' ]',
             ]);
+
             return Resp::error($message);
         }
 
@@ -132,8 +140,8 @@ class Handler extends ExceptionHandler
     /**
      * Checks if the exception implements the HttpExceptionInterface, or returns
      * as generic 500 error code for a server side error.
+     *
      * @param Throwable $exception exception
-     * @return int
      */
     protected function getStatusCode(Throwable $exception): int
     {
@@ -152,7 +160,6 @@ class Handler extends ExceptionHandler
 
     /**
      * Get the default context variables for logging.
-     * @return array
      */
     protected function context(): array
     {
@@ -167,6 +174,7 @@ class Handler extends ExceptionHandler
                 'message' => trans('weiran::resp.authentication_exception'),
             ], 401);
         }
+
         return Resp::web(401, trans('weiran::resp.authentication_exception'));
     }
 }

@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * FakerException
  */
-class FakerException extends BaseException
-{
-}
+class FakerException extends BaseException {}

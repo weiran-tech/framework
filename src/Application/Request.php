@@ -16,21 +16,15 @@ use Weiran\System\Models\PamAccount;
  */
 abstract class Request extends FormRequest
 {
-
     protected string $scene = '';
 
     // 取消自动验证
 
     /**
      * 进行验证
-     * @var bool
      */
     protected bool $isValidate = true;
 
-
-    /**
-     * @var array
-     */
     protected array $demo = [];
 
     public function authorize(): bool
@@ -52,17 +46,18 @@ abstract class Request extends FormRequest
     /**
      * @param null $key
      * @param null $default
+     *
      * @throws ValidationException
      * @throws AuthorizationException
      */
     public function validated($key = null, $default = null)
     {
         $this->manualValidateResolved();
+
         return $this->validator->validated();
     }
 
     /**
-     * @param $factory
      * @return mixed
      */
     public function validator($factory)
@@ -79,7 +74,7 @@ abstract class Request extends FormRequest
 
     /**
      * Set validate scene
-     * @param string $scene
+     *
      * @return $this
      */
     public function scene(string $scene): self
@@ -91,6 +86,7 @@ abstract class Request extends FormRequest
         }
         $this->scene      = $scene;
         $this->isValidate = true;
+
         return $this;
     }
 
@@ -101,6 +97,7 @@ abstract class Request extends FormRequest
 
     /**
      * 手动进行验证
+     *
      * @throws ValidationException
      * @throws AuthorizationException
      */
@@ -139,6 +136,7 @@ abstract class Request extends FormRequest
                 $rules[$property] = $condition;
             }
         }
+
         return $rules;
     }
 
@@ -162,6 +160,7 @@ abstract class Request extends FormRequest
 
     /**
      * 检测权限
+     *
      * @throws AuthorizationException
      */
     protected function can($policy, $model): bool
@@ -183,6 +182,7 @@ abstract class Request extends FormRequest
             ]);
             throw new AuthorizationException($message);
         }
+
         return true;
     }
 }

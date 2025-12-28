@@ -12,7 +12,6 @@ use Weiran\Framework\Weiran\Weiran;
  */
 class WeiranMigrateReset extends Event
 {
-
     /**
      * @var Weiran 模块
      */
@@ -24,8 +23,7 @@ class WeiranMigrateReset extends Event
     private $option;
 
     /**
-     * @param Weiran $weiran
-     * @param array  $option
+     * @param array $option
      */
     public function __construct(Weiran $weiran, $option = [])
     {

@@ -17,24 +17,23 @@ use Weiran\Framework\Exceptions\ModuleNotFoundException;
  */
 abstract class WeiranServiceProvider extends ServiceProviderBase
 {
-
     use MigrationTrait;
 
     /**
      * event listener
-     * @var array
      */
     protected array $listens = [];
 
     /**
      * policy
-     * @var array
      */
     protected array $policies = [];
 
     /**
      * Bootstrap the application events.
+     *
      * @return void
+     *
      * @throws ModuleNotFoundException
      */
     public function boot()
@@ -72,8 +71,8 @@ abstract class WeiranServiceProvider extends ServiceProviderBase
     }
 
     /**
-     * @param $args
      * @return null
+     *
      * @throws ModuleNotFoundException
      */
     public function getModule($args)
@@ -115,11 +114,11 @@ abstract class WeiranServiceProvider extends ServiceProviderBase
 
     /**
      * consoleLog
-     * @return string
      */
     protected function consoleLog(): string
     {
         $day = Carbon::now()->toDateString();
+
         return storage_path('logs/console-' . $day . '.log');
     }
 }

@@ -10,7 +10,7 @@ namespace Weiran\Framework\Exceptions;
 class PolicyException extends BaseException
 {
     /**
-     * @var int $code
+     * @var int
      */
     protected $code = 101;
 }

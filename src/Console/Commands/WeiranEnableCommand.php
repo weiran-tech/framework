@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace Weiran\Framework\Console\Commands;
 
 use Illuminate\Console\Command;
-use Weiran\Framework\Events\WeiranEnabled;
 use Symfony\Component\Console\Input\InputArgument;
+use Weiran\Framework\Events\WeiranEnabled;
 
 /**
  * Weiran Enable
@@ -15,12 +15,14 @@ class WeiranEnableCommand extends Command
 {
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $name = 'weiran:enable';
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Enable a module';
@@ -50,7 +52,6 @@ class WeiranEnableCommand extends Command
 
     /**
      * Get the console command arguments.
-     * @return array
      */
     protected function getArguments(): array
     {

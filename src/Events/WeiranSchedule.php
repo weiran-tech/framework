@@ -9,6 +9,4 @@ use Weiran\Framework\Application\Event;
 /**
  * WeiranSchedule
  */
-class WeiranSchedule extends Event
-{
-}
+class WeiranSchedule extends Event {}

@@ -11,15 +11,13 @@ use Weiran\Framework\Foundation\Application as WeiranHttpContainer;
 use Weiran\Framework\Foundation\Console\Kernel as WeiranConsoleKernel;
 use Weiran\Framework\Helper\HtmlHelper;
 
-
 if (!function_exists('route_url')) {
     /**
      * 自定义可以传值的路由写法
-     * @param string            $route
-     * @param array|string|null $route_params
-     * @param array|string|null $params
-     * @param bool              $absolute 是否绝对路径
-     * @return string
+     *
+     * @param array|string|null $route_params 路由参数
+     * @param array|string|null $params       参数
+     * @param bool              $absolute     是否绝对路径
      */
     function route_url(string $route = '', $route_params = [], $params = null, bool $absolute = true): string
     {
@@ -67,8 +65,6 @@ if (!function_exists('route_prefix')) {
 if (!function_exists('command_exist')) {
     /**
      * 检测命令是否存在
-     * @param $cmd
-     * @return bool
      */
     function command_exist($cmd): bool
     {
@@ -76,7 +72,8 @@ if (!function_exists('command_exist')) {
             $returnVal = shell_exec("which $cmd");
 
             return !empty($returnVal);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             return false;
         }
     }
@@ -86,10 +83,9 @@ if (!function_exists('kv')) {
     /**
      * 返回定义的kv 值
      * 一般用户模型中的数据返回
-     * @param array $desc
-     * @param null  $key
-     * @param bool  $check_key 检查key 是否正常
-     * @return array|string
+     *
+     * @param null $key
+     * @param bool $check_key 检查key 是否正常
      */
     function kv(array $desc, $key = null, bool $check_key = false)
     {
@@ -113,12 +109,14 @@ if (!function_exists('input')) {
      * $name = input('contact[location][city]');
      * </pre>
      * Booleans are converted from strings
-     * @param string|null $name
-     * @param mixed       $default
-     * @return string|array
+     *
+     * @param mixed $default 默认
+     *
+     * @return string|array 内容
+     *
      * @deprecated 1.x 已废弃, 使用 Request 替代
      */
-    function input(string $name = null, $default = null)
+    function input(?string $name = null, $default = null)
     {
         if ($name === null) {
             return Request::all();
@@ -144,7 +142,6 @@ if (!function_exists('input')) {
 if (!function_exists('is_post')) {
     /**
      * 当前访问方法是否是post请求
-     * @return bool
      */
     function is_post(): bool
     {
@@ -155,7 +152,6 @@ if (!function_exists('is_post')) {
 if (!function_exists('is_production')) {
     /**
      * Check Env If Production
-     * @return bool
      */
     function is_production(): bool
     {
@@ -166,24 +162,20 @@ if (!function_exists('is_production')) {
 if (!function_exists('jwt_token')) {
     /**
      * 是否是 Jwt 请求
-     * @return string|null
      */
     function jwt_token(): ?string
     {
         if (is_null(app('tymon.jwt'))) {
             return '';
         }
+
         return (string) app('tymon.jwt')->setRequest(Request::instance())->getToken();
     }
 }
 
-
 if (!function_exists('policy_friendly')) {
     /**
      * 策略的友好提示
-     * @param string $model
-     * @param        $policy
-     * @return string
      */
     function policy_friendly(string $model, $policy): string
     {
@@ -200,16 +192,14 @@ if (!function_exists('policy_friendly')) {
         else {
             $namespace = $part1;
         }
+
         return trans("{$namespace}::util.policy.{$path}.{$policy}");
     }
 }
 
-
 if (!function_exists('home_path')) {
     /**
      * Weiran home path.
-     * @param string $path
-     * @return string
      */
     function home_path(string $path = ''): string
     {
@@ -220,21 +210,20 @@ if (!function_exists('home_path')) {
 if (!function_exists('framework_path')) {
     /**
      * weiran framework path.
-     * @param string $path
-     * @return string
      */
     function framework_path(string $path = ''): string
     {
         /** @var WeiranHttpContainer $container */
         $container = Container::getInstance();
+
         return $container->frameworkPath($path);
     }
 }
 
-
 if (!function_exists('weiran_container')) {
     /**
      * Get IoC Container.
+     *
      * @return WeiranHttpContainer
      */
     function weiran_container(): Container
@@ -246,7 +235,6 @@ if (!function_exists('weiran_container')) {
 if (!function_exists('weiran_console')) {
     /**
      * Get Console Container.
-     * @return WeiranConsoleKernel
      */
     function weiran_console(): WeiranConsoleKernel
     {
@@ -254,15 +242,11 @@ if (!function_exists('weiran_console')) {
     }
 }
 
-
 if (!function_exists('weiran_path')) {
     /**
      * Return the path to the given module file.
-     * @param string|null $slug
-     * @param string|null $file
-     * @return string
      */
-    function weiran_path(string $slug = null, string $file = null): string
+    function weiran_path(?string $slug = null, ?string $file = null): string
     {
         if (Str::contains($slug, 'weiran.')) {
             $modulesPath = app('path.weiran');
@@ -282,9 +266,6 @@ if (!function_exists('weiran_class')) {
     /**
      * Return the full path to the given module class or namespace.
      * Class may not exist
-     * @param string $slug
-     * @param string $class
-     * @return string
      */
     function weiran_class(string $slug, string $class = ''): string
     {
@@ -302,8 +283,6 @@ if (!function_exists('weiran_class')) {
 if (!function_exists('weiran_friendly')) {
     /**
      * 根据 Framework / Module 的参数定义返回 util 中定义的 class 的友好名称
-     * @param string $class
-     * @return string
      */
     function weiran_friendly(string $class): string
     {
@@ -321,15 +300,15 @@ if (!function_exists('weiran_friendly')) {
             $namespace = $part1;
             $path      = $snake->slice(1)->join('.');
         }
+
         return trans("{$namespace}::util.classes.{$path}");
     }
 }
 
-
 if (!function_exists('poppy_faker')) {
     /**
      * Get Faker Container.
-     * @return \Poppy\Faker\Generator
+     *
      * @throws ApplicationException
      */
     function poppy_faker(): Poppy\Faker\Generator
@@ -347,8 +326,8 @@ if (!function_exists('parse_seo')) {
      * 解析 Seo 标题
      * 单参数 : 标题, 多参数, 标题, 描述
      * 数组参数 : 标题, 描述
+     *
      * @param mixed ...$args
-     * @return array
      */
     function parse_seo(...$args): array
     {
@@ -369,6 +348,7 @@ if (!function_exists('parse_seo')) {
             $title       = func_get_arg(0);
             $description = func_get_arg(1);
         }
+
         return [$title, $description];
     }
 }
@@ -377,10 +357,12 @@ if (!function_exists('x_header')) {
     /**
      * 获取 Header 中的 x-{ph} 信息, 不支持获取 x-app 里存储的 json 信息
      * 完整列表参考以下地址
+     *
      * @url https://wulicode.com/develop/standard/client/
-     * @param string $type ver,id,os
+     *
+     * @param string $type    ver,id,os
      * @param string $default 增加默认参数
-     * @return string
+     *
      * @since 3.2
      */
     function x_header(string $type, string $default = ''): string
@@ -388,6 +370,7 @@ if (!function_exists('x_header')) {
         /** @var \Illuminate\Http\Request $request */
         $request = app('request');
         $fullKey = strtoupper('x-' . $type);
+
         return $request->header($fullKey, $default);
     }
 }

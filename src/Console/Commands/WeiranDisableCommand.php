@@ -15,12 +15,14 @@ class WeiranDisableCommand extends Command
 {
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $name = 'weiran:disable';
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Disable a module';
@@ -50,7 +52,6 @@ class WeiranDisableCommand extends Command
 
     /**
      * Get the console command arguments.
-     * @return array
      */
     protected function getArguments(): array
     {

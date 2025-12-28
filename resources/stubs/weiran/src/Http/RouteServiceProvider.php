@@ -11,6 +11,7 @@ class RouteServiceProvider extends WeiranFrameworkRouteServiceProvider
 {
     /**
      * Define your route model bindings, pattern filters, etc.
+     *
      * @return void
      */
     public function boot()
@@ -25,7 +26,6 @@ class RouteServiceProvider extends WeiranFrameworkRouteServiceProvider
     /**
      * Define the "web" routes for the module.
      * These routes all receive session state, CSRF protection, etc.
-     * @return void
      */
     protected function mapWebRoutes(): void
     {
@@ -47,7 +47,6 @@ class RouteServiceProvider extends WeiranFrameworkRouteServiceProvider
     /**
      * Define the "api" routes for the module.
      * These routes are typically stateless.
-     * @return void
      */
     protected function mapApiRoutes(): void
     {

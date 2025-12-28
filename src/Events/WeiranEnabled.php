@@ -12,15 +12,11 @@ use Weiran\Framework\Application\Event;
  */
 class WeiranEnabled extends Event
 {
-
     /**
      * @var Collection 模块
      */
     public $module;
 
-    /**
-     * @param $module
-     */
     public function __construct($module)
     {
         $this->module = $module;

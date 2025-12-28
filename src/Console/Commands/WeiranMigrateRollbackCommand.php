@@ -17,35 +17,31 @@ use Weiran\Framework\Weiran\Weiran;
  */
 class WeiranMigrateRollbackCommand extends Command
 {
-    use MigrationTrait, ConfirmableTrait;
+    use ConfirmableTrait, MigrationTrait;
 
     /**
      * The console command name.
+     *
      * @var string
      */
     protected $name = 'weiran:migrate:rollback';
 
     /**
      * The console command description.
+     *
      * @var string
      */
     protected $description = 'Rollback the last database migrations for a specific or all modules';
 
     /**
      * The migrator instance.
-     * @var Migrator
      */
     protected Migrator $migrator;
 
-    /**
-     * @var Weiran
-     */
     protected Weiran $weiran;
 
     /**
      * Create a new command instance.
-     * @param Migrator $migrator
-     * @param Weiran   $weiran
      */
     public function __construct(Migrator $migrator, Weiran $weiran)
     {
@@ -82,7 +78,6 @@ class WeiranMigrateRollbackCommand extends Command
 
     /**
      * Get the console command arguments.
-     * @return array
      */
     protected function getArguments(): array
     {
@@ -93,7 +88,6 @@ class WeiranMigrateRollbackCommand extends Command
 
     /**
      * Get the console command options.
-     * @return array
      */
     protected function getOptions(): array
     {
@@ -107,7 +101,6 @@ class WeiranMigrateRollbackCommand extends Command
 
     /**
      * Get all the migration paths.
-     * @return array
      */
     protected function getMigrationPaths(): array
     {

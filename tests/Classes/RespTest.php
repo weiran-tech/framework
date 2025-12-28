@@ -10,8 +10,7 @@ use Weiran\Framework\Classes\Resp;
 
 class RespTest extends TestCase
 {
-
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         weiran_container()->setExecutionContext('api');

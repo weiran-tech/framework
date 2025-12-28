@@ -7,6 +7,4 @@ namespace Weiran\Framework\Exceptions;
 /**
  * 运行异常
  */
-class RuntimeException extends BaseException
-{
-}
+class RuntimeException extends BaseException {}

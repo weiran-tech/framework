@@ -14,13 +14,13 @@ class WeiranOptimized extends Event
 {
     /**
      * Optimized module collection
-     * @var Collection $modules
+     *
+     * @var Collection
      */
     private $modules;
 
     /**
      * WeiranOptimized constructor.
-     * @param Collection $modules
      */
     public function __construct(Collection $modules)
     {

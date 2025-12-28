@@ -14,8 +14,8 @@ class UtilHelper
 {
     /**
      * 检测是否email
+     *
      * @param string $email Email address
-     * @return bool
      */
     public static function isEmail(string $email): bool
     {
@@ -24,8 +24,8 @@ class UtilHelper
 
     /**
      * 是不是url地址
+     *
      * @param string $url url address
-     * @return bool
      */
     public static function isUrl(string $url): bool
     {
@@ -34,22 +34,23 @@ class UtilHelper
 
     /**
      * 是否是用户名, 子用户比主用户多一个英文版本的 `:`
+     *
      * @url https://regex101.com/r/otDXQG/1/
+     *
      * @param string $username 用户名
-     * @param false  $is_sub 是否是子用户
-     * @return bool
+     * @param false  $is_sub   是否是子用户
      */
     public static function isUsername(string $username, bool $is_sub = false): bool
     {
         if (preg_match('/(?<username>[a-zA-Z\x{4e00}-\x{9fa5}][' . ($is_sub ? ':' : '') . 'a-zA-Z0-9_\x{4e00}-\x{9fa5}]{5,50})/u', $username, $match)) {
             return $match['username'] === $username;
         }
+
         return false;
     }
 
     /**
      * 检测是否搜索机器人.
-     * @return bool
      */
     public static function isRobot(): bool
     {
@@ -66,8 +67,8 @@ class UtilHelper
 
     /**
      * 检测IP的匹配
+     *
      * @param string $ip 是否是IPv4
-     * @return bool
      */
     public static function isIp(string $ip): bool
     {
@@ -76,21 +77,20 @@ class UtilHelper
 
     /**
      * 是否是局域网IP
-     * @param string $ip
-     * @return bool
      */
     public static function isLocalIp(string $ip): bool
     {
         if (str_starts_with($ip, '127.0.')) {
             return true;
         }
-        return (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE));
+
+        return !filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
     }
 
     /**
      * 是否是md5, 检测是否32位数字字母的组合
+     *
      * @param string $str string
-     * @return bool
      */
     public static function isMd5(string $str): bool
     {
@@ -99,8 +99,8 @@ class UtilHelper
 
     /**
      * 文件是否是图像
+     *
      * @param string $filename 文件名是否是图像
-     * @return bool
      */
     public static function isImage(string $filename): bool
     {
@@ -109,22 +109,22 @@ class UtilHelper
 
     /**
      * 是否是正确的手机号码
+     *
      * @url https://regex101.com/r/7hOVSg/1
+     *
      * @param string $mobile 手机号
-     * @return bool
      */
     public static function isMobile(string $mobile): bool
     {
         if (($mobile !== '' && is_numeric($mobile)) || Str::startsWith($mobile, ['+86', '86-'])) {
             return self::isChMobile($mobile);
         }
+
         return (bool) preg_match('/^\+?(\d{1,5})-?\d{6,14}\d$/', $mobile);
     }
 
     /**
      * 是否是国内手机号
-     * @param string $mobile
-     * @return bool
      */
     public static function isChMobile(string $mobile): bool
     {
@@ -133,20 +133,20 @@ class UtilHelper
 
     /**
      * 联系方式
+     *
      * @param string $telephone 电话号码
-     * @return bool
      */
     public static function isTelephone(string $telephone): bool
     {
-        //return preg_match("/^[0-9\-\+]{7,}$/", $telephone);
-        //return preg_match("/^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$/", $telephone);
+        // return preg_match("/^[0-9\-\+]{7,}$/", $telephone);
+        // return preg_match("/^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$/", $telephone);
         return (bool) preg_match('/((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d)|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d))$)/', $telephone);
     }
 
     /**
      * 是否全部为中文, 并且验证长度
+     *
      * @param string $str 字串
-     * @return bool
      */
     public static function isChinese(string $str): bool
     {
@@ -155,8 +155,8 @@ class UtilHelper
 
     /**
      * 是否存在汉字
+     *
      * @param string $str 字符串
-     * @return bool
      */
     public static function hasChinese(string $str): bool
     {
@@ -165,8 +165,8 @@ class UtilHelper
 
     /**
      * 验证身份证号 , 身份证有效性检测
+     *
      * @param string $id_card 身份证号码
-     * @return bool
      */
     public static function isChId(string $id_card): bool
     {
@@ -174,13 +174,12 @@ class UtilHelper
             return false;
 
         }
+
         return self::chidChecksum18($id_card);
     }
 
     /**
      * 移除所有空格
-     * @param string $str
-     * @return string
      */
     public static function trimAll(string $str): string
     {
@@ -189,8 +188,8 @@ class UtilHelper
 
     /**
      * 为了避免兼容问题, 这里银行卡账号不保存空格
+     *
      * @param string $bank_account 银行账号
-     * @return bool
      */
     public static function isBankNumber(string $bank_account): bool
     {
@@ -199,8 +198,8 @@ class UtilHelper
 
     /**
      * 检测是否含有空格符
+     *
      * @param string $value 需要检测的字串
-     * @return bool
      */
     public static function hasSpace(string $value): bool
     {
@@ -209,19 +208,20 @@ class UtilHelper
 
     /**
      * 是否是单词, 不包含空格, 仅仅是字母组合
+     *
      * @param string $letter 检测是否单词
-     * @return bool
      */
     public static function isWord(string $letter): bool
     {
         $letter_match = preg_match('/^[A-Za-z]+$/', $letter);
+
         return !(empty($letter_match) || strlen($letter) > 1);
     }
 
     /**
      * 检测代码中是否含有 html 标签
+     *
      * @param string $content string
-     * @return bool
      */
     public static function hasTag(string $content): bool
     {
@@ -230,21 +230,21 @@ class UtilHelper
 
     /**
      * 格式化小数, 也可以用于货币的格式化
-     * @param string $input value
+     *
+     * @param string $input     value
      * @param int    $precision 保留小数
-     * @return string
      */
     public static function formatDecimal(string $input, int $precision = 2): string
     {
         $var = round((float) $input, $precision);
+
         return sprintf('%.' . $precision . 'f', $var);
     }
 
     /**
      * 修复链接地址, 如果没有 :// 则补齐
+     *
      * @param string $url string
-     * @param bool   $is_https
-     * @return string
      */
     public static function fixLink(string $url, bool $is_https = false): string
     {
@@ -257,8 +257,8 @@ class UtilHelper
 
     /**
      * 18位身份证校验码有效性检查
+     *
      * @param string $chid 18 位身份证号码
-     * @return bool
      */
     public static function chidChecksum18(string $chid): bool
     {
@@ -266,13 +266,14 @@ class UtilHelper
             return false;
         }
         $base = substr($chid, 0, 17);
+
         return !(self::chidVerify($base) !== strtoupper($chid[17]));
     }
 
     /**
      * 计算给定 字串/数组 的 md5 的值, 支持多个参数传入
+     *
      * @param string|array $str need md5 string
-     * @return string
      */
     public static function md5(string|array $str): string
     {
@@ -286,18 +287,20 @@ class UtilHelper
 
     /**
      * 生成递归数列
+     *
      * @param array  $items 条目
-     * @param string $id id键
-     * @param string $pid 父级元素
-     * @param string $son 子元素
-     * @return array        返回的排序好的数组
+     * @param string $id    id键
+     * @param string $pid   父级元素
+     * @param string $son   子元素
+     *
+     * @return array 返回的排序好的数组
      */
     public static function genTree(array $items, string $id = 'id', string $pid = 'pid', string $son = 'children', $reserve_pid = true): array
     {
         $items = self::objToArray($items);
 
-        $tree   = [];  //格式化的树
-        $tmpMap = [];  //临时扁平数据
+        $tree   = [];  // 格式化的树
+        $tmpMap = [];  // 临时扁平数据
 
         foreach ($items as $item) {
             $itemId          = $item[$id];
@@ -328,8 +331,8 @@ class UtilHelper
 
     /**
      * 对象到数组
+     *
      * @param object|array $obj 需要转换的对象
-     * @return array
      */
     public static function objToArray(mixed $obj): array
     {
@@ -342,16 +345,14 @@ class UtilHelper
             }
 
             return $arr;
-        } catch (JsonException) {
+        }
+        catch (JsonException) {
             return [];
         }
     }
 
-
     /**
      * Kv 转化成Id/Title 类型
-     * @param array $kv
-     * @return array
      */
     public static function kvToIdTitle(array $kv): array
     {
@@ -365,9 +366,9 @@ class UtilHelper
 
     /**
      * 转换成小时
+     *
      * @param int $hour hour
-     * @param int $day day num
-     * @return int
+     * @param int $day  day num
      */
     public static function toHour(int $hour, int $day = 0): int
     {
@@ -376,9 +377,9 @@ class UtilHelper
 
     /**
      * 格式化文件大小
-     * @param int $bytes 长度
+     *
+     * @param int $bytes     长度
      * @param int $precision 分数
-     * @return string
      */
     public static function formatBytes(int $bytes, int $precision = 2): string
     {
@@ -397,8 +398,6 @@ class UtilHelper
 
     /**
      * 可识别的大小转换为 bytes
-     * @param string $size
-     * @return int
      */
     public static function sizeToBytes(string $size): int
     {
@@ -411,13 +410,14 @@ class UtilHelper
             }
             $sum *= 1024;
         }
+
         return 0;
     }
 
     /**
      * 检测是不是正规版本号
+     *
      * @param string $version 版本
-     * @return bool
      */
     public static function isVersion(string $version): bool
     {
@@ -426,34 +426,35 @@ class UtilHelper
 
     /**
      * 根据两点间的经纬度计算距离
+     *
      * @param float $lng1 lng1
      * @param float $lat1 lat1
      * @param float $lng2 lng2
      * @param float $lat2 lat2
-     * @return string
      */
     public static function getDistance(float $lng1, float $lat1, float $lng2, float $lat2): string
     {
-        //将角度转为狐度
-        $radLat1 = deg2rad($lat1);//deg2rad()函数将角度转换为弧度
+        // 将角度转为狐度
+        $radLat1 = deg2rad($lat1); // deg2rad()函数将角度转换为弧度
         $radLat2 = deg2rad($lat2);
         $radLng1 = deg2rad($lng1);
         $radLng2 = deg2rad($lng2);
         $a       = $radLat1 - $radLat2;
         $b       = $radLng1 - $radLng2;
         $s       = 2 * asin(sqrt((sin($a / 2) ** 2) + cos($radLat1) * cos($radLat2) * (sin($b / 2) ** 2))) * 6378.137;
+
         return round($s, 2) . 'km';
     }
 
     /**
      * guid 生成函数
-     * @return string
      */
     public static function guid(): string
     {
-        mt_srand(); //optional for php 4.2.0 and up.
+        mt_srand(); // optional for php 4.2.0 and up.
         $id     = strtoupper(md5(uniqid((string) mt_rand(), true)));
         $hyphen = chr(45); // "-"
+
         return chr(123) // "{"
             . substr($id, 0, 8) . $hyphen
             . substr($id, 8, 4) . $hyphen
@@ -465,15 +466,17 @@ class UtilHelper
 
     /**
      * 检测是否是有效的json数据格式
+     *
      * @param string $string string
-     * @return bool
      */
     public static function isJson(string $string): bool
     {
         try {
             json_decode($string, false, 512, JSON_THROW_ON_ERROR);
+
             return true;
-        } catch (JsonException) {
+        }
+        catch (JsonException) {
             return false;
         }
     }
@@ -485,43 +488,47 @@ class UtilHelper
     {
         try {
             $parse = json_decode($string, true, 512, JSON_THROW_ON_ERROR);
+
             return is_array($parse);
-        } catch (JsonException) {
+        }
+        catch (JsonException) {
             return false;
         }
     }
 
     /**
      * 检测是否是有效的日期格式
+     *
      * @param string $string string
-     * @return bool
      */
     public static function isDate(string $string): bool
     {
         [$year, $month, $day] = explode('-', $string);
-        $year  = (int) $year;
-        $month = (int) $month;
-        $day   = (int) $day;
+        $year                 = (int) $year;
+        $month                = (int) $month;
+        $day                  = (int) $day;
+
         return checkdate($month, $day, $year);
     }
 
     /**
      * 是否是密码
+     *
      * @param string $pwd pwd
-     * @return bool
      */
     public static function isPwd(string $pwd): bool
     {
         if (preg_match('/([0-9a-zA-Z_.[\]!@#$%^&()~+={};\'":<>?|`,\-\/\\\*]+)/i', $pwd, $match)) {
             return $match[0] === $pwd;
         }
+
         return false;
     }
 
     /**
      * 是否是逗号隔开的数字字符串
+     *
      * @param string $str str
-     * @return bool
      */
     public static function isComma(string $str): bool
     {
@@ -534,10 +541,6 @@ class UtilHelper
 
     /**
      * 移除树中的KEY
-     * @param array  $tree
-     * @param string $child_key
-     * @param string $pid_key
-     * @return array
      */
     private static function removePidAt(array $tree, string $child_key = 'children', string $pid_key = 'parent_id'): array
     {
@@ -550,13 +553,14 @@ class UtilHelper
             }
             $return[$k] = $rm;
         }
+
         return $return;
     }
 
     /**
      * 计算身份证校验码，根据国家标准GB 11643-1999
+     *
      * @param string $id_base chid base
-     * @return string
      */
     private static function chidVerify(string $id_base): string
     {
@@ -564,28 +568,31 @@ class UtilHelper
         if (!preg_match('/\d{17}/', $id_base)) {
             return '';
         }
-        //加权因子
+        // 加权因子
         $factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-        //校验码对应值
+        // 校验码对应值
         $verify_number_list = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
         $checksum           = 0;
         for ($i = 0, $iMax = strlen($id_base); $i < $iMax; $i++) {
             $checksum += (int) $id_base[$i] * $factor[$i];
         }
         $mod = $checksum % 11;
+
         return $verify_number_list[$mod];
     }
 
     /**
      * 计算某个经纬度的周围某段距离的正方形的四个点
-     * @param float $lng 经度
-     * @param float $lat 纬度
+     *
+     * @param float $lng      经度
+     * @param float $lat      纬度
      * @param float $distance 该点所在圆的半径，该圆与此正方形内切，默认值为0.5千米
+     *
      * @return array 正方形的四个点的经纬度坐标
      */
     public function squarePoint(float $lng, float $lat, float $distance = 0.5): array
     {
-        //地球半径，平均半径为6371km
+        // 地球半径，平均半径为6371km
         $EARTH_RADIUS = 6371;
         $degLng       = 2 * asin(sin($distance / (2 * $EARTH_RADIUS)) / cos(deg2rad($lat)));
         $degLng       = rad2deg($degLng);
