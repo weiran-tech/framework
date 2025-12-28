@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use TypeError;
 use Weiran\Framework\Helper\StrHelper;
 use Weiran\Framework\Helper\UtilHelper;
-use TypeError;
 
 /**
  * Resp
@@ -63,7 +63,7 @@ class Resp
 
         $this->code = $code;
 
-        if (is_string($message) && !empty($message)) {
+        if (is_string($message) && $message) {
             $this->message = $message;
         }
 
@@ -76,36 +76,17 @@ class Resp
         }
 
         if (!$message) {
-            switch ($code) {
-                case self::SUCCESS:
-                    $message = (string) trans('weiran::resp.success');
-                    break;
-                case self::ERROR:
-                    $message = (string) trans('weiran::resp.error');
-                    break;
-                case self::TOKEN_MISS:
-                    $message = (string) trans('weiran::resp.token_miss');
-                    break;
-                case self::TOKEN_TIMEOUT:
-                    $message = (string) trans('weiran::resp.token_timeout');
-                    break;
-                case self::TOKEN_ERROR:
-                    $message = (string) trans('weiran::resp.token_error');
-                    break;
-                case self::PARAM_ERROR:
-                    $message = (string) trans('weiran::resp.param_error');
-                    break;
-                case self::SIGN_ERROR:
-                    $message = (string) trans('weiran::resp.sign_error');
-                    break;
-                case self::NO_AUTH:
-                    $message = (string) trans('weiran::resp.no_auth');
-                    break;
-                case self::INNER_ERROR:
-                default:
-                    $message = (string) trans('weiran::resp.inner_error');
-                    break;
-            }
+            $message       = match ($code) {
+                self::SUCCESS => (string) trans('weiran::resp.success'),
+                self::ERROR => (string) trans('weiran::resp.error'),
+                self::TOKEN_MISS => (string) trans('weiran::resp.token_miss'),
+                self::TOKEN_TIMEOUT => (string) trans('weiran::resp.token_timeout'),
+                self::TOKEN_ERROR => (string) trans('weiran::resp.token_error'),
+                self::PARAM_ERROR => (string) trans('weiran::resp.param_error'),
+                self::SIGN_ERROR => (string) trans('weiran::resp.sign_error'),
+                self::NO_AUTH => (string) trans('weiran::resp.no_auth'),
+                default => (string) trans('weiran::resp.inner_error'),
+            };
             $this->message = $message;
         }
     }
@@ -173,31 +154,33 @@ class Resp
         }
 
 
-        $arrAppend = StrHelper::parseKey($append);
+        $parsed = StrHelper::parseKey($append);
 
+        // is JSON or forced JSON
         $isJson = false;
-        // is json
-        if (($arrAppend['_json'] ?? false) ||
+        if ((is_array($parsed) && ($parsed['_json'] ?? false)) ||
             Request::ajax() ||
             Request::bearerToken() ||
             weiran_container()->isRunningIn('api')
         ) {
             $isJson = true;
-            unset($arrAppend['_json']);
+            if (is_array($parsed)) {
+                unset($parsed['_json']);
+            }
         }
 
         if ($isJson) {
             if ($append && is_string($append) && !Str::contains($append, '|')) {
                 return self::webSplash($resp, $append);
             }
-            return self::webSplash($resp, !is_null($append) ? $arrAppend : null);
+            return self::webSplash($resp, !is_null($append) ? $parsed : null);
         }
 
         // is forgotten, 不写入 session 数据
-        $location = $arrAppend['_location'] ?? '';
-        $time     = $arrAppend['_time'] ?? true;
+        $location = $parsed['_location'] ?? '';
+        $time     = $parsed['_time'] ?? true;
 
-        if (isset($arrAppend['_reload'])) {
+        if (isset($parsed['_reload'])) {
             $location = (string) Session::previousUrl();
         }
 
@@ -242,7 +225,7 @@ class Resp
     /**
      * 显示界面
      * @param int|bool|null $time 时间
-     * @param string   $location location
+     * @param string        $location location
      * @param array|null    $input input
      * @return RedirectResponse|\Illuminate\Http\Response
      */
@@ -298,11 +281,11 @@ class Resp
     /**
      * 不支持 location
      * splash 不支持 location | back (Mark Zhao)
-     * @param Resp         $resp resp
-     * @param string|array $append append
+     * @param Resp                $resp resp
+     * @param array|string|object $append append
      * @return JsonResponse
      */
-    private static function webSplash(Resp $resp, $append = ''): JsonResponse
+    private static function webSplash(Resp $resp, mixed $append = ''): JsonResponse
     {
         $return = [
             'status'  => $resp->getCode(),
@@ -325,7 +308,7 @@ class Resp
             }
             $data = $returnData;
         }
-        else if (is_string($append)) {
+        else if (is_string($append) || is_object($append)) {
             $data = $append;
         }
         if (!is_null($data)) {

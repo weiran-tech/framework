@@ -461,7 +461,7 @@ class StrHelper
      * @param mixed $str str
      * @return mixed
      */
-    public static function parseKey($str)
+    public static function parseKey(mixed $str)
     {
         if (!$str) {
             return [];
@@ -476,7 +476,7 @@ class StrHelper
         if ($arr) {
             $return = [];
             foreach ($arr as $v) {
-                if ($v && strpos($v, '|') !== false) {
+                if ($v && str_contains($v, '|')) {
                     [$key, $value] = explode('|', $v);
                     $key          = trim($key);
                     $return[$key] = trim($value);
@@ -561,22 +561,18 @@ class StrHelper
      * @param int $number Number to get its ordinal value
      * @return string ordinal representation of given string
      */
-    public static function ordinal(int $number)
+    public static function ordinal(int $number): string
     {
         if (in_array($number % 100, range(11, 13), true)) {
             return $number . 'th';
         }
 
-        switch ($number % 10) {
-            case 1:
-                return $number . 'st';
-            case 2:
-                return $number . 'nd';
-            case 3:
-                return $number . 'rd';
-            default:
-                return $number . 'th';
-        }
+        return match ($number % 10) {
+            1 => $number . 'st',
+            2 => $number . 'nd',
+            3 => $number . 'rd',
+            default => $number . 'th',
+        };
     }
 
     /**
