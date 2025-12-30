@@ -40,6 +40,11 @@
         "new_with_parentheses": {
             "anonymous_class": false,
             "named_class": true
+        },
+        "type_declaration_spaces": {
+            "elements": [
+                "property"
+            ]
         }
     }
 }
