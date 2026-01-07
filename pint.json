@@ -18,11 +18,15 @@
             "elements": {
                 "method": "one",
                 "const": "only_if_meta"
-            }
+            },
+            "skip_single_line_classes": true
         },
         "elseif": true,
         "control_structure_continuation_position": {
             "position": "next_line"
+        },
+        "braces_position": {
+            "functions_opening_brace": "next_line"
         },
         "phpdoc_align": {
             "align": "vertical"

@@ -103,21 +103,10 @@ class ArrayHelper
 
     /**
      * 根据值删除数组中的元素
-     *
-     * @param string|array $value
      */
-    public static function delete(array $array, $value): array
+    public static function delete(array $array, array|string $value): array
     {
-        $value = Arr::wrap($value);
-
-        $return = [];
-        foreach ($array as $index => $item) {
-            if (!in_array($item, $value)) {
-                $return[$index] = $item;
-            }
-        }
-
-        return $return;
+        return array_diff($array, Arr::wrap($value));
     }
 
     /**
@@ -162,4 +151,5 @@ class ArrayHelper
 
         return array_search($values, $arr);
     }
+
 }
