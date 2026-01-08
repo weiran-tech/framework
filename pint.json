@@ -7,6 +7,9 @@
         "declare_equal_normalize": {
             "space": "single"
         },
+        "class_definition": {
+            "single_item_single_line": true
+        },
         "binary_operator_spaces": {
             "operators": {
                 "=>": "align",
@@ -18,15 +21,15 @@
             "elements": {
                 "method": "one",
                 "const": "only_if_meta"
-            },
-            "skip_single_line_classes": true
+            }
         },
         "elseif": true,
         "control_structure_continuation_position": {
             "position": "next_line"
         },
         "braces_position": {
-            "functions_opening_brace": "next_line"
+            "functions_opening_brace": "next_line_unless_newline_at_signature_end",
+            "anonymous_classes_opening_brace": "next_line_unless_newline_at_signature_end"
         },
         "phpdoc_align": {
             "align": "vertical"
