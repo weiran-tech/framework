@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Throwable;
-use Weiran\Framework\Events\WeiranOptimized;
+use Weiran\Framework\Events\WeiranOptimizedEvent;
 use Weiran\Framework\Exceptions\ApplicationException;
 use Weiran\Framework\Weiran\Abstracts\Repository;
 
@@ -275,7 +275,7 @@ class FileRepository extends Repository
 
         $this->files->put($cachePath, $content);
 
-        event(new WeiranOptimized(collect($modules->all())));
+        event(new WeiranOptimizedEvent(collect($modules->all())));
 
         return true;
     }

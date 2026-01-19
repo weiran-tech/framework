@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Weiran\Framework\Classes\Traits\MigrationTrait;
-use Weiran\Framework\Events\WeiranMigrateReset;
+use Weiran\Framework\Events\WeiranMigrateResetEvent;
 use Weiran\Framework\Weiran\Weiran;
 
 /**
@@ -133,7 +133,7 @@ class WeiranMigrateResetCommand extends Command
         foreach ($this->getSlugsToReset() as $slug) {
             $migrationPaths[] = $this->getMigrationPath($slug);
 
-            event(new WeiranMigrateReset($this->weiran, $this->option()));
+            event(new WeiranMigrateResetEvent($this->weiran, $this->option()));
         }
 
         return $migrationPaths;

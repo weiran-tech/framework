@@ -12,9 +12,9 @@ class NumberTest extends TestCase
 {
     public function testDivide(): void
     {
-        $NumberB = new Number(5);
+        $numberB = new Number(5);
         try {
-            $result = (new Number(5))->divide($NumberB);
+            $result = (new Number(5))->divide($numberB);
             $this->assertEquals('1.00', $result->getValue());
         }
         catch (Throwable $e) {
@@ -35,9 +35,9 @@ class NumberTest extends TestCase
 
     public function testAdd(): void
     {
-        $Number = new Number(100);
+        $number100 = new Number(100);
         try {
-            $result = (new Number(-100))->add($Number);
+            $result = (new Number(-100))->add($number100);
             $this->assertEquals('0.00', $result->getValue());
         }
         catch (Throwable $e) {
@@ -58,9 +58,9 @@ class NumberTest extends TestCase
 
     public function testCompareTo(): void
     {
-        $Number = new Number(10);
+        $number = new Number(10);
         try {
-            $result = (new Number(10))->compareTo($Number);
+            $result = (new Number(10))->compareTo($number);
             $this->assertEquals('0.00', $result);
         }
         catch (Throwable $e) {
@@ -136,9 +136,9 @@ class NumberTest extends TestCase
 
     public function testIsEqualTo(): void
     {
-        $Number = new Number(3);
+        $number = new Number(3);
         try {
-            $result = (new Number(3))->isEqualTo($Number);
+            $result = (new Number(3))->isEqualTo($number);
             $this->assertTrue($result);
         }
         catch (Throwable $e) {
@@ -148,9 +148,9 @@ class NumberTest extends TestCase
 
     public function testIsGreaterThan(): void
     {
-        $Number = new Number(3);
+        $number = new Number(3);
         try {
-            $result = (new Number(4))->isGreaterThan($Number);
+            $result = (new Number(4))->isGreaterThan($number);
             $this->assertTrue($result);
         }
         catch (Throwable $e) {
@@ -160,9 +160,9 @@ class NumberTest extends TestCase
 
     public function testIsGreaterThanOrEqualTo(): void
     {
-        $Number = new Number(3);
+        $number = new Number(3);
         try {
-            $result = (new Number(3))->isGreaterThanOrEqualTo($Number);
+            $result = (new Number(3))->isGreaterThanOrEqualTo($number);
             $this->assertTrue($result);
         }
         catch (Throwable $e) {
@@ -172,9 +172,9 @@ class NumberTest extends TestCase
 
     public function testIsLessThan(): void
     {
-        $Number = new Number(3);
+        $number = new Number(3);
         try {
-            $result = (new Number(2))->isLessThan($Number);
+            $result = (new Number(2))->isLessThan($number);
             $this->assertTrue($result);
         }
         catch (Throwable $e) {
@@ -184,9 +184,9 @@ class NumberTest extends TestCase
 
     public function testIsLessThanOrEqualTo(): void
     {
-        $Number = new Number(3);
+        $number = new Number(3);
         try {
-            $result = (new Number(3))->isLessThanOrEqualTo($Number);
+            $result = (new Number(3))->isLessThanOrEqualTo($number);
             $this->assertTrue($result);
         }
         catch (Throwable $e) {
@@ -218,9 +218,9 @@ class NumberTest extends TestCase
 
     public function testMod(): void
     {
-        $Number = new Number(2.9);
+        $number = new Number(2.9);
         try {
-            $result = (new Number(4))->mod($Number);
+            $result = (new Number(4))->mod($number);
             $this->assertEquals('1', $result->getValue());
         }
         catch (Throwable $e) {
@@ -230,9 +230,9 @@ class NumberTest extends TestCase
 
     public function testMultiply(): void
     {
-        $Number = new Number(2.1);
+        $number = new Number(2.1);
         try {
-            $result = (new Number(2))->multiply($Number);
+            $result = (new Number(2))->multiply($number);
             $this->assertEquals('4.20', $result->getValue());
         }
         catch (Throwable $e) {
@@ -356,9 +356,9 @@ class NumberTest extends TestCase
 
     public function testSubtract(): void
     {
-        $Number = new Number(4);
+        $number = new Number(4);
         try {
-            $result = (new Number(2))->subtract($Number);
+            $result = (new Number(2))->subtract($number);
             $this->assertEquals('-2.00', $result);
         }
         catch (Throwable $e) {

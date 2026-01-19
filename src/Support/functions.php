@@ -66,16 +66,11 @@ if (!function_exists('command_exist')) {
     /**
      * 检测命令是否存在
      */
-    function command_exist($cmd): bool
+    function command_exist(string $cmd): bool
     {
-        try {
-            $returnVal = shell_exec("which $cmd");
-
-            return !empty($returnVal);
-        }
-        catch (Exception $e) {
-            return false;
-        }
+        $cmd    = escapeshellcmd($cmd);
+        $result = shell_exec("which $cmd 2>/dev/null");
+        return !empty(trim($result));
     }
 }
 

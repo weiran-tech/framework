@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Weiran\Framework\Classes\Traits\MigrationTrait;
-use Weiran\Framework\Events\WeiranMigrated;
+use Weiran\Framework\Events\WeiranMigratedEvent;
 use Weiran\Framework\Weiran\Weiran;
 
 /**
@@ -120,7 +120,7 @@ class WeiranMigrateCommand extends Command
                     'step'    => $step,
                 ]);
 
-            event(new WeiranMigrated($module, $this->option()));
+            event(new WeiranMigratedEvent($module, $this->option()));
 
             // Once the migrator has run we will grab the note output and send it out to
             // the console screen, since the migrator itself functions without having

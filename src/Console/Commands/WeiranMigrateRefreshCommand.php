@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use Weiran\Framework\Events\WeiranMigrateRefreshed;
+use Weiran\Framework\Events\WeiranMigrateRefreshedEvent;
 
 /**
  * Weiran Migrate Refresh
@@ -61,7 +61,7 @@ class WeiranMigrateRefreshCommand extends Command
         if (isset($slug)) {
             $module = $this->laravel['weiran']->where('slug', $slug);
 
-            event(new WeiranMigrateRefreshed($module, $this->option()));
+            event(new WeiranMigrateRefreshedEvent($module, $this->option()));
 
             $this->info('Module has been refreshed.');
         }

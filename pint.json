@@ -29,10 +29,14 @@
         },
         "braces_position": {
             "functions_opening_brace": "next_line_unless_newline_at_signature_end",
-            "anonymous_classes_opening_brace": "next_line_unless_newline_at_signature_end"
+            "anonymous_classes_opening_brace": "next_line_unless_newline_at_signature_end",
+            "classes_opening_brace": "next_line_unless_newline_at_signature_end"
         },
         "phpdoc_align": {
             "align": "vertical"
+        },
+        "method_argument_space": {
+            "on_multiline": "ensure_fully_multiline"
         },
         "phpdoc_separation": {
             "groups": [

@@ -6,7 +6,7 @@ namespace Weiran\Framework\Console\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Weiran\Framework\Events\WeiranDisabled;
+use Weiran\Framework\Events\WeiranDisabledEvent;
 
 /**
  * Weiran Disable
@@ -39,7 +39,7 @@ class WeiranDisableCommand extends Command
 
             $module = $this->laravel['weiran']->where('slug', $slug);
 
-            event(new WeiranDisabled($module));
+            event(new WeiranDisabledEvent($module));
 
             $this->info('Module was disabled successfully.');
         }

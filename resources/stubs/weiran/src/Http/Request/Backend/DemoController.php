@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace DummyNamespace\Http\Request\Backend;
 
-use Weiran\MgrPage\Http\Request\Backend\BackendController;
+use Weiran\MgrPage\Http\Backend\BackendController;
 
 class DemoController extends BackendController
 {

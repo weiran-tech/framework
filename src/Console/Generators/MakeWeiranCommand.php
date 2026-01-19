@@ -9,7 +9,7 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Weiran\Framework\Events\WeiranMake;
+use Weiran\Framework\Events\WeiranMakeEvent;
 use Weiran\Framework\Weiran\Weiran;
 
 /**
@@ -150,7 +150,7 @@ class MakeWeiranCommand extends Command
 
         $progress->finish();
 
-        event(new WeiranMake($this->conf['slug']));
+        event(new WeiranMakeEvent($this->conf['slug']));
 
         // 移除 js 文件
         $this->weiran->optimize();
