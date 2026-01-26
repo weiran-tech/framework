@@ -17,11 +17,14 @@ trait RequestIdTrait
      */
     protected string $requestId = '';
 
-    public function logger(): LoggerInterface
+    public function logger($requestId = ''): LoggerInterface
     {
         $logger = Logging::logger(static::class);
         if ($this->requestId) {
             $logger->withContext(['requestId' => $this->requestId]);
+        }
+        if ($requestId) {
+            $logger->withContext(['requestId' => $requestId]);
         }
         return $logger;
     }
