@@ -59,18 +59,18 @@ class TestCase extends \Illuminate\Foundation\Testing\TestCase
     protected function outputVariables($vars, string $description = ''): void
     {
         if ($description) {
-            fwrite(STDOUT, print_r($description . ':' . PHP_EOL, true));
+            fwrite(STDOUT, $description . ':' . PHP_EOL);
         }
         if (is_array($vars)) {
             try {
-                fwrite(STDOUT, print_r(json_encode($vars, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL, true));
+                fwrite(STDOUT, json_encode($vars, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
             }
             catch (JsonException) {
                 fwrite(STDERR, 'Wrong format with error format with output variables');
             }
         }
         else {
-            fwrite(STDOUT, print_r($vars . PHP_EOL, true));
+            fwrite(STDOUT, $vars . PHP_EOL);
         }
     }
 

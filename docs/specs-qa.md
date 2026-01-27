@@ -16,10 +16,9 @@
 **配置文件**
 
 - 配置文件在 `/config` 目录下
-- 自定义配置文件 `weiran.php`, `module.php` 的数组深度不超过二级
+- 自定义配置文件 `weiran.php`, `module.php` 的数组深度不超过二级, 二级的 value 不可以是 kv 数组, 可以是 `array[]`
     - 一级: `'key' => value`
-    - 二级: `'key' => ['subkey' => value]`, `value` 不可以是 kv 数组, 可以是 `array[]`
-    - 三级及以上: ❌ 不允许
+    - 二级: `'key' => ['subkey' => value]`
 
 
 ## 模块定义
@@ -27,11 +26,13 @@
 **结构**
 
 - 所有的代码模块均放置在 `modules`, `weiran` 目录下
+- `@deprecated` 的类/方法不参与检查
 
 **模块结构**
 
 - `weiran/framwork` 目录, `weiran/faker` 目录, `weiran/ext-*` 不用遵循以下目录结构
 - 以下为推荐的标准模块结构（`*` 为可选目录或文件）:
+
 ```
 ├── configurations           # 配置目录, 目录必须存在
 │   ├── permissions.yaml*    # 权限定义
@@ -72,25 +73,26 @@
 - 单元测试的加载在 `composer.json` 的 `autoload-dev.psr-4` 进行定义, 例如 `modules/user/tests` 目录下的单元测试命名空间为
   `User\Tests\`
 
-**Events 目录**
+**src/Events 目录**
 
 - 文件必须以 `Event` 后缀结尾 (如 `UserCreatedEvent.php`)
 
-**Commands 目录**
+**src/Commands 目录**
 
 - 文件必须以 `Command` 结尾
 
-**Listeners 目录**
+**src/Listeners 目录**
 
 - 文件必须以 `Listener` 后缀结尾 (如 `SendEmailListener.php`)
 
-**Models 目录**
+**src/Models 目录**
 
+- 不包含单元测试目录
 - 文件名称一般是表名的 `CamelCase` 格式
 - **Models/Policies 目录**: 文件必须以 `Policy` 后缀结尾 (如 `UserPolicy.php`)
 - **Models/Resources 目录**: 文件必须以 `Resource` 后缀结尾 (如 `UserResource.php`)
 
-**Http 目录**
+**src/Http 目录**
 
 - 文件以 `Controller` 结尾为控制器文件
 - 文件以 `Request` 结尾为Form 验证文件 / Request 请求校验 / OpenApi 参数文件
@@ -107,12 +109,11 @@
 - 路由定义文件禁止使用 `namespace` 参数
 - 路由可以不用命名
 
-**Action 目录**
+**src/Action 目录**
 
 - 存放业务逻辑文件
-- 推荐: 使用异常替代返回 bool 的错误处理
-- 不推荐 : 业务方法返回 bool
 - **modules** 目录下的文件必须以 `Act` 作为前缀
+- **weiran** 目录下的文件不做限制
 
 ## 编码说明
 
@@ -163,7 +164,7 @@
 
 **路由命名规范**
 
-- 路由可以不进行命名
+- 路由可以不命名
 - 路由若命名, 名称必须符合格式: `{module}:{type}.{group}.{action}`
     - `{module}` 必须存在
     - `{type}` 命名为 `api_*` 或 `backend`, `web` 限制词
@@ -173,13 +174,15 @@
 - **接口规范**
 
 - `Http/**/Api*`, `Http/Api*` 文件下的公共方法都必须要编写接口文档
-- 接口必须要符合格式 : `api/{type}/{module}/{version}/{group}/{action}`, 例如 : `/api/web/system/v1/core/info`
+- 接口必须要符合格式 : `/api/{type}/{module}/{version}/{group}/{action}`, 例如 : `/api/web/system/v1/core/info`
 - OpenApi 文档编写使用 [OpenApi](https://github.com/zircote/swagger-php) 规范
 - 使用 `php artisan core:doc api` 生成 OpenApi 文档
 
 **严格模式**
 
-- 项目中必须包含 `declare(strict_types = 1)` 声明严格模式
+- 项目指定的目录必须包含 `declare(strict_types = 1)` 来声明严格模式
+- 包含目录 `modules/{module}/src`
+- 排除目录 `modules/{module}/src/Http/Routes`
 
 **Deprecated**
 
