@@ -16,6 +16,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Weiran\Framework\Http\Middlewares\EnableCrossRequest;
 use Weiran\Framework\Http\Middlewares\EncryptCookies;
 use Weiran\Framework\Http\Middlewares\VerifyCsrfToken;
+use Weiran\System\Http\Middlewares\RequestIdMiddleware;
 
 /**
  * weiran http kernel
@@ -59,10 +60,12 @@ class Kernel extends HttpKernel
             SubstituteBindings::class,
             EncryptCookies::class,
             AddQueuedCookiesToResponse::class,
+            RequestIdMiddleware::class,
         ],
         'api' => [
             'throttle:api',
             SubstituteBindings::class,
+            RequestIdMiddleware::class,
         ],
     ];
 }

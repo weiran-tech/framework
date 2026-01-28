@@ -20,6 +20,7 @@ use Weiran\Framework\Classes\Traits\PjaxTrait;
 use Weiran\Framework\Exceptions\AjaxException;
 use Weiran\Framework\Exceptions\BaseException;
 use Weiran\Framework\Exceptions\HintException;
+use Weiran\Framework\Exceptions\ParamException;
 use Weiran\Framework\Exceptions\Warningable;
 
 /**
@@ -90,6 +91,14 @@ class Handler extends ExceptionHandler
             ]);
         }
 
+        /* 参数错误
+         * ---------------------------------------- */
+        if ($e instanceof ParamException) {
+            return Resp::web(Resp::PARAM_ERROR, $e->getMessage());
+        }
+
+        /* 基础异常
+         * ---------------------------------------- */
         if ($e instanceof BaseException) {
             return Resp::error($e->getMessage());
         }

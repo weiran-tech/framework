@@ -6,7 +6,7 @@ namespace Weiran\Framework\Foundation\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Weiran\Framework\Events\WeiranSchedule;
+use Weiran\Framework\Events\WeiranScheduleEvent;
 
 /**
  * weiran console kernel
@@ -20,6 +20,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $this->app['events']->dispatch(WeiranSchedule::class, [$schedule]);
+        $this->app['events']->dispatch(WeiranScheduleEvent::class, [$schedule]);
     }
 }

@@ -4,9 +4,7 @@ declare(strict_types = 1);
 
 namespace Weiran\Framework\Events;
 
-use Weiran\Framework\Application\Event;
-
 /**
  * WeiranSchedule
  */
-class WeiranScheduleEvent extends Event {}
+class WeiranScheduleEvent extends WeiranSchedule {}
