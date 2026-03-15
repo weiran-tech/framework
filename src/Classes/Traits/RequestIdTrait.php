@@ -26,6 +26,7 @@ trait RequestIdTrait
         if ($requestId) {
             $logger->withContext(['requestId' => $requestId]);
         }
+
         return $logger;
     }
 
@@ -35,6 +36,7 @@ trait RequestIdTrait
     public function setRequestId(string $requestId): self
     {
         $this->requestId = $requestId;
+
         return $this;
     }
 }

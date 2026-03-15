@@ -115,10 +115,12 @@ class WeiranMigrateCommand extends Command
             $path    = $this->getMigrationPath($slug);
 
             $this->migrator->setOutput($this->output)->run(
-                $path, [
+                $path,
+                [
                     'pretend' => $pretend,
                     'step'    => $step,
-                ]);
+                ]
+            );
 
             event(new WeiranMigratedEvent($module, $this->option()));
 

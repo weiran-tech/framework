@@ -27,7 +27,8 @@ trait ThrottlesLogins
     protected function hasTooManyLoginAttempts(Request $request)
     {
         return $this->limiter()->tooManyAttempts(
-            $this->throttleKey($request), $this->maxAttempts()
+            $this->throttleKey($request),
+            $this->maxAttempts()
         );
     }
 
@@ -39,7 +40,8 @@ trait ThrottlesLogins
     protected function incrementLoginAttempts(Request $request)
     {
         $this->limiter()->hit(
-            $this->throttleKey($request), $this->decayMinutes() * 60
+            $this->throttleKey($request),
+            $this->decayMinutes() * 60
         );
     }
 

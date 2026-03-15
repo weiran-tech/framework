@@ -12,7 +12,6 @@ use Weiran\Framework\Application\Event;
  */
 class WeiranMigrateRefreshedEvent extends Event
 {
-
     public function __construct(
         public readonly Collection $module,
         public readonly array      $option = []

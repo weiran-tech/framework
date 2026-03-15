@@ -70,6 +70,7 @@ if (!function_exists('command_exist')) {
     {
         $cmd    = escapeshellcmd($cmd);
         $result = shell_exec("which $cmd 2>/dev/null");
+
         return !empty(trim($result));
     }
 }

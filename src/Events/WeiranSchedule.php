@@ -8,7 +8,9 @@ use Weiran\Framework\Application\Event;
 
 /**
  * WeiranSchedule
+ *
  * @deprecated 1.0
+ *
  * @see        WeiranScheduleEvent 替代
  */
 class WeiranSchedule extends Event {}

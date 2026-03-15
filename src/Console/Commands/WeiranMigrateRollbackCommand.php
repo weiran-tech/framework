@@ -63,7 +63,8 @@ class WeiranMigrateRollbackCommand extends Command
         $this->migrator->setConnection($this->option('database'));
 
         $this->migrator->setOutput($this->output)->rollback(
-            $this->getMigrationPaths(), [
+            $this->getMigrationPaths(),
+            [
                 'pretend' => $this->option('pretend'),
                 'step'    => (int) $this->option('step'),
             ]
